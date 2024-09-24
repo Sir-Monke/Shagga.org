@@ -2,10 +2,15 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+// Define the type for PopupArea props
+interface PopupAreaProps {
+  onClose: () => void; // onClose is a function with no arguments and no return value
+}
+
 const imageCount = 16;
 const ShaggaImages = Array.from({ length: imageCount }, (_, index) => require(`@/app/images/shaggas/${index + 1}.jpg`));
 
-export default function PopupArea({ onClose }) {
+export default function PopupArea({ onClose }: PopupAreaProps) { // Use the typed PopupAreaProps
   const maleNames = [
     'John', 'Noah', 'Oliver', 'Elijah', 'James',
     'William', 'Benjamin', 'Lucas', 'Henry', 'Jamal',
@@ -15,8 +20,8 @@ export default function PopupArea({ onClose }) {
 
   const [location, setLocation] = useState('');
   const [loading, setLoading] = useState(true);
-  const [randomImage, setRandomImage] = useState(null);
-  const [shuffledImages, setShuffledImages] = useState([]);
+  const [randomImage, setRandomImage] = useState<string | null>(null); // Allow string or null
+  const [shuffledImages, setShuffledImages] = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const getRandomDistance = () => Math.floor(Math.random() * 50) + 1;
@@ -38,13 +43,14 @@ export default function PopupArea({ onClose }) {
     }
   };
 
-  const shuffleArray = (array) => {
+  const shuffleArray = (array: string[]): string[] => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
   };
+  
 
   useEffect(() => {
     const shuffled = shuffleArray(ShaggaImages);
