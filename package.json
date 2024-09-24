@@ -1,0 +1,31 @@
+{
+  "name": "shagga.org",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@studio-freight/lenis": "^1.0.42",
+    "axios": "^1.7.7",
+    "framer-motion": "^11.5.6",
+    "gsap": "^3.12.5",
+    "next": "14.2.13",
+    "react": "^18",
+    "react-dom": "^18",
+    "sass": "^1.79.3"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "typescript": "^5"
+  }
+}

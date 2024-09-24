@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes blink {
+    0% {
+      border-color: red;
+    }
+    50% {
+      border-color: transparent;
+    }
+    100% {
+      border-color: red;
+    }
+  }
+  
+  .animate-blink {
+    animation: blink 0.5s infinite;
+  }
