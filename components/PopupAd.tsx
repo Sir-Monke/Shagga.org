@@ -4,13 +4,17 @@ import React, { useEffect, useState } from 'react';
 const imageCount = 20;
 const ShaggaImages = Array.from({ length: imageCount }, (_, index) => require(`@/app/images/products/${index + 1}.jpg`));
 
-export default function PopupAd({ onClose }) {
-  const [randomImage, setRandomImage] = useState(null);
-  const [shuffledImages, setShuffledImages] = useState([]);
+interface PopupAdProps {
+  onClose: () => void; // Type for onClose function
+}
+
+export default function PopupAd({ onClose }: PopupAdProps) { // Use the typed PopupAdProps
+  const [randomImage, setRandomImage] = useState<any>(null);
+  const [shuffledImages, setShuffledImages] = useState<any[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentPrice, setCurrentPrice] = useState(0); // State to hold the current price
 
-  const shuffleArray = (array) => {
+  const shuffleArray = (array: any[]) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
@@ -19,16 +23,17 @@ export default function PopupAd({ onClose }) {
   };
 
   const generateRandomPrice = () => {
-    // Generates a random price between 1.00 and 100.00
-    return (Math.random() * 2 + 2).toFixed(2); // Returns a float formatted to 2 decimal places
+    // Generates a random price between 2.00 and 4.00
+    return parseFloat((Math.random() * 2 + 2).toFixed(2)); // Returns a number formatted to 2 decimal places
   };
-
+  
   useEffect(() => {
     const shuffled = shuffleArray(ShaggaImages);
     setShuffledImages(shuffled);
     setRandomImage(shuffled[0]);
-    setCurrentPrice(generateRandomPrice()); // Set initial price
+    setCurrentPrice(generateRandomPrice()); // Set initial price with number
   }, []);
+  
 
   const getNextImage = () => {
     const nextIndex = (currentImageIndex + 1) % shuffledImages.length;
