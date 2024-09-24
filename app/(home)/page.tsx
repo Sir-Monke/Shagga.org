@@ -8,7 +8,8 @@ import MidSection from './components/MidSection';
 import PopupAd from '@/components/PopupAd';
 
 export default function Home() {
-  const [activePopup, setActivePopup] = useState(null);
+  // Define the state as either null or a string
+  const [activePopup, setActivePopup] = useState<string | null>(null);
 
   const togglePopup = () => {
     setActivePopup(null);
@@ -18,7 +19,7 @@ export default function Home() {
     const showPopup = () => {
       const popupOptions = ['popupArea', 'popupPc', 'popupAd'];
       const randomPopup = popupOptions[Math.floor(Math.random() * popupOptions.length)];
-      setActivePopup(randomPopup);
+      setActivePopup(randomPopup);  // This now works because activePopup can be a string or null
     };
 
     showPopup();
@@ -27,7 +28,7 @@ export default function Home() {
       if (!activePopup) {
         showPopup();
       }
-    }, 10);
+    }, 10000);  // Adjusted to 10 seconds (10000ms)
 
     return () => clearInterval(interval);
   }, [activePopup]);
