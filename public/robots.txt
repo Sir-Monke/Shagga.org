@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /.env
+Disallow: /.git/
+Disallow: /@fs/
+
+Sitemap: https://shagga.org/sitemap.xml
