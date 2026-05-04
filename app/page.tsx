@@ -10,7 +10,6 @@ import ShaggaHackerBody from '@/components/ShaggaHackerBody';
 import ShaggapadBody from '@/components/ShaggapadBody';
 import NortonScanBody from '@/components/NortonScanBody';
 import LimewireBody from '@/components/LimewireBody';
-import MsnMessengerBody from '@/components/MsnMessengerBody';
 import VisitorBannerBody from '@/components/VisitorBannerBody';
 import WindowsUpdateBody from '@/components/WindowsUpdateBody';
 import ChainEmailBody from '@/components/ChainEmailBody';
@@ -19,7 +18,6 @@ import ChainEmailBody from '@/components/ChainEmailBody';
 import CalculatorBody from '@/components/CalculatorBody';
 import MinesweeperBody from '@/components/MinesweeperBody';
 import InternetShaggaBody from '@/components/InternetShaggaBody';
-import MagpieGameBody from '@/components/MagpieGameBody';
 import PaintBody from '@/components/PaintBody';
 import GoonCalcBody from '@/components/GoonCalcBody';
 import WeatherBody from '@/components/WeatherBody';
@@ -29,6 +27,8 @@ import ShwitterBody from '@/components/ShwitterBody';
 import ShaggaTubeBody from '@/components/ShaggaTubeBody';
 import ShaggaBookBody from '@/components/ShaggaBookBody';
 import ShaggaFyBody from '@/components/ShaggaFyBody';
+import ShaggaChatBody from '@/components/ShaggaChatBody';
+import GalleryBody from '@/components/GalleryBody';
 import { MyShaggaBody, RecycleBinBody, TaxReturnsBody } from '@/components/FolderBodies';
 
 // chrome / desktop
@@ -45,10 +45,11 @@ import RaveMode from '@/components/RaveMode';
 
 import {
   NotepadIcon, NotepadIconLarge, PhotoIcon, MoneyIcon, SkullIcon,
-  NortonIcon, LimewireIcon, MsnIcon, StarIcon, UpdateIcon, EmailIcon,
+  NortonIcon, LimewireIcon, StarIcon, UpdateIcon, EmailIcon,
   CalculatorIcon, MineIcon, IEIcon, RecycleIcon, RecycleIconLarge,
   FolderIcon, MyShaggaIcon, GameIcon, RunIcon,
   SettingsIcon, GramIcon, ShwitterIcon, TubeIcon, BookIcon, SfyIcon,
+  PaintIcon, PaintIconLarge, SunIcon, GoonIcon, ChatIcon, ChatIconLarge, GalleryIcon,
 } from '@/components/icons';
 
 import { productsList, shaggasList } from '@/components/imageManifest';
@@ -57,9 +58,9 @@ import { productsList, shaggasList } from '@/components/imageManifest';
 
 type WindowKind =
   | 'area' | 'ad' | 'hacker'
-  | 'norton' | 'limewire' | 'msn' | 'visitor' | 'update' | 'chainemail'
-  | 'shaggapad' | 'calculator' | 'minesweeper' | 'internetshagga' | 'magpie'
-  | 'paint' | 'gooncalc' | 'weather' | 'settings'
+  | 'norton' | 'limewire' | 'chat' | 'visitor' | 'update' | 'chainemail'
+  | 'shaggapad' | 'calculator' | 'minesweeper' | 'internetshagga'
+  | 'paint' | 'gooncalc' | 'weather' | 'settings' | 'gallery'
   | 'shaggagram' | 'shwitter' | 'shaggatube' | 'shaggabook' | 'shaggafy'
   | 'myshagga' | 'recyclebin' | 'taxreturns';
 
@@ -79,7 +80,7 @@ interface OpenWindow {
   shaggapadText?: string;
 }
 
-const RANDOM_POPUP_KINDS: WindowKind[] = ['area', 'ad', 'hacker', 'norton', 'limewire', 'msn', 'visitor', 'update', 'chainemail'];
+const RANDOM_POPUP_KINDS: WindowKind[] = ['area', 'ad', 'hacker', 'norton', 'limewire', 'chat', 'visitor', 'update', 'chainemail'];
 const POPUP_WEIGHTS: Record<string, number> = {
   area: 4, ad: 4, hacker: 1, norton: 1.5, limewire: 1.5, msn: 2, visitor: 1, update: 1.5, chainemail: 1.5,
 };
@@ -243,7 +244,7 @@ export default function Home() {
       hacker:         { title: 'h4ck4_5h4gg4.exe',               icon: <SkullIcon />,     w: 380, h: 280 },
       norton:         { title: 'Norton AntiShagga 2003',         icon: <NortonIcon />,    w: 360, h: 340 },
       limewire:       { title: 'LimeShagga 4.18.8',              icon: <LimewireIcon />,  w: 460, h: 260 },
-      msn:            { title: 'MSN Messenger',                  icon: <MsnIcon />,       w: 320, h: 340 },
+      chat:           { title: 'Shagga Chat',                    icon: <ChatIcon />,      w: 560, h: 420 },
       visitor:        { title: 'CONGRATULATIONS!!!',             icon: <StarIcon />,      w: 300, h: 360 },
       update:         { title: 'ShaggaOS Update',                icon: <UpdateIcon />,    w: 360, h: 320 },
       chainemail:     { title: 'FWD: FWD: FWD: ⚠ READ NOW',     icon: <EmailIcon />,     w: 380, h: 440 },
@@ -251,16 +252,16 @@ export default function Home() {
       calculator:     { title: 'Calculator',                     icon: <CalculatorIcon />,w: 220, h: 280, resizable: false },
       minesweeper:    { title: 'Punt Sweeper',                   icon: <MineIcon />,      w: 248, h: 320, resizable: false },
       internetshagga: { title: 'Internet Shagga',                icon: <IEIcon />,        w: 640, h: 480 },
-      magpie:         { title: 'Punt the Magpie',                icon: <SkullIcon />,     w: 480, h: 360 },
-      paint:           { title: 'Shagga-Paint',                  icon: '🖌️',              w: 500, h: 460 },
-      gooncalc:        { title: 'Goon Calculator',               icon: '🍷',              w: 320, h: 320, resizable: false },
-      weather:         { title: 'Shagga Weather',                icon: '☀️',              w: 280, h: 320, resizable: false },
-      settings:        { title: 'Shagga Control Panel',          icon: <SettingsIcon />,  w: 420, h: 480 },
-      shaggagram:      { title: 'Shagga-gram',                   icon: <GramIcon />,      w: 380, h: 540 },
-      shwitter:        { title: 'Shwitter',                      icon: <ShwitterIcon />,  w: 480, h: 540 },
-      shaggatube:      { title: 'ShaggaTube',                    icon: <TubeIcon />,      w: 600, h: 480 },
-      shaggabook:      { title: 'ShaggaBook',                    icon: <BookIcon />,      w: 640, h: 520 },
-      shaggafy:        { title: 'Shagga-fy',                     icon: <SfyIcon />,       w: 660, h: 480 },
+      paint:          { title: 'Shagga-Paint',                   icon: <PaintIcon />,     w: 540, h: 460 },
+      gooncalc:       { title: 'Goon Calculator',                icon: <GoonIcon />,      w: 320, h: 320, resizable: false },
+      weather:        { title: 'Shagga Weather',                 icon: <SunIcon />,       w: 280, h: 320, resizable: false },
+      settings:       { title: 'Shagga Control Panel',           icon: <SettingsIcon />,  w: 460, h: 540 },
+      gallery:        { title: 'Shagga Gallery',                 icon: <GalleryIcon />,   w: 600, h: 480 },
+      shaggagram:     { title: 'Shagga-gram',                    icon: <GramIcon />,      w: 380, h: 540 },
+      shwitter:       { title: 'Shwitter',                       icon: <ShwitterIcon />,  w: 480, h: 540 },
+      shaggatube:     { title: 'ShaggaTube',                     icon: <TubeIcon />,      w: 600, h: 480 },
+      shaggabook:     { title: 'ShaggaBook',                     icon: <BookIcon />,      w: 640, h: 520 },
+      shaggafy:       { title: 'Shagga-fy',                      icon: <SfyIcon />,       w: 660, h: 480 },
       myshagga:       { title: 'My Shagga',                      icon: <MyShaggaIcon size={16} />,    w: 460, h: 380 },
       recyclebin:     { title: 'Recycle Bin',                    icon: <RecycleIcon />,   w: 460, h: 320 },
       taxreturns:     { title: 'tax_returns_DO_NOT_OPEN',        icon: <FolderIcon size={16} />,      w: 360, h: 280 },
@@ -360,11 +361,12 @@ export default function Home() {
   const openCalculator  = useCallback(() => openOrFocus('calculator'), [openOrFocus]);
   const openMinesweeper = useCallback(() => openOrFocus('minesweeper'), [openOrFocus]);
   const openIE          = useCallback(() => openOrFocus('internetshagga'), [openOrFocus]);
-  const openMagpieGame  = useCallback(() => openOrFocus('magpie'), [openOrFocus]);
   const openPaint       = useCallback(() => openOrFocus('paint'), [openOrFocus]);
   const openGoonCalc    = useCallback(() => openOrFocus('gooncalc'), [openOrFocus]);
   const openWeather     = useCallback(() => openOrFocus('weather'), [openOrFocus]);
   const openSettings    = useCallback(() => openOrFocus('settings'), [openOrFocus]);
+  const openChat        = useCallback(() => openOrFocus('chat'), [openOrFocus]);
+  const openGallery     = useCallback(() => openOrFocus('gallery'), [openOrFocus]);
   const openShaggaGram  = useCallback(() => openOrFocus('shaggagram'), [openOrFocus]);
   const openShwitter    = useCallback(() => openOrFocus('shwitter'), [openOrFocus]);
   const openShaggaTube  = useCallback(() => openOrFocus('shaggatube'), [openOrFocus]);
@@ -425,22 +427,31 @@ export default function Home() {
     return () => clearInterval(id);
   }, []);
 
+  // ----- apply wallpaper class to body -----
+  useEffect(() => {
+    const cls = `wp-${settings.wallpaper}`;
+    // Remove any existing wp-* class then add the current one.
+    document.body.className = document.body.className
+      .split(' ').filter((c) => !c.startsWith('wp-')).join(' ').trim();
+    document.body.classList.add(cls);
+  }, [settings.wallpaper]);
+
   // ----- start menu -----
   const startLeft: StartMenuItem[] = [
     { id: 'ie',     label: 'Internet Shagga',    icon: <IEIcon size={20} />,         onClick: openIE, bold: true },
+    { id: 'chat',   label: 'Shagga Chat',        icon: <ChatIcon size={20} />,       onClick: openChat, bold: true },
     { id: 'gram',   label: 'Shagga-gram',        icon: <GramIcon size={20} />,       onClick: openShaggaGram, bold: true },
-    { id: 'shw',    label: 'Shwitter',           icon: <ShwitterIcon size={20} />,   onClick: openShwitter, bold: true },
+    { id: 'shw',    label: 'Shwitter',           icon: <ShwitterIcon size={20} />,   onClick: openShwitter },
     { id: 'tube',   label: 'ShaggaTube',         icon: <TubeIcon size={20} />,       onClick: openShaggaTube },
     { id: 'fbook',  label: 'ShaggaBook',         icon: <BookIcon size={20} />,       onClick: openShaggaBook },
     { id: 'sfy',    label: 'Shagga-fy',          icon: <SfyIcon size={20} />,        onClick: openShaggaFy },
-    { id: 'msn',    label: 'MSN Messenger',      icon: <MsnIcon size={20} />,        onClick: () => open('msn') },
     { id: 'pad',    label: 'Shaggapad',          icon: <NotepadIcon size={20} />,    onClick: openShaggapad },
     { id: 'calc',   label: 'Calculator',         icon: <CalculatorIcon size={20} />, onClick: openCalculator },
     { id: 'mine',   label: 'Punt Sweeper',       icon: <MineIcon size={20} />,       onClick: openMinesweeper },
-    { id: 'magpie', label: 'Punt the Magpie',    icon: '🪶',                          onClick: openMagpieGame },
-    { id: 'paint',  label: 'Shagga-Paint',       icon: '🖌️',                          onClick: openPaint },
-    { id: 'goon',   label: 'Goon Calculator',    icon: '🍷',                          onClick: openGoonCalc },
-    { id: 'weather',label: 'Shagga Weather',     icon: '☀️',                          onClick: openWeather },
+    { id: 'paint',  label: 'Shagga-Paint',       icon: <PaintIcon size={20} />,      onClick: openPaint },
+    { id: 'gallery',label: 'Shagga Gallery',     icon: <GalleryIcon size={20} />,    onClick: openGallery },
+    { id: 'goon',   label: 'Goon Calculator',    icon: <GoonIcon size={20} />,       onClick: openGoonCalc },
+    { id: 'weather',label: 'Shagga Weather',     icon: <SunIcon size={20} />,        onClick: openWeather },
     { id: 'norton', label: 'Norton AntiShagga',  icon: <NortonIcon size={20} />,     onClick: () => open('norton') },
   ];
   const startRight: StartMenuItem[] = [
@@ -548,7 +559,7 @@ export default function Home() {
             {w.kind === 'hacker' && <ShaggaHackerBody />}
             {w.kind === 'norton' && <NortonScanBody />}
             {w.kind === 'limewire' && <LimewireBody />}
-            {w.kind === 'msn' && <MsnMessengerBody />}
+            {w.kind === 'chat' && <ShaggaChatBody />}
             {w.kind === 'visitor' && <VisitorBannerBody />}
             {w.kind === 'update' && <WindowsUpdateBody />}
             {w.kind === 'chainemail' && <ChainEmailBody />}
@@ -556,11 +567,11 @@ export default function Home() {
             {w.kind === 'calculator' && <CalculatorBody />}
             {w.kind === 'minesweeper' && <MinesweeperBody />}
             {w.kind === 'internetshagga' && <InternetShaggaBody />}
-            {w.kind === 'magpie' && <MagpieGameBody />}
             {w.kind === 'paint' && <PaintBody />}
             {w.kind === 'gooncalc' && <GoonCalcBody />}
             {w.kind === 'weather' && <WeatherBody />}
             {w.kind === 'settings' && <SettingsBody settings={settings} onChange={setSettings} />}
+            {w.kind === 'gallery' && <GalleryBody />}
             {w.kind === 'shaggagram' && <ShaggaGramBody />}
             {w.kind === 'shwitter' && <ShwitterBody />}
             {w.kind === 'shaggatube' && <ShaggaTubeBody />}

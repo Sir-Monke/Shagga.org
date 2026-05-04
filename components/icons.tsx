@@ -294,3 +294,111 @@ export const SfyIcon = ({ size }: { size?: number }) => {
     </svg>
   );
 };
+
+export const PaintIcon = ({ size }: { size?: number }) => {
+  const s = sizeFor(size);
+  return (
+    <svg width={s} height={s} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+      <rect x="6" y="1.5" width="8" height="3.5" fill="#c0c0c0" stroke="#444" strokeWidth="0.5" rx="0.5" transform="rotate(45 10 3.25)" />
+      <rect x="3" y="5" width="5" height="2.5" fill="#a05a2c" stroke="#3d1e0a" strokeWidth="0.5" transform="rotate(45 5.5 6.25)" />
+      <path d="M 3 8 L 5.5 6 L 7 7.5 L 4 10 Z" fill="#fff200" stroke="#000" strokeWidth="0.5" />
+      <path d="M 1.5 14.5 L 3 12 L 4.5 13.5 L 2 15 Z" fill="#fff200" stroke="#000" strokeWidth="0.5" />
+      <path d="M 4 10 L 2 14" stroke="#cc6600" strokeWidth="0.4" />
+    </svg>
+  );
+};
+
+export const PaintIconLarge = ({ size = 48 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+    <rect x="22" y="4" width="22" height="9" fill="#c0c0c0" stroke="#444" strokeWidth="1" rx="1" transform="rotate(45 33 8.5)" />
+    <rect x="11" y="14" width="14" height="6" fill="#a05a2c" stroke="#3d1e0a" strokeWidth="1" transform="rotate(45 18 17)" />
+    <path d="M 11 24 L 17 18 L 21 22 L 14 28 Z" fill="#fff200" stroke="#000" strokeWidth="1" />
+    <path d="M 4 44 L 10 36 L 14 40 L 7 46 Z" fill="#fff200" stroke="#000" strokeWidth="1" />
+    <path d="M 13 28 L 6 41" stroke="#cc6600" strokeWidth="1.5" />
+  </svg>
+);
+
+export const PencilToolIcon = ({ size = 18 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+    <rect x="3" y="2" width="3" height="11" fill="#fff200" stroke="#444" strokeWidth="0.5" />
+    <path d="M 3 13 L 4.5 16 L 6 13 Z" fill="#222" />
+    <rect x="3" y="2" width="3" height="2" fill="#ec7777" />
+    <rect x="3" y="4" width="3" height="0.4" fill="#888" />
+  </svg>
+);
+
+export const EraserToolIcon = ({ size = 18 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2.5" y="6.5" width="11" height="6" fill="#ff8fb5" stroke="#444" strokeWidth="0.5" rx="0.5" transform="rotate(-25 8 9.5)" />
+    <rect x="2.5" y="6.5" width="4" height="6" fill="#e8688f" stroke="#444" strokeWidth="0.5" transform="rotate(-25 4.5 9.5)" />
+    <line x1="6" y1="9.5" x2="13.5" y2="6" stroke="#444" strokeWidth="0.4" />
+  </svg>
+);
+
+export const SunIcon = ({ size }: { size?: number }) => {
+  const s = sizeFor(size);
+  return (
+    <svg width={s} height={s} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="8" cy="8" r="3.2" fill="#ffd54f" stroke="#cc8800" strokeWidth="0.5" />
+      {[0, 45, 90, 135, 180, 225, 270, 315].map((a) => (
+        <line key={a} x1="8" y1="1.5" x2="8" y2="3" stroke="#cc8800" strokeWidth="1" strokeLinecap="round" transform={`rotate(${a} 8 8)`} />
+      ))}
+    </svg>
+  );
+};
+
+export const ChatIcon = ({ size }: { size?: number }) => {
+  const s = sizeFor(size);
+  return (
+    <svg width={s} height={s} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 1.5 3 L 11 3 L 11 9.5 L 6.5 9.5 L 4 12 L 4 9.5 L 1.5 9.5 Z" fill="#5b9bd5" stroke="#1f4e79" strokeWidth="0.6" strokeLinejoin="round" />
+      <path d="M 5 6 L 11 6 L 14.5 6 L 14.5 11.5 L 12.5 11.5 L 12.5 13.5 L 10.5 11.5 L 7 11.5 L 7 9.5" fill="#92d050" stroke="#385723" strokeWidth="0.6" strokeLinejoin="round" />
+    </svg>
+  );
+};
+
+export const ChatIconLarge = ({ size = 48 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 4 6 L 32 6 L 32 28 L 18 28 L 11 35 L 11 28 L 4 28 Z" fill="#5b9bd5" stroke="#1f4e79" strokeWidth="1.2" strokeLinejoin="round" />
+    <circle cx="11" cy="17" r="1.5" fill="#fff" />
+    <circle cx="18" cy="17" r="1.5" fill="#fff" />
+    <circle cx="25" cy="17" r="1.5" fill="#fff" />
+    <path d="M 16 18 L 38 18 L 44 18 L 44 38 L 38 38 L 38 44 L 32 38 L 22 38 L 22 28" fill="#92d050" stroke="#385723" strokeWidth="1.2" strokeLinejoin="round" />
+  </svg>
+);
+
+export const GoonIcon = ({ size }: { size?: number }) => {
+  const s = sizeFor(size);
+  return (
+    <svg width={s} height={s} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 4 2 L 12 2 L 11 7 C 11 9 9.5 10 8 10 C 6.5 10 5 9 5 7 Z" fill="#a4185a" stroke="#5a0c2e" strokeWidth="0.5" />
+      <line x1="8" y1="10" x2="8" y2="14" stroke="#5a0c2e" strokeWidth="0.8" />
+      <ellipse cx="8" cy="14" rx="2.6" ry="0.6" fill="#5a0c2e" />
+    </svg>
+  );
+};
+
+export const GalleryIcon = ({ size }: { size?: number }) => {
+  const s = sizeFor(size);
+  return (
+    <svg width={s} height={s} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+      <rect x="1.5" y="3" width="11" height="9" fill="#fff" stroke="#000" strokeWidth="0.6" />
+      <rect x="3.5" y="5" width="11" height="9" fill="#fff" stroke="#000" strokeWidth="0.6" />
+      <circle cx="11.5" cy="8" r="0.9" fill="#ffd54f" />
+      <path d="M 5 12 L 8 9 L 10 11 L 12 10 L 13.5 13 L 5 13 Z" fill="#5a9b3c" />
+    </svg>
+  );
+};
+
+export const WallpaperIcon = ({ size }: { size?: number }) => {
+  const s = sizeFor(size);
+  return (
+    <svg width={s} height={s} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+      <rect x="1.5" y="2.5" width="13" height="11" fill="#5392d6" stroke="#000" strokeWidth="0.5" />
+      <ellipse cx="3" cy="11" rx="3" ry="1.5" fill="#6cb344" />
+      <ellipse cx="13" cy="12" rx="4" ry="2" fill="#468a2c" />
+      <circle cx="11.5" cy="5" r="1" fill="#ffd54f" />
+      <ellipse cx="6" cy="4" rx="2" ry="0.6" fill="#fff" opacity="0.8" />
+    </svg>
+  );
+};

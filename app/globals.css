@@ -2038,3 +2038,398 @@ body.noon-snag::after {
   min-width: 80px;
   text-align: center;
 }
+
+/* ====== WALLPAPERS ====== */
+/* The desktop background is on body — these classes override the default. */
+body.wp-bliss {
+  background:
+    radial-gradient(ellipse at 30% 40%, #b6dcff 0%, transparent 60%),
+    linear-gradient(to bottom, #5392d6 0%, #6cb344 60%, #468a2c 100%) !important;
+}
+body.wp-sunset {
+  background: linear-gradient(to bottom, #ff7e5f 0%, #feb47b 50%, #ffd194 100%) !important;
+}
+body.wp-ocean {
+  background:
+    radial-gradient(ellipse at 70% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+    linear-gradient(to bottom, #2c5364 0%, #203a43 50%, #0f2027 100%) !important;
+}
+body.wp-galaxy {
+  background:
+    radial-gradient(circle at 20% 30%, white 0.5px, transparent 1px),
+    radial-gradient(circle at 70% 60%, white 0.5px, transparent 1px),
+    radial-gradient(circle at 40% 80%, white 0.5px, transparent 1px),
+    radial-gradient(circle at 85% 15%, white 0.4px, transparent 0.8px),
+    linear-gradient(135deg, #1a0033 0%, #4a148c 50%, #1a0033 100%) !important;
+  background-size: 200px 200px, 250px 250px, 180px 180px, 150px 150px, 100% 100% !important;
+}
+body.wp-forest {
+  background: linear-gradient(to bottom, #134e5e 0%, #71b280 100%) !important;
+}
+body.wp-noir {
+  background: linear-gradient(to bottom, #232526 0%, #414345 100%) !important;
+}
+body.wp-pink {
+  background: linear-gradient(to bottom, #ff6e7f 0%, #bfe9ff 100%) !important;
+}
+body.wp-matrix {
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 18px, rgba(0,255,0,0.03) 18px, rgba(0,255,0,0.03) 19px),
+    linear-gradient(to bottom, #000 0%, #003b00 100%) !important;
+}
+
+/* ====== SETTINGS WALLPAPER PICKER ====== */
+.settings-wallpapers {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 6px;
+}
+.settings-wallpaper {
+  background: none; border: 2px solid transparent;
+  padding: 2px; cursor: pointer; border-radius: 4px;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 2px;
+}
+.settings-wallpaper.active {
+  border-color: #316ac5;
+  background: rgba(49, 106, 197, 0.1);
+}
+.settings-wallpaper-preview {
+  width: 100%; aspect-ratio: 4 / 3;
+  border: 1px solid #888;
+}
+.settings-wallpaper-name {
+  font-size: 10px; color: #333; font-weight: 500;
+}
+
+/* ====== PAINT (rebuilt — works at any window size) ====== */
+.paint-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #ece9d8;
+  min-height: 0;
+  min-width: 0;
+}
+.paint-toolbox {
+  display: flex; gap: 4px; align-items: center;
+  background: #d4d0c8; border-bottom: 1px solid #888;
+  padding: 4px 6px;
+  flex-wrap: wrap; flex-shrink: 0;
+}
+.paint-tool {
+  width: 28px; height: 28px;
+  background: #ece9d8; border: 1px outset #ece9d8;
+  cursor: pointer; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.paint-tool.active { border: 1px inset #ece9d8; background: #d4d0c8; }
+.paint-divider {
+  width: 1px; height: 22px; background: #888; margin: 0 2px;
+}
+.paint-sizes { display: flex; gap: 3px; }
+.paint-size {
+  width: 26px; height: 26px;
+  background: #ece9d8; border: 1px outset #ece9d8; cursor: pointer; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.paint-size.active { border: 1px inset #ece9d8; background: #d4d0c8; }
+.paint-action {
+  background: #ece9d8; border: 1px outset #ece9d8;
+  padding: 4px 10px; font-family: Tahoma; font-size: 11px; cursor: pointer;
+}
+.paint-action:active { border: 1px inset #ece9d8; }
+
+.paint-main {
+  flex: 1;
+  display: flex;
+  min-height: 0; /* CRITICAL — lets canvas shrink properly when window resizes */
+  min-width: 0;
+}
+.paint-canvas-wrap {
+  flex: 1;
+  background: white;
+  border: 2px inset #d4d0c8;
+  margin: 4px;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  position: relative;
+}
+.paint-canvas {
+  width: 100%; height: 100%;
+  display: block;
+  cursor: crosshair;
+  touch-action: none;
+}
+.paint-palette {
+  width: 90px;
+  background: #d4d0c8;
+  border-left: 1px solid #888;
+  padding: 6px 4px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  align-content: start;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+.paint-swatch {
+  aspect-ratio: 1;
+  cursor: pointer;
+  border: 1px solid #555;
+  padding: 0;
+}
+.paint-swatch.active { outline: 2px solid #316ac5; outline-offset: 1px; }
+.paint-current {
+  grid-column: 1 / -1;
+  margin-top: 4px; padding: 4px;
+  background: #ece9d8;
+  border: 1px inset #d4d0c8;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+.paint-current-label { font-size: 9px; color: #555; }
+.paint-current-swatch {
+  width: 100%; height: 16px; border: 1px solid #555;
+}
+
+/* ====== SHAGGA CHAT ====== */
+.schat-block {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  min-height: 0;
+  min-width: 0;
+  background: #ece9d8;
+  font-family: Tahoma, sans-serif;
+}
+.schat-roster {
+  background: linear-gradient(to bottom, #d4e1f5, #b8cce8);
+  border-right: 1px solid #7a96b8;
+  overflow-y: auto;
+  padding: 8px 6px;
+}
+.schat-roster-title {
+  font-weight: bold;
+  font-size: 11px;
+  color: #003399;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #7a96b8;
+  padding-bottom: 4px;
+}
+.schat-roster-count {
+  font-weight: normal;
+  color: #555;
+}
+.schat-roster-row {
+  display: flex; align-items: center; gap: 5px;
+  padding: 4px 4px;
+  font-size: 11px;
+  border-radius: 3px;
+}
+.schat-roster-row:hover { background: rgba(255, 255, 255, 0.4); }
+.schat-status {
+  width: 8px; height: 8px; border-radius: 50%;
+  flex-shrink: 0;
+}
+.schat-status.on  { background: #4caf50; box-shadow: 0 0 4px #4caf50; }
+.schat-status.off { background: #888; }
+.schat-flag { font-size: 12px; }
+.schat-handle { font-weight: 600; }
+
+.schat-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+.schat-header {
+  background: linear-gradient(to bottom, #f0eee0, #e0ddc8);
+  border-bottom: 1px solid #999;
+  padding: 6px 12px;
+}
+.schat-title {
+  font-weight: bold; font-size: 13px; color: #003399;
+}
+.schat-topic {
+  font-size: 11px; color: #666; font-style: italic;
+}
+.schat-feed {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 12px;
+  background: white;
+  font-size: 12px;
+  min-height: 0;
+}
+.schat-msg { padding: 4px 0; }
+.schat-msg.me .schat-msg-text {
+  background: #e7f3ff; padding: 4px 8px; border-radius: 4px;
+  display: inline-block;
+}
+.schat-msg-head {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 10px; margin-bottom: 2px;
+}
+.schat-msg-flag { font-size: 12px; }
+.schat-msg-user { font-weight: 700; }
+.schat-msg-time { color: #999; margin-left: auto; }
+.schat-msg-text { line-height: 1.4; }
+.schat-typing {
+  font-style: italic; color: #888; font-size: 11px; padding: 4px 0;
+}
+.schat-typing span:first-child { font-weight: 600; color: #555; }
+.schat-dot { animation: schatBlink 1s infinite; }
+.schat-dot:nth-child(2) { animation-delay: 0.3s; }
+.schat-dot:nth-child(3) { animation-delay: 0.6s; }
+@keyframes schatBlink { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+.schat-compose {
+  display: flex; gap: 6px; padding: 8px;
+  background: #ece9d8;
+  border-top: 1px solid #999;
+  flex-shrink: 0;
+}
+.schat-compose input {
+  flex: 1; padding: 6px 10px; font-size: 12px;
+  border: 1px inset #d4d0c8; outline: none;
+  font-family: Tahoma, sans-serif;
+}
+.schat-compose button {
+  background: linear-gradient(to bottom, #f0f0f0, #d4d0c8);
+  border: 1px outset #d4d0c8;
+  padding: 6px 16px; font-family: Tahoma, sans-serif; font-size: 12px;
+  font-weight: bold; cursor: pointer;
+}
+.schat-compose button:disabled { opacity: 0.5; cursor: not-allowed; }
+.schat-compose button:active { border: 1px inset #d4d0c8; }
+
+/* ====== SHAGGA GALLERY ====== */
+.gallery-block {
+  flex: 1; display: flex; flex-direction: column;
+  min-height: 0; min-width: 0;
+  background: #1a1a1a;
+}
+.gallery-toolbar {
+  background: linear-gradient(to bottom, #ece9d8, #d4d0c8);
+  border-bottom: 1px solid #888;
+  padding: 4px 10px;
+  font-size: 11px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-shrink: 0;
+  font-family: Tahoma, sans-serif;
+}
+.gallery-count { color: #555; font-style: italic; }
+.gallery-grid {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 6px;
+}
+.gallery-item {
+  background: #2a2a2a;
+  border: 1px solid #444;
+  padding: 0;
+  cursor: pointer;
+  aspect-ratio: 1;
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+.gallery-item:hover { border-color: #5392d6; }
+.gallery-item img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block;
+}
+.gallery-zoom {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10;
+  cursor: zoom-out;
+}
+.gallery-zoom img {
+  max-width: 95%; max-height: 95%;
+  object-fit: contain;
+}
+.gallery-zoom-close {
+  position: absolute; top: 12px; right: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid white; color: white;
+  width: 32px; height: 32px;
+  font-size: 16px; cursor: pointer;
+  border-radius: 4px;
+}
+.gallery-empty {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 24px; text-align: center;
+  font-family: Tahoma, sans-serif; color: #666;
+  background: #ece9d8;
+}
+.gallery-empty-icon { font-size: 48px; margin-bottom: 12px; }
+.gallery-empty-title {
+  font-size: 16px; font-weight: bold; color: #003399; margin-bottom: 12px;
+}
+.gallery-empty-msg {
+  font-size: 12px; line-height: 1.6;
+}
+.gallery-empty-msg code {
+  background: #fff; padding: 2px 6px;
+  border: 1px solid #ccc; font-family: Consolas, monospace; font-size: 11px;
+}
+
+/* ====== RESPONSIVE FIXES FOR PARODY APPS ====== */
+/* The shared problem: when the user maximizes the window, internal flex/grid
+   layouts had hardcoded widths or didn't handle min-height: 0 correctly,
+   so things either overflowed or didn't fill. This patch makes them all
+   stretch and scroll properly at any size. */
+
+.gram-block,
+.shwitter-block,
+.ytube-block,
+.fbook-block,
+.sfy-block {
+  min-height: 0 !important;
+  min-width: 0 !important;
+}
+.gram-feed,
+.shwitter-feed,
+.ytube-grid,
+.fbook-main,
+.sfy-main,
+.sfy-tracks {
+  min-height: 0;
+  min-width: 0;
+}
+/* Spotify clone — make the player always fit at the bottom */
+.sfy-block {
+  display: grid;
+  grid-template-columns: minmax(160px, 200px) 1fr;
+  grid-template-rows: 1fr 88px;
+}
+.sfy-sidebar { min-height: 0; }
+.sfy-main { overflow-y: auto; }
+.sfy-player {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) minmax(180px, 2fr) minmax(80px, 1fr);
+  align-items: center;
+}
+/* ShaggaBook — make sidebar collapse on narrow widths */
+.fbook-body { flex-wrap: wrap; }
+@media (max-width: 480px) {
+  .fbook-sidebar { display: none; }
+}
+/* ShaggaTube — grid auto-fills */
+.ytube-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+/* Fix any overflow on the title bar of any window */
+.xp-title-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
