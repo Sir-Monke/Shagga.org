@@ -3,17 +3,20 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 const TIPS = [
-  "It looks like you're trying to be a top shagga. Want help, mate?",
-  "Pro tip: never trust a magpie holdin a pen.",
-  "Have you considered putting a snag on the barbie? It's about that time.",
-  "I see you're opening a lot of windows. Like, a LOT. You good?",
-  "Friendly reminder: it's bin night.",
-  "Did u remember to drink some water today, mate? It's been a while.",
+  "It looks like you're trying to be a top shagga. Want help?",
+  "Pro tip: if u reply 'k' to ur mum, u are picking a fight.",
+  "Have u tried turning it off and on again? (it works 89% of the time)",
+  "I see u have 47 windows open. like Phil's car, u are committed.",
+  "Friendly reminder: ur dad has 247 tabs open. someone needs to intervene.",
+  "Did u know? Margaret (90) sent a message from the phone she lost asking if anyone has found it.",
   "Pssst. The Konami code does something. (just sayin.)",
-  "Right-click the desktop. Trust me. Big shagga energy.",
-  "Click that .txt file on the desktop. It will change ur life or whatever.",
-  "U look great today legend. Carry on.",
-  "It looks like you're being a fat neek. Want me to convert u to a shagga?",
+  "Right-click the desktop. trust me.",
+  "Click the .txt file on the desktop. it will change ur life or whatever.",
+  "U look great today legend. carry on.",
+  "Phil installed a manual handbrake on his automatic. for the feel of it. legend.",
+  "Pro tip: if it says 'reply all' do not click reply all. ask Sharon.",
+  "Aldi middle aisle this week: kayak, chainsaw, gnomes. invest now.",
+  "Drink some water mate. its been a while.",
 ];
 
 interface Props {

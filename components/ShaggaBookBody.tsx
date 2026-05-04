@@ -37,42 +37,43 @@ type View =
   | { kind: 'profile'; handle: string };
 
 const USERS: User[] = [
-  { handle: 'margaret_shagga',  name: 'Margaret Shagga',     avatar: '👵', color: '#c2185b', online: true },
-  { handle: 'bunnings_local',   name: 'Bunnings Mooroolbark',avatar: '🔨', color: '#ef6c00' },
-  { handle: 'daz',              name: 'Daz',                 avatar: '🍺', color: '#ffa500', online: true },
+  { handle: 'margaret_90',      name: 'Margaret (Nan)',      avatar: '👵', color: '#c2185b', online: true },
+  { handle: 'phil_drives',      name: 'Phil',                avatar: '🚗', color: '#1976d2', online: true },
+  { handle: 'uncle_dave',       name: 'Uncle Dave',          avatar: '🧓', color: '#5d4037' },
+  { handle: 'auntie_linda',     name: 'Auntie Linda',        avatar: '💃', color: '#d81b60', online: true },
   { handle: 'shagga_memories',  name: 'Shagga Memories',     avatar: '📸', color: '#5e35b1' },
-  { handle: 'genuine_news',     name: 'GENUINE NEWS Australia', avatar: '📰', color: '#d32f2f' },
-  { handle: 'big_shagga_94',    name: 'Big Shagga',          avatar: '🤠', color: '#1976d2', online: true },
-  { handle: 'cooked_dave',      name: 'Cooked Dave',         avatar: '🌊', color: '#00838f' },
-  { handle: 'shazza',           name: 'Shazza',              avatar: '💅', color: '#d81b60', online: true },
-  { handle: 'goon_lord',        name: 'Goon Lord',           avatar: '🍷', color: '#7b1fa2' },
-  { handle: 'tradie_tim',       name: 'Tradie Tim',          avatar: '🛠️', color: '#5d4037', online: true },
-  { handle: 'cookwithshagga',   name: 'Cook With Shagga',    avatar: '🍳', color: '#ff8f00' },
-  { handle: 'maggie_swooper',   name: 'maggie_swooper',      avatar: '🐦‍⬛', color: '#1c1c1c', online: true },
+  { handle: 'genuine_news',     name: 'GENUINE NEWS',        avatar: '📰', color: '#d32f2f' },
+  { handle: 'big_shagga_94',    name: 'Big Shagga',          avatar: '🤠', color: '#0e7e7e', online: true },
+  { handle: 'concerned_mum',    name: 'Mom',                 avatar: '👩', color: '#7b1fa2' },
+  { handle: 'dad_browser',      name: 'Dad',                 avatar: '👨', color: '#3949ab' },
+  { handle: 'sharon_accounts',  name: 'Sharon from Accounts', avatar: '💼', color: '#388e3c', online: true },
+  { handle: 'tech_helpline',    name: 'Tech Support',        avatar: '💻', color: '#455a64', online: true },
+  { handle: 'aldi_middle',      name: 'Aldi Middle Aisle',   avatar: '🛒', color: '#ef6c00' },
 ];
 
 const POST_TEMPLATES: Omit<FBPost, 'id'>[] = [
-  { userHandle: 'margaret_shagga',  time: '47 mins ago', content: 'GOOD MORNING family !! to whom this may concern please call ur mother she is worried sick !! also enjoy this beautiful sunrise photo i found on the internet !! 🌅🌅🌅 GOD BLESS', emoji: '🌅', bg: 'linear-gradient(135deg, #ffd54f, #ff7043)', initialReactions: { like: 47, love: 89, haha: 2, wow: 12, sad: 0, angry: 0 }, initialComments: [{ user: 'Big Shagga', text: 'love u nan' }, { user: 'Daz', text: 'beautiful nan' }], initialShares: 1 },
-  { userHandle: 'bunnings_local',   time: '2 hours ago', content: 'SAUSAGE SIZZLE SATURDAY !!! 9am till sold out. proceeds go to the local rotary club. ONIONS ARE UNDER THE SNAG. we will not be debating this in 2024. 🌭', emoji: '🌭', bg: 'linear-gradient(135deg, #ef6c00, #d32f2f)', initialReactions: { like: 8214, love: 412, haha: 47, wow: 12, sad: 2, angry: 89 }, initialComments: [{ user: 'Goon Lord', text: 'on top is heresy' }, { user: 'Daz', text: 'see u there' }], initialShares: 2104 },
-  { userHandle: 'shagga_memories',  time: '5 hours ago', content: '✨ On this day in 2003 ✨ you were tagged in a photo with 47 of ur mates at the dam. simpler times mate.', emoji: '📸', bg: 'linear-gradient(135deg, #5e35b1, #311b92)', initialReactions: { like: 891, love: 234, haha: 12, wow: 47, sad: 412, angry: 0 }, initialComments: [{ user: 'Cooked Dave', text: 'wonder where everyone is now' }], initialShares: 12 },
-  { userHandle: 'daz',              time: '1 day ago', content: 'lost a thong at the BBQ. if found please return. it has sentimental value (it was my dads)', emoji: '🩴', bg: 'linear-gradient(135deg, #ffa500, #ef6c00)', initialReactions: { like: 47, love: 8, haha: 234, wow: 12, sad: 89, angry: 4 }, initialComments: [{ user: 'Big Shagga', text: 'will keep an eye out' }], initialShares: 3 },
-  { userHandle: 'genuine_news',     time: '2 days ago', content: 'BREAKING: Local man "shagga" allegedly seen near Bunnings holding what witnesses described as "definitely a snag". More at 7.', emoji: '📰', bg: 'linear-gradient(135deg, #d32f2f, #b71c1c)', initialReactions: { like: 12847, love: 234, haha: 8472, wow: 891, sad: 12, angry: 47 }, initialComments: [{ user: 'Big Shagga', text: 'guilty' }, { user: 'Margaret', text: 'thats my son' }], initialShares: 8421 },
-  { userHandle: 'big_shagga_94',    time: '3 days ago', content: 'just put a snag on the barbie at 6:47am. cooked behaviour. happy weekend everyone 🌭🍻', emoji: '🌭', bg: 'linear-gradient(135deg, #ff7e2d, #ff3b3b)', initialReactions: { like: 891, love: 47, haha: 234, wow: 12, sad: 0, angry: 0 }, initialComments: [{ user: 'Daz', text: 'pour one out for me' }], initialShares: 12 },
-  { userHandle: 'cooked_dave',      time: '4 days ago', content: 'going to the dam if anyone wants to come. its lukewarm. as is tradition.', emoji: '🌊', bg: 'linear-gradient(135deg, #2c5364, #0f2027)', initialReactions: { like: 234, love: 47, haha: 12, wow: 0, sad: 0, angry: 0 }, initialComments: [{ user: 'Daz', text: 'on my way' }], initialShares: 4 },
-  { userHandle: 'shazza',           time: '5 days ago', content: 'WON GOON OF FORTUNE AGAIN!!! 4 weeks running 👑👑👑 nobody can beat me', emoji: '👑', bg: 'linear-gradient(135deg, #d81b60, #6a1b9a)', initialReactions: { like: 2341, love: 412, haha: 47, wow: 12, sad: 891, angry: 234 }, initialComments: [{ user: 'Goon Lord', text: 'unbeatable. truly.' }, { user: 'Daz', text: 'rematch' }], initialShares: 89 },
-  { userHandle: 'goon_lord',        time: '6 days ago', content: 'tonight. 7pm. back fence. byo peg. RT this post.', emoji: '🍷', bg: 'linear-gradient(135deg, #7b1fa2, #4a148c)', initialReactions: { like: 412, love: 47, haha: 12, wow: 0, sad: 0, angry: 4 }, initialComments: [{ user: 'Shazza', text: 'count me in' }], initialShares: 28 },
-  { userHandle: 'tradie_tim',       time: '1 week ago', content: 'on smoko. dont txt. unless its about a snag.', emoji: '🚬', bg: 'linear-gradient(135deg, #5d4037, #3e2723)', initialReactions: { like: 234, love: 12, haha: 412, wow: 0, sad: 0, angry: 0 }, initialComments: [{ user: 'boss', text: 'come back to work' }], initialShares: 7 },
-  { userHandle: 'cookwithshagga',   time: '1 week ago', content: 'fried egg. attempt #47. close but not perfect. recipe in comments below 👇', emoji: '🍳', bg: 'linear-gradient(135deg, #ffa500, #ef6c00)', initialReactions: { like: 891, love: 234, haha: 47, wow: 12, sad: 8, angry: 0 }, initialComments: [{ user: 'Margaret', text: 'use less butter' }], initialShares: 89 },
-  { userHandle: 'maggie_swooper',   time: '2 weeks ago', content: 'reminder: swooping season is upon us. wear a helmet. carry a stick. respect the maggies.', emoji: '🪶', bg: 'linear-gradient(135deg, #1c1c1c, #444)', initialReactions: { like: 47, love: 8, haha: 89, wow: 12, sad: 4, angry: 12 }, initialComments: [{ user: 'cyclist', text: 'they are evil' }], initialShares: 23 },
+  { userHandle: 'margaret_90',      time: '2 mins ago',  content: 'has anyone found my phone i must have left it somewhere. typing this on it. love nan x ❤️🌹', emoji: '📱', bg: 'linear-gradient(135deg, #ec407a, #ad1457)', initialReactions: { like: 4128, love: 14728, haha: 8472, wow: 47, sad: 12, angry: 0 }, initialComments: [{ user: 'Big Shagga', text: 'nan u are texting on your phone' }, { user: 'Auntie Linda', text: '🌹🌹🌹 LOVE U ANGEL' }], initialShares: 234 },
+  { userHandle: 'phil_drives',      time: '1 hour ago',  content: 'BIG NEWS FROM ME. my car can do 90mph in first gear with NO REDLINE. it just keeps going. i think i broke physics or something. stoked!! 🚗', emoji: '🚗', bg: 'linear-gradient(135deg, #1976d2, #0d47a1)', initialReactions: { like: 8214, love: 412, haha: 12047, wow: 891, sad: 0, angry: 47 }, initialComments: [{ user: 'Mechanic', text: 'phil this is concerning' }, { user: 'Big Shagga', text: 'PHIL NO' }, { user: 'Mom', text: 'k' }], initialShares: 2104 },
+  { userHandle: 'phil_drives',      time: '47 mins ago', content: 'UPDATE: also installed a manual handbrake on the auto. for the feel of it. golden 👌', emoji: '🛞', bg: 'linear-gradient(135deg, #1565c0, #0d47a1)', initialReactions: { like: 412, love: 8, haha: 8472, wow: 47, sad: 0, angry: 12 }, initialComments: [{ user: 'Mechanic', text: 'phil please' }], initialShares: 89 },
+  { userHandle: 'uncle_dave',       time: '3 hours ago', content: '👍', emoji: undefined, initialReactions: { like: 47, love: 234, haha: 891, wow: 12, sad: 412, angry: 0 }, initialComments: [{ user: 'Big Shagga', text: 'dave that was a death announcement' }, { user: 'Margaret', text: 'what is happening' }], initialShares: 0 },
+  { userHandle: 'auntie_linda',     time: '5 hours ago', content: '🌹🌹🌹 GOOD MORNING ANGELS!! 🌹🌹🌹 GOD BLESS THIS BEAUTIFUL DAY ❤️❤️❤️ FAMILY IS EVERYTHING 💕💕💕 SHARE IF U AGREE 🙏🙏🙏', emoji: '🌹', bg: 'linear-gradient(135deg, #ff7e5f, #feb47b)', initialReactions: { like: 1247, love: 4128, haha: 234, wow: 89, sad: 0, angry: 0 }, initialComments: [{ user: 'Margaret', text: 'AMEN GOD BLESS' }, { user: 'Uncle Dave', text: '👍' }], initialShares: 47 },
+  { userHandle: 'shagga_memories',  time: '6 hours ago', content: '✨ On this day in 2007 ✨ you were tagged in 47 photos. all sideways. simpler times ❤️', emoji: '📸', bg: 'linear-gradient(135deg, #5e35b1, #311b92)', initialReactions: { like: 891, love: 234, haha: 47, wow: 12, sad: 412, angry: 0 }, initialComments: [{ user: 'Big Shagga', text: 'why was my phone always sideways' }], initialShares: 12 },
+  { userHandle: 'genuine_news',     time: '12 hours ago',content: 'BREAKING: Local man "Phil" allegedly taught his automatic car to think it is a manual. Witnesses describe his driving as "concerning but committed". More at 7. 🚨', emoji: '🚨', bg: 'linear-gradient(135deg, #d32f2f, #b71c1c)', initialReactions: { like: 12847, love: 234, haha: 47281, wow: 891, sad: 12, angry: 47 }, initialComments: [{ user: 'Phil', text: 'genuine news again my goat' }, { user: 'Mom', text: 'phil call me' }], initialShares: 8421 },
+  { userHandle: 'sharon_accounts',  time: '1 day ago',   content: 'ALL: please disregard my previous email. and the one before that. and the one before that. and the one i am about to send. — Sharon', emoji: '📧', bg: 'linear-gradient(135deg, #2e7d32, #1b5e20)', initialReactions: { like: 8472, love: 412, haha: 14728, wow: 47, sad: 234, angry: 12 }, initialComments: [{ user: 'IT', text: 'sharon please stop reply-all' }, { user: 'Big Shagga', text: 'sharon never stop' }], initialShares: 4128 },
+  { userHandle: 'aldi_middle',      time: '2 days ago',  content: 'THIS WEEK IN THE MIDDLE AISLE: a kayak. a chainsaw. 47 garden gnomes. one (1) astronaut suit. a ukulele. £14.99 each. while stocks last 🛒', emoji: '🛒', bg: 'linear-gradient(135deg, #ef6c00, #d84315)', initialReactions: { like: 47281, love: 8472, haha: 4128, wow: 891, sad: 0, angry: 0 }, initialComments: [{ user: 'Phil', text: 'kayak booked' }, { user: 'Big Shagga', text: 'astronaut suit booked' }], initialShares: 12047 },
+  { userHandle: 'concerned_mum',    time: '3 days ago',  content: 'call me when you get a chance', emoji: undefined, initialReactions: { like: 47, love: 0, haha: 0, wow: 89, sad: 412, angry: 234 }, initialComments: [{ user: 'Big Shagga', text: 'is everyone ok' }, { user: 'Mom', text: 'k' }], initialShares: 0 },
+  { userHandle: 'dad_browser',      time: '4 days ago',  content: 'how do u close a tab. asking for a friend. its me. 247 of them. asking for me.', emoji: '💻', bg: 'linear-gradient(135deg, #3949ab, #1a237e)', initialReactions: { like: 891, love: 47, haha: 4128, wow: 234, sad: 412, angry: 0 }, initialComments: [{ user: 'Tech Support', text: 'have you tried turning it off and on again' }], initialShares: 47 },
+  { userHandle: 'tech_helpline',    time: '5 days ago',  content: 'have you tried turning it off and on again', emoji: '💻', bg: 'linear-gradient(135deg, #455a64, #263238)', initialReactions: { like: 14728, love: 234, haha: 891, wow: 47, sad: 0, angry: 0 }, initialComments: [{ user: 'Dad', text: 'i have not. let me try' }], initialShares: 234 },
 ];
 
 const FRIENDS = USERS;
 
 const EVENTS = [
-  { name: 'Sausage Sizzle Saturday',  when: 'Saturday 9am', going: 47, location: 'Bunnings Mooroolbark' },
-  { name: 'Goon of Fortune Tournament', when: 'Tonight 7pm', going: 12, location: 'Back fence' },
-  { name: 'Shaggas Nan\'s Birthday',  when: 'Next Tuesday', going: 234, location: 'her house, dont be late' },
-  { name: 'BBQ at Daves',              when: 'This Sunday', going: 89, location: "Daves backyard" },
+  { name: 'Margaret 90th Birthday',          when: 'Next Sunday',     going: 234, location: 'her house, dont be late' },
+  { name: 'Phil\'s Car Show & Tell',         when: 'This Saturday',   going: 12,  location: 'his driveway, may end early' },
+  { name: 'Dad\'s 247 Tabs Closing Ceremony',when: 'Some time in 2027', going: 4, location: 'the spare room' },
+  { name: 'Aldi Middle Aisle Reset',          when: 'Tuesday 8am',     going: 89,  location: 'aisle 3' },
+  { name: 'Sharon\'s Email Recall Party',     when: 'Pending recall',  going: 47,  location: 'TBD (recalled)' },
 ];
 
 // ---------- Helpers ----------
@@ -430,14 +431,14 @@ function PostCard({ post, user, myReaction, onReact, extraComments, onAddComment
 // ---------- Marketplace ----------
 function MarketplaceView({ products, placeholder }: { products: string[]; placeholder: boolean }) {
   const items = [
-    { name: 'Genuine Shagga Thong (single)',  price: 2,  desc: 'sentimental value. mostly. lost the other one at a BBQ.' },
-    { name: 'Used Hills Hoist (slightly leans)', price: 47, desc: 'great for goon of fortune. comes with vibes.' },
-    { name: 'Cooked Snag Photo (signed)',      price: 99, desc: 'rare. signed by Big Shagga himself. mint condition.' },
-    { name: 'Empty Goon Bag (sentimental)',    price: 5,  desc: 'won goon of fortune in 2003 with this. priceless really.' },
-    { name: 'Bunnings Sausage Sizzle Tongs',   price: 12, desc: 'used. seasoned. you cannot replicate the patina.' },
-    { name: 'Magpie Repellent (homemade)',     price: 15, desc: 'works 47% of the time. money back unguaranteed.' },
-    { name: 'Lukewarm Shower Head',             price: 8,  desc: 'never lets you go hot. perfect for shaggas.' },
-    { name: 'Vegemite Sandwich (digital nft)',  price: 4747, desc: 'definitely real. trust.' },
+    { name: 'Used Astronaut Suit (Aldi 2024)',  price: 14, desc: 'worn once. middle aisle classic. some moon dust included.' },
+    { name: 'Phil\'s Old Manual Gearbox',        price: 47, desc: 'no longer needed. its automatic now. and a manual. and paddle shift. weirdly all 3.' },
+    { name: 'Margaret\'s Phone (allegedly lost)', price: 0, desc: 'she keeps finding it then losing it. taking offers.' },
+    { name: 'Garden Gnome Collection (47)',      price: 12, desc: 'middle aisle haul. all named "kevin". non-negotiable.' },
+    { name: 'Dad\'s Browser Tabs (247 of them)',  price: 99, desc: 'serious buyer only. each one is "important". includes 6 banking ones from 2018.' },
+    { name: 'Used Kayak (never wet)',             price: 47, desc: 'bought in middle aisle 2 years ago. has lived in the garage. mint.' },
+    { name: 'Bluetooth Speaker (gear shift sounds)', price: 8, desc: 'phil\'s spare. plays manual gear shift sounds in your automatic. immersive.' },
+    { name: 'Sharon\'s Email Drafts (folder)',    price: 4, desc: '47 emails marked "do not send". she sent them. all of them.' },
   ];
   return (
     <div className="fb2-marketplace">

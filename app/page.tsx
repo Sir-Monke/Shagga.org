@@ -42,6 +42,7 @@ import BSOD from '@/components/BSOD';
 import Clippy from '@/components/Clippy';
 import SnagCounter from '@/components/SnagCounter';
 import RaveMode from '@/components/RaveMode';
+import Toaster from '@/components/Toaster';
 
 import {
   NotepadIcon, NotepadIconLarge, PhotoIcon, MoneyIcon, SkullIcon,
@@ -608,6 +609,7 @@ export default function Home() {
 
       {bsodActive && <BSOD onComplete={() => setBsodActive(false)} />}
       {raveActive && <RaveMode onClose={() => setRaveActive(false)} />}
+      <Toaster />
     </main>
   );
 }
