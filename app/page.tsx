@@ -23,6 +23,12 @@ import MagpieGameBody from '@/components/MagpieGameBody';
 import PaintBody from '@/components/PaintBody';
 import GoonCalcBody from '@/components/GoonCalcBody';
 import WeatherBody from '@/components/WeatherBody';
+import SettingsBody, { ShaggaSettings, DEFAULT_SETTINGS } from '@/components/SettingsBody';
+import ShaggaGramBody from '@/components/ShaggaGramBody';
+import ShwitterBody from '@/components/ShwitterBody';
+import ShaggaTubeBody from '@/components/ShaggaTubeBody';
+import ShaggaBookBody from '@/components/ShaggaBookBody';
+import ShaggaFyBody from '@/components/ShaggaFyBody';
 import { MyShaggaBody, RecycleBinBody, TaxReturnsBody } from '@/components/FolderBodies';
 
 // chrome / desktop
@@ -42,6 +48,7 @@ import {
   NortonIcon, LimewireIcon, MsnIcon, StarIcon, UpdateIcon, EmailIcon,
   CalculatorIcon, MineIcon, IEIcon, RecycleIcon, RecycleIconLarge,
   FolderIcon, MyShaggaIcon, GameIcon, RunIcon,
+  SettingsIcon, GramIcon, ShwitterIcon, TubeIcon, BookIcon, SfyIcon,
 } from '@/components/icons';
 
 import { productsList, shaggasList } from '@/components/imageManifest';
@@ -52,7 +59,8 @@ type WindowKind =
   | 'area' | 'ad' | 'hacker'
   | 'norton' | 'limewire' | 'msn' | 'visitor' | 'update' | 'chainemail'
   | 'shaggapad' | 'calculator' | 'minesweeper' | 'internetshagga' | 'magpie'
-  | 'paint' | 'gooncalc' | 'weather'
+  | 'paint' | 'gooncalc' | 'weather' | 'settings'
+  | 'shaggagram' | 'shwitter' | 'shaggatube' | 'shaggabook' | 'shaggafy'
   | 'myshagga' | 'recyclebin' | 'taxreturns';
 
 interface OpenWindow {
@@ -132,6 +140,26 @@ export default function Home() {
   const [bsodActive, setBsodActive] = useState(false);
   const [raveActive, setRaveActive] = useState(false);
   const [clippyHidden, setClippyHidden] = useState(false);
+
+  // settings (persisted to localStorage)
+  const [settings, setSettings] = useState<ShaggaSettings>(DEFAULT_SETTINGS);
+  const [settingsLoaded, setSettingsLoaded] = useState(false);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('shagga-settings');
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        setSettings({ ...DEFAULT_SETTINGS, ...parsed });
+      }
+    } catch {}
+    setSettingsLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (!settingsLoaded) return;
+    try { localStorage.setItem('shagga-settings', JSON.stringify(settings)); } catch {}
+  }, [settings, settingsLoaded]);
 
   const products = useMemo(() => productsList(), []);
   const shaggas = useMemo(() => shaggasList(), []);
@@ -227,6 +255,12 @@ export default function Home() {
       paint:           { title: 'Shagga-Paint',                  icon: '🖌️',              w: 500, h: 460 },
       gooncalc:        { title: 'Goon Calculator',               icon: '🍷',              w: 320, h: 320, resizable: false },
       weather:         { title: 'Shagga Weather',                icon: '☀️',              w: 280, h: 320, resizable: false },
+      settings:        { title: 'Shagga Control Panel',          icon: <SettingsIcon />,  w: 420, h: 480 },
+      shaggagram:      { title: 'Shagga-gram',                   icon: <GramIcon />,      w: 380, h: 540 },
+      shwitter:        { title: 'Shwitter',                      icon: <ShwitterIcon />,  w: 480, h: 540 },
+      shaggatube:      { title: 'ShaggaTube',                    icon: <TubeIcon />,      w: 600, h: 480 },
+      shaggabook:      { title: 'ShaggaBook',                    icon: <BookIcon />,      w: 640, h: 520 },
+      shaggafy:        { title: 'Shagga-fy',                     icon: <SfyIcon />,       w: 660, h: 480 },
       myshagga:       { title: 'My Shagga',                      icon: <MyShaggaIcon size={16} />,    w: 460, h: 380 },
       recyclebin:     { title: 'Recycle Bin',                    icon: <RecycleIcon />,   w: 460, h: 320 },
       taxreturns:     { title: 'tax_returns_DO_NOT_OPEN',        icon: <FolderIcon size={16} />,      w: 360, h: 280 },
@@ -279,11 +313,18 @@ export default function Home() {
   // auto-spawn loop
   useEffect(() => {
     if (!mounted || isMobile) return;
+    if (!settings.popupsEnabled) return;
+    const rateMap = {
+      slow:   { min: 8000,  range: 7000 },
+      normal: { min: 4000,  range: 5000 },
+      fast:   { min: 1500,  range: 2500 },
+    };
+    const { min, range } = rateMap[settings.spawnRate];
     const first = setTimeout(spawnRandom, 1300);
     let cancelled = false;
     function loop() {
       if (cancelled) return;
-      const delay = 4000 + Math.random() * 5000;
+      const delay = min + Math.random() * range;
       setTimeout(() => {
         if (cancelled) return;
         setWindows((cur) => {
@@ -295,11 +336,12 @@ export default function Home() {
     }
     loop();
     return () => { cancelled = true; clearTimeout(first); };
-  }, [mounted, isMobile, spawnRandom]);
+  }, [mounted, isMobile, spawnRandom, settings.popupsEnabled, settings.spawnRate]);
 
   // periodic random BSOD
   useEffect(() => {
     if (!mounted || isMobile) return;
+    if (!settings.bsodEnabled) return;
     function schedule() {
       const delay = 240_000 + Math.random() * 240_000; // 4-8 min
       return setTimeout(() => {
@@ -308,7 +350,7 @@ export default function Home() {
     }
     const id = schedule();
     return () => clearTimeout(id);
-  }, [mounted, isMobile, bsodActive]);
+  }, [mounted, isMobile, bsodActive, settings.bsodEnabled]);
 
   // ----- desktop icons -----
   const openShaggapad   = useCallback(() => openOrFocus('shaggapad', { shaggapadText }), [openOrFocus, shaggapadText]);
@@ -322,6 +364,12 @@ export default function Home() {
   const openPaint       = useCallback(() => openOrFocus('paint'), [openOrFocus]);
   const openGoonCalc    = useCallback(() => openOrFocus('gooncalc'), [openOrFocus]);
   const openWeather     = useCallback(() => openOrFocus('weather'), [openOrFocus]);
+  const openSettings    = useCallback(() => openOrFocus('settings'), [openOrFocus]);
+  const openShaggaGram  = useCallback(() => openOrFocus('shaggagram'), [openOrFocus]);
+  const openShwitter    = useCallback(() => openOrFocus('shwitter'), [openOrFocus]);
+  const openShaggaTube  = useCallback(() => openOrFocus('shaggatube'), [openOrFocus]);
+  const openShaggaBook  = useCallback(() => openOrFocus('shaggabook'), [openOrFocus]);
+  const openShaggaFy    = useCallback(() => openOrFocus('shaggafy'), [openOrFocus]);
 
   // ----- konami code -----
   useEffect(() => {
@@ -380,7 +428,12 @@ export default function Home() {
   // ----- start menu -----
   const startLeft: StartMenuItem[] = [
     { id: 'ie',     label: 'Internet Shagga',    icon: <IEIcon size={20} />,         onClick: openIE, bold: true },
-    { id: 'msn',    label: 'MSN Messenger',      icon: <MsnIcon size={20} />,        onClick: () => open('msn'), bold: true },
+    { id: 'gram',   label: 'Shagga-gram',        icon: <GramIcon size={20} />,       onClick: openShaggaGram, bold: true },
+    { id: 'shw',    label: 'Shwitter',           icon: <ShwitterIcon size={20} />,   onClick: openShwitter, bold: true },
+    { id: 'tube',   label: 'ShaggaTube',         icon: <TubeIcon size={20} />,       onClick: openShaggaTube },
+    { id: 'fbook',  label: 'ShaggaBook',         icon: <BookIcon size={20} />,       onClick: openShaggaBook },
+    { id: 'sfy',    label: 'Shagga-fy',          icon: <SfyIcon size={20} />,        onClick: openShaggaFy },
+    { id: 'msn',    label: 'MSN Messenger',      icon: <MsnIcon size={20} />,        onClick: () => open('msn') },
     { id: 'pad',    label: 'Shaggapad',          icon: <NotepadIcon size={20} />,    onClick: openShaggapad },
     { id: 'calc',   label: 'Calculator',         icon: <CalculatorIcon size={20} />, onClick: openCalculator },
     { id: 'mine',   label: 'Punt Sweeper',       icon: <MineIcon size={20} />,       onClick: openMinesweeper },
@@ -396,6 +449,7 @@ export default function Home() {
     { id: 'tax',      label: 'tax_returns',   icon: <FolderIcon size={20} />,      onClick: openTaxReturns },
     { id: 'run',      label: 'Run...',        icon: <RunIcon size={20} />,         onClick: () => open('hacker') },
     { id: 'update',   label: 'Windows Update',icon: <UpdateIcon size={20} />,      onClick: () => open('update') },
+    { id: 'settings', label: 'Control Panel', icon: <SettingsIcon size={20} />,    onClick: openSettings },
   ];
 
   // ----- context menu -----
@@ -457,6 +511,14 @@ export default function Home() {
       {/* Desktop icons (right column) */}
       <DesktopIcon label="Recycle Bin"  icon={<RecycleIconLarge />}   x={20}  y={420} onOpen={openRecycleBin} />
 
+      {/* Desktop icons (second column - parody apps) */}
+      <DesktopIcon label="Shagga-gram" icon={<GramIcon size={48} />}     x={120} y={20}  onOpen={openShaggaGram} />
+      <DesktopIcon label="Shwitter"    icon={<ShwitterIcon size={48} />} x={120} y={120} onOpen={openShwitter} />
+      <DesktopIcon label="ShaggaTube"  icon={<TubeIcon size={48} />}     x={120} y={220} onOpen={openShaggaTube} />
+      <DesktopIcon label="ShaggaBook"  icon={<BookIcon size={48} />}     x={120} y={320} onOpen={openShaggaBook} />
+      <DesktopIcon label="Shagga-fy"   icon={<SfyIcon size={48} />}      x={120} y={420} onOpen={openShaggaFy} />
+      <DesktopIcon label="Settings"    icon={<SettingsIcon size={48} />} x={220} y={20}  onOpen={openSettings} />
+
       {/* Open windows */}
       {windows.map((w, idx) => {
         const z = 100 + idx;
@@ -498,6 +560,12 @@ export default function Home() {
             {w.kind === 'paint' && <PaintBody />}
             {w.kind === 'gooncalc' && <GoonCalcBody />}
             {w.kind === 'weather' && <WeatherBody />}
+            {w.kind === 'settings' && <SettingsBody settings={settings} onChange={setSettings} />}
+            {w.kind === 'shaggagram' && <ShaggaGramBody />}
+            {w.kind === 'shwitter' && <ShwitterBody />}
+            {w.kind === 'shaggatube' && <ShaggaTubeBody />}
+            {w.kind === 'shaggabook' && <ShaggaBookBody />}
+            {w.kind === 'shaggafy' && <ShaggaFyBody />}
             {w.kind === 'myshagga' && <MyShaggaBody />}
             {w.kind === 'recyclebin' && <RecycleBinBody />}
             {w.kind === 'taxreturns' && <TaxReturnsBody />}
@@ -505,7 +573,7 @@ export default function Home() {
         );
       })}
 
-      {!clippyHidden && <Clippy onClose={() => setClippyHidden(true)} />}
+      {settings.clippyEnabled && !clippyHidden && <Clippy onClose={() => setClippyHidden(true)} />}
 
       <Taskbar
         items={taskbarItems}

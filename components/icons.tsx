@@ -216,3 +216,81 @@ export const RunIcon = ({ size }: { size?: number }) => {
     </svg>
   );
 };
+
+export const SettingsIcon = ({ size }: { size?: number }) => {
+  const s = sizeFor(size);
+  return (
+    <svg width={s} height={s} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="8" cy="8" r="6.5" fill="#c0c0c0" stroke="#444" strokeWidth="0.6" />
+      <circle cx="8" cy="8" r="2.5" fill="#444" />
+      {[0, 45, 90, 135, 180, 225, 270, 315].map((a) => {
+        const rad = (a * Math.PI) / 180;
+        return (
+          <rect key={a} x="7" y="0.5" width="2" height="3" fill="#666"
+            transform={`rotate(${a} 8 8)`} />
+        );
+      })}
+    </svg>
+  );
+};
+
+export const GramIcon = ({ size }: { size?: number }) => {
+  const s = sizeFor(size);
+  return (
+    <svg width={s} height={s} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="gramG" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#feda77" />
+          <stop offset="50%" stopColor="#f58529" />
+          <stop offset="100%" stopColor="#dd2a7b" />
+        </linearGradient>
+      </defs>
+      <rect x="1" y="1" width="14" height="14" rx="3" fill="url(#gramG)" />
+      <rect x="3.5" y="3.5" width="9" height="9" rx="2.5" fill="none" stroke="#fff" strokeWidth="1.2" />
+      <circle cx="8" cy="8" r="2.5" fill="none" stroke="#fff" strokeWidth="1.2" />
+      <circle cx="11.5" cy="4.5" r="0.6" fill="#fff" />
+    </svg>
+  );
+};
+
+export const ShwitterIcon = ({ size }: { size?: number }) => {
+  const s = sizeFor(size);
+  return (
+    <svg width={s} height={s} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+      <rect x="1" y="1" width="14" height="14" rx="2" fill="#000" />
+      <text x="3" y="12" fontFamily="Arial Black, sans-serif" fontSize="11" fontWeight="900" fill="#fff">𝕏</text>
+    </svg>
+  );
+};
+
+export const TubeIcon = ({ size }: { size?: number }) => {
+  const s = sizeFor(size);
+  return (
+    <svg width={s} height={s} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+      <rect x="1" y="3" width="14" height="10" rx="2.5" fill="#ff0000" />
+      <polygon points="6,5.5 11,8 6,10.5" fill="#fff" />
+    </svg>
+  );
+};
+
+export const BookIcon = ({ size }: { size?: number }) => {
+  const s = sizeFor(size);
+  return (
+    <svg width={s} height={s} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+      <rect x="1" y="1" width="14" height="14" rx="2" fill="#1877f2" />
+      <text x="5.5" y="13" fontFamily="Georgia, serif" fontSize="13" fontWeight="bold" fill="#fff" fontStyle="italic">f</text>
+    </svg>
+  );
+};
+
+export const SfyIcon = ({ size }: { size?: number }) => {
+  const s = sizeFor(size);
+  return (
+    <svg width={s} height={s} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="8" cy="8" r="7" fill="#1db954" />
+      <path d="M 4 6 Q 8 4 12 6" stroke="#000" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+      <path d="M 4.5 8.5 Q 8 7 11.5 8.5" stroke="#000" strokeWidth="1" fill="none" strokeLinecap="round" />
+      <path d="M 5 11 Q 8 10 11 11" stroke="#000" strokeWidth="0.8" fill="none" strokeLinecap="round" />
+    </svg>
+  );
+};
