@@ -138,7 +138,7 @@ export default function ShaggaFyBody() {
 
   // Save liked
   useEffect(() => {
-    try { localStorage.setItem(STORAGE.liked, JSON.stringify([...liked])); } catch {}
+    try { localStorage.setItem(STORAGE.liked, JSON.stringify(Array.from(liked))); } catch {}
   }, [liked]);
   // Save custom playlists
   useEffect(() => {

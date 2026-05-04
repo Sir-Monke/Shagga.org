@@ -123,7 +123,7 @@ function loadSet(key: string): Set<string> {
   return new Set();
 }
 function saveSet(key: string, value: Set<string>) {
-  try { localStorage.setItem(key, JSON.stringify([...value])); } catch {}
+  try { localStorage.setItem(key, JSON.stringify(Array.from(value))); } catch {}
 }
 
 // ---------- Main component ----------
@@ -162,7 +162,7 @@ export default function ShaggaTubeBody() {
       const next = new Set(w);
       if (next.has(videoId)) next.delete(videoId);
       else next.add(videoId);
-      try { localStorage.setItem(STORAGE.watchLater, JSON.stringify([...next])); } catch {}
+      try { localStorage.setItem(STORAGE.watchLater, JSON.stringify(Array.from(next))); } catch {}
       return next;
     });
   };
