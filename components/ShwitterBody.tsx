@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { ShwitterIcon } from './icons';
 
 interface Tweet {
   id: number;
@@ -39,7 +40,7 @@ export default function ShwitterBody() {
     <div className="xp-content" style={{ padding: 0 }}>
       <div className="shwitter-block">
         <div className="shwitter-header">
-          <div className="shwitter-logo">𝕏 Shwitter</div>
+          <div className="shwitter-logo"><ShwitterIcon size={20} /> Shwitter</div>
           <div className="shwitter-tabs">
             <span className="shwitter-tab active">For You</span>
             <span className="shwitter-tab">Following</span>

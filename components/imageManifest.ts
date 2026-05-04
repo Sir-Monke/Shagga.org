@@ -15,12 +15,14 @@
  */
 
 export const SHAGGA_IMAGES = {
-  productsCount: 21,
+  productsCount: 20,
   shaggasCount: 16,
   galleryCount: 66,
+  videosCount: 1,
   productsExt: 'jpg' as const,
   shaggasExt: 'jpg' as const,
   galleryExt: 'jpg' as const,
+  videosExt: 'mp4' as const,
   /** While true, just shows placeholder.svg. Flip to false once you've added real images. */
   usePlaceholder: false,
 };
@@ -53,4 +55,12 @@ export function galleryList(): string[] {
     { length: SHAGGA_IMAGES.galleryCount },
     (_, i) => `/images/gallery/${i + 1}.${SHAGGA_IMAGES.galleryExt}`
   );
+}
+
+/** Returns the URL for video #id, or null if no videos are available. */
+export function videoSrc(id: number): string | null {
+  if (SHAGGA_IMAGES.videosCount <= 0) return null;
+  // Round-robin cycle: if user has fewer videos than items, reuse them.
+  const v = ((id - 1) % SHAGGA_IMAGES.videosCount) + 1;
+  return `/videos/${v}.${SHAGGA_IMAGES.videosExt}`;
 }

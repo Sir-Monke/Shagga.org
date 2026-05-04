@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { GramIcon } from './icons';
 
 interface Post {
   id: number;
@@ -34,7 +35,7 @@ export default function ShaggaGramBody() {
     <div className="xp-content" style={{ padding: 0 }}>
       <div className="gram-block">
         <div className="gram-header">
-          <div className="gram-logo">📷 Shagga-gram</div>
+          <div className="gram-logo"><GramIcon size={20} /> Shagga-gram</div>
           <div className="gram-header-icons">❤️ ✉️</div>
         </div>
 

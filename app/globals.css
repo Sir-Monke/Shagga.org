@@ -1575,7 +1575,7 @@ body.noon-snag::after {
   padding: 8px 12px; border-bottom: 1px solid #dbdbdb;
   background: white;
 }
-.gram-logo { font-weight: bold; font-size: 16px; }
+.gram-logo { font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px; }
 .gram-header-icons { font-size: 14px; }
 .gram-stories {
   display: flex; gap: 10px; padding: 10px;
@@ -1586,7 +1586,7 @@ body.noon-snag::after {
 .gram-story-ring {
   width: 52px; height: 52px; border-radius: 50%;
   padding: 2px;
-  background: linear-gradient(45deg, #feda77 0%, #f58529 50%, #dd2a7b 100%);
+  background: linear-gradient(45deg, #4fc3f7 0%, #1565c0 50%, #00695c 100%);
 }
 .gram-story-avatar {
   width: 100%; height: 100%; border-radius: 50%;
@@ -1628,13 +1628,13 @@ body.noon-snag::after {
 .shwitter-header {
   background: rgba(0,0,0,0.85); border-bottom: 1px solid #2f3336;
 }
-.shwitter-logo { padding: 12px; font-weight: 900; font-size: 18px; }
+.shwitter-logo { padding: 12px; font-weight: 900; font-size: 18px; display: flex; align-items: center; gap: 8px; }
 .shwitter-tabs { display: flex; }
 .shwitter-tab {
   flex: 1; text-align: center; padding: 12px; cursor: pointer; font-weight: 700;
   color: #71767b; border-bottom: 2px solid transparent;
 }
-.shwitter-tab.active { color: #e7e9ea; border-bottom-color: #1d9bf0; }
+.shwitter-tab.active { color: #e7e9ea; border-bottom-color: #0e7e7e; }
 .shwitter-compose {
   display: flex; gap: 10px; padding: 12px;
   border-bottom: 1px solid #2f3336;
@@ -1650,7 +1650,7 @@ body.noon-snag::after {
   color: #e7e9ea; font-size: 14px; padding: 8px 0;
 }
 .shwitter-post-btn {
-  background: #1d9bf0; color: white; border: none; border-radius: 999px;
+  background: #0e7e7e; color: white; border: none; border-radius: 999px;
   padding: 6px 16px; font-weight: 700; font-size: 12px; cursor: pointer;
 }
 .shwitter-post-btn:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -1663,7 +1663,7 @@ body.noon-snag::after {
 .shwitter-tweet-meta { font-size: 13px; }
 .shwitter-tweet-meta strong { color: #e7e9ea; }
 .shwitter-verified {
-  display: inline-block; color: #1d9bf0; margin: 0 3px; font-weight: 900;
+  display: inline-block; color: #0e7e7e; margin: 0 3px; font-weight: 900;
 }
 .shwitter-handle { color: #71767b; margin-left: 4px; }
 .shwitter-tweet-content { margin: 4px 0 8px; line-height: 1.4; }
@@ -1760,12 +1760,9 @@ body.noon-snag::after {
   border-bottom: 1px solid #dadde1;
 }
 .fbook-logo {
-  width: 32px; height: 32px; background: #1877f2; color: white;
   display: flex; align-items: center; justify-content: center;
-  font-family: Georgia, serif; font-size: 22px; font-weight: bold; font-style: italic;
-  border-radius: 50%;
 }
-.fbook-name { font-weight: bold; color: #1877f2; font-size: 16px; }
+.fbook-name { font-weight: bold; color: #ef6c00; font-size: 16px; }
 .fbook-search {
   flex: 1; background: #f0f2f5; border: none; padding: 6px 12px;
   border-radius: 999px; font-size: 12px; outline: none; max-width: 240px;
@@ -1794,7 +1791,7 @@ body.noon-snag::after {
   border-radius: 999px; font-size: 13px; outline: none;
 }
 .fbook-status button {
-  background: #1877f2; color: white; border: none;
+  background: #ef6c00; color: white; border: none;
   padding: 6px 14px; border-radius: 6px; cursor: pointer; font-weight: 600;
 }
 .fbook-status button:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -1824,7 +1821,7 @@ body.noon-snag::after {
   border-radius: 4px;
 }
 .fbook-action:hover { background: #f0f2f5; }
-.fbook-action.active { color: #1877f2; }
+.fbook-action.active { color: #ef6c00; }
 
 /* ====== SHAGGA-FY ====== */
 .sfy-block {
@@ -1838,7 +1835,7 @@ body.noon-snag::after {
 .sfy-sidebar {
   grid-row: 1 / 2; background: #000; padding: 12px; overflow-y: auto;
 }
-.sfy-logo { font-weight: 900; font-size: 18px; margin-bottom: 16px; color: #1db954; }
+.sfy-logo { font-weight: 900; font-size: 18px; margin-bottom: 16px; color: #a47cd9; display: flex; align-items: center; gap: 8px; }
 .sfy-nav { margin-bottom: 16px; }
 .sfy-nav-item {
   padding: 8px 10px; font-size: 13px; color: #b3b3b3; cursor: pointer; border-radius: 4px;
@@ -1855,12 +1852,12 @@ body.noon-snag::after {
 .sfy-playlist.active, .sfy-playlist:hover { color: white; background: #181818; }
 .sfy-main {
   grid-row: 1 / 2; overflow-y: auto; padding: 16px;
-  background: linear-gradient(to bottom, #2d4a3a 0%, #121212 280px);
+  background: linear-gradient(to bottom, #3a2150 0%, #121212 280px);
 }
 .sfy-banner { display: flex; gap: 16px; align-items: flex-end; margin-bottom: 16px; }
 .sfy-banner-art {
   width: 100px; height: 100px;
-  background: linear-gradient(135deg, #1db954, #105828);
+  background: linear-gradient(135deg, #a47cd9, #4a148c);
   display: flex; align-items: center; justify-content: center;
   font-size: 48px; box-shadow: 0 4px 16px rgba(0,0,0,0.5);
 }
@@ -1876,7 +1873,7 @@ body.noon-snag::after {
   text-align: left; cursor: pointer; font-size: 12px; border-radius: 4px;
 }
 .sfy-track:hover { background: rgba(255,255,255,0.07); }
-.sfy-track.playing { color: #1db954; }
+.sfy-track.playing { color: #a47cd9; }
 .sfy-track-num { color: #b3b3b3; text-align: center; }
 .sfy-track-emoji { font-size: 18px; }
 .sfy-track-artist { color: #b3b3b3; }
@@ -1889,7 +1886,7 @@ body.noon-snag::after {
 .sfy-player-info { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .sfy-player-art {
   width: 48px; height: 48px;
-  background: linear-gradient(135deg, #1db954, #105828);
+  background: linear-gradient(135deg, #a47cd9, #4a148c);
   display: flex; align-items: center; justify-content: center;
   font-size: 24px; flex-shrink: 0;
 }
@@ -2432,4 +2429,400 @@ body.wp-matrix {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* ====== SHAGGATUBE v2 (full clone) ====== */
+.ytube2-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #0f0f0f;
+  color: #fff;
+  font-family: -apple-system, "Segoe UI", Roboto, Tahoma, sans-serif;
+  font-size: 13px;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Header bar */
+.ytube2-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 14px;
+  background: #0f0f0f;
+  border-bottom: 1px solid #272727;
+  flex-shrink: 0;
+}
+.ytube2-logo, .ytube2-logo-small {
+  background: none; border: none; color: white; cursor: pointer;
+  font-weight: 700; font-size: 18px; padding: 4px 8px;
+  font-family: inherit;
+  flex-shrink: 0;
+}
+.ytube2-logo-small { font-size: 16px; opacity: 0.8; }
+.ytube2-back {
+  background: #272727; color: white; border: none;
+  padding: 6px 14px; border-radius: 18px; cursor: pointer;
+  font-size: 12px; font-weight: 600;
+  flex-shrink: 0;
+}
+.ytube2-back:hover { background: #3a3a3a; }
+.ytube2-searchbar {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 540px;
+  margin: 0 auto;
+  display: flex;
+  align-items: stretch;
+}
+.ytube2-searchbar input {
+  flex: 1 1 auto;
+  min-width: 0;
+  background: #121212; color: white;
+  border: 1px solid #303030;
+  border-right: none;
+  padding: 7px 14px;
+  border-radius: 18px 0 0 18px;
+  outline: none;
+  font-size: 13px; font-family: inherit;
+}
+.ytube2-searchbar input:focus { border-color: #1c62b9; }
+.ytube2-search-btn {
+  flex: 0 0 56px;
+  background: #272727; color: white;
+  border: 1px solid #303030;
+  border-radius: 0 18px 18px 0;
+  cursor: pointer; font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.ytube2-search-btn:hover { background: #3a3a3a; }
+
+/* Main body: sidebar + grid */
+.ytube2-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  min-height: 0;
+  min-width: 0;
+}
+.ytube2-sidebar {
+  background: #0f0f0f;
+  border-right: 1px solid #272727;
+  padding: 8px 4px;
+  overflow-y: auto;
+  min-height: 0;
+}
+.ytube2-navitem {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%;
+  background: none; border: none; color: white;
+  padding: 8px 12px; border-radius: 8px;
+  cursor: pointer; font-size: 13px; text-align: left;
+  font-family: inherit;
+}
+.ytube2-navitem:hover { background: #272727; }
+.ytube2-navitem.active { background: #272727; font-weight: 600; }
+.ytube2-count {
+  background: #ff0000; color: white;
+  font-size: 10px; padding: 1px 6px;
+  border-radius: 10px; margin-left: auto;
+}
+.ytube2-section-title {
+  font-size: 10px; color: #aaa; padding: 12px 12px 4px; letter-spacing: 1px;
+  border-top: 1px solid #272727; margin-top: 8px; padding-top: 12px;
+}
+.ytube2-empty-msg { padding: 8px 12px; color: #888; font-size: 11px; font-style: italic; }
+.ytube2-channel-row {
+  display: flex; align-items: center; gap: 8px;
+  width: 100%;
+  background: none; border: none; color: white;
+  padding: 6px 12px; border-radius: 4px;
+  cursor: pointer; font-size: 12px; text-align: left;
+  font-family: inherit;
+}
+.ytube2-channel-row:hover { background: #272727; }
+.ytube2-channel-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.ytube2-channel-name {
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Main content area */
+.ytube2-main {
+  overflow-y: auto;
+  min-height: 0;
+  min-width: 0;
+}
+.ytube2-search-banner {
+  background: #272727; color: white;
+  padding: 8px 16px; font-size: 12px;
+  display: flex; align-items: center; gap: 12px;
+}
+.ytube2-search-banner button {
+  background: #3a3a3a; color: white; border: none;
+  padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 11px;
+  margin-left: auto;
+}
+.ytube2-empty {
+  padding: 60px 24px; text-align: center; color: #888;
+}
+.ytube2-empty-icon { font-size: 48px; margin-bottom: 16px; }
+.ytube2-empty-sub { font-size: 11px; margin-top: 8px; color: #666; }
+
+/* Video grid */
+.ytube2-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+.ytube2-card {
+  background: none; border: none; color: white;
+  cursor: pointer; text-align: left; padding: 0;
+  display: flex; flex-direction: column; gap: 8px;
+  font-family: inherit;
+}
+.ytube2-thumb {
+  aspect-ratio: 16 / 9; border-radius: 12px; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.ytube2-thumb-emoji {
+  font-size: 56px; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+}
+.ytube2-duration {
+  position: absolute; bottom: 6px; right: 6px;
+  background: rgba(0,0,0,0.85); color: white;
+  padding: 2px 6px; border-radius: 4px;
+  font-size: 11px; font-weight: 600;
+}
+.ytube2-card-body {
+  display: flex; gap: 10px; padding: 0 4px;
+}
+.ytube2-card-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.ytube2-card-text { flex: 1; min-width: 0; }
+.ytube2-card-title {
+  font-weight: 600; font-size: 13px; line-height: 1.3;
+  margin-bottom: 4px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.ytube2-card-channel { color: #aaa; font-size: 12px; }
+.ytube2-card-meta { color: #aaa; font-size: 12px; }
+
+/* Watch view */
+.ytube2-watch {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr minmax(280px, 360px);
+  gap: 16px;
+  padding: 16px;
+  overflow-y: auto;
+  min-height: 0;
+  min-width: 0;
+}
+.ytube2-watch-main { min-width: 0; }
+.ytube2-player {
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.ytube2-player-emoji {
+  font-size: 120px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.6));
+}
+.ytube2-player-end {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: bold; pointer-events: none;
+}
+.ytube2-player-controls {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 16px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.85));
+  font-size: 13px;
+}
+.ytube2-player-controls button {
+  background: none; border: none; color: white;
+  cursor: pointer; font-size: 16px;
+}
+.ytube2-player-time { font-size: 11px; min-width: 36px; text-align: center; }
+.ytube2-player-progress {
+  flex: 1; height: 4px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 2px; overflow: hidden;
+  cursor: pointer;
+}
+.ytube2-player-progress-bar {
+  height: 100%; background: #ff0000;
+  transition: width 0.1s linear;
+}
+.ytube2-watch-title {
+  margin: 12px 0 8px;
+  font-size: 18px; line-height: 1.3;
+  font-weight: 700;
+}
+.ytube2-watch-meta {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.ytube2-watch-channel {
+  display: flex; align-items: center; gap: 10px;
+  background: none; border: none; color: white;
+  cursor: pointer; padding: 0; font-family: inherit;
+}
+.ytube2-watch-channel-name { font-weight: 700; font-size: 14px; }
+.ytube2-watch-channel-subs { color: #aaa; font-size: 11px; }
+.ytube2-sub-btn {
+  background: #fff; color: black;
+  border: none; padding: 8px 16px;
+  border-radius: 18px; font-weight: 700;
+  cursor: pointer; font-size: 13px;
+}
+.ytube2-sub-btn.subbed {
+  background: #272727; color: white;
+}
+.ytube2-watch-actions {
+  display: flex; gap: 4px; margin-left: auto;
+  flex-wrap: wrap;
+}
+.ytube2-action {
+  background: #272727; color: white; border: none;
+  padding: 8px 14px; border-radius: 18px;
+  cursor: pointer; font-size: 12px; font-weight: 600;
+  font-family: inherit;
+}
+.ytube2-action:hover { background: #3a3a3a; }
+.ytube2-action.active { background: #1c62b9; }
+.ytube2-watch-info {
+  background: #272727; padding: 12px 16px;
+  border-radius: 12px; margin-bottom: 16px;
+}
+.ytube2-watch-stats { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+.ytube2-watch-desc { font-size: 13px; line-height: 1.5; color: #ddd; }
+
+/* Comments */
+.ytube2-comments { padding: 8px 0; }
+.ytube2-comments-title {
+  font-size: 16px; font-weight: 700; margin-bottom: 16px;
+}
+.ytube2-comment-compose {
+  display: flex; gap: 12px; align-items: center;
+  margin-bottom: 24px;
+}
+.ytube2-comment-compose input {
+  flex: 1; background: transparent; color: white;
+  border: none; border-bottom: 1px solid #444;
+  padding: 6px 0; outline: none; font-size: 13px;
+  font-family: inherit;
+}
+.ytube2-comment-compose input:focus { border-bottom-color: #fff; }
+.ytube2-comment-compose button {
+  background: #1c62b9; color: white; border: none;
+  padding: 8px 16px; border-radius: 18px;
+  cursor: pointer; font-weight: 600; font-size: 12px;
+  font-family: inherit;
+}
+.ytube2-comment-compose button:disabled { opacity: 0.4; cursor: not-allowed; }
+.ytube2-comment {
+  display: flex; gap: 12px; padding: 8px 0;
+}
+.ytube2-comment-user { font-size: 12px; font-weight: 700; margin-bottom: 2px; }
+.ytube2-comment-text { font-size: 13px; line-height: 1.4; margin-bottom: 4px; }
+.ytube2-comment-actions { font-size: 11px; color: #888; }
+
+/* Related sidebar */
+.ytube2-related {
+  display: flex; flex-direction: column; gap: 8px;
+  min-width: 0;
+}
+.ytube2-related-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.ytube2-related-card {
+  display: flex; gap: 8px;
+  background: none; border: none; color: white;
+  cursor: pointer; padding: 4px; border-radius: 8px;
+  text-align: left; font-family: inherit;
+}
+.ytube2-related-card:hover { background: #272727; }
+.ytube2-related-thumb {
+  width: 160px; aspect-ratio: 16 / 9;
+  border-radius: 8px; position: relative; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+}
+.ytube2-related-info { flex: 1; min-width: 0; }
+.ytube2-related-vtitle {
+  font-size: 12px; font-weight: 700; line-height: 1.3;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.ytube2-related-vchannel { font-size: 11px; color: #aaa; margin-bottom: 2px; }
+.ytube2-related-vmeta { font-size: 11px; color: #aaa; }
+
+/* Channel page */
+.ytube2-channelpage {
+  flex: 1; overflow-y: auto; min-height: 0;
+}
+.ytube2-channelpage-banner {
+  height: 120px;
+  background: #272727;
+}
+.ytube2-channelpage-header {
+  display: flex; align-items: center; gap: 16px;
+  padding: 16px;
+  border-bottom: 1px solid #272727;
+}
+.ytube2-channelpage-avatar {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+}
+.ytube2-channelpage-info { flex: 1; }
+.ytube2-channelpage-name { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+.ytube2-channelpage-handle { font-size: 12px; color: #aaa; }
+.ytube2-channelpage-tabs {
+  display: flex; gap: 24px;
+  padding: 0 16px;
+  border-bottom: 1px solid #272727;
+}
+.ytube2-channelpage-tab {
+  padding: 12px 0; cursor: pointer; font-size: 12px;
+  color: #aaa; font-weight: 600;
+  border-bottom: 2px solid transparent;
+  letter-spacing: 0.5px;
+}
+.ytube2-channelpage-tab.active {
+  color: white; border-bottom-color: white;
+}
+
+/* Responsive: collapse the related sidebar on narrow widths */
+@media (max-width: 700px) {
+  .ytube2-watch { grid-template-columns: 1fr; }
+  .ytube2-body  { grid-template-columns: 1fr; }
+  .ytube2-sidebar { display: none; }
+}
+
+/* ====== Real <video> player inside ShaggaTube ====== */
+.ytube2-player-real {
+  background: #000;
+}
+.ytube2-player-real video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 12px;
 }

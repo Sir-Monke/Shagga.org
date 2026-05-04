@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { BookIcon } from './icons';
 
 interface FBPost {
   id: number;
@@ -46,7 +47,7 @@ export default function ShaggaBookBody() {
     <div className="xp-content" style={{ padding: 0 }}>
       <div className="fbook-block">
         <div className="fbook-header">
-          <div className="fbook-logo">f</div>
+          <div className="fbook-logo"><BookIcon size={28} /></div>
           <div className="fbook-name">ShaggaBook</div>
           <input className="fbook-search" placeholder="Search ShaggaBook" onMouseDown={(e) => e.stopPropagation()} />
           <div className="fbook-header-icons">🏠 👥 🔔</div>

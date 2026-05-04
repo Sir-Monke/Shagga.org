@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { SfyIcon } from './icons';
 
 interface Track {
   id: number;
@@ -49,7 +50,7 @@ export default function ShaggaFyBody() {
     <div className="xp-content" style={{ padding: 0 }}>
       <div className="sfy-block">
         <div className="sfy-sidebar">
-          <div className="sfy-logo">▶ Shagga-fy</div>
+          <div className="sfy-logo"><SfyIcon size={20} /> Shagga-fy</div>
           <div className="sfy-nav">
             <div className="sfy-nav-item active">🏠 Home</div>
             <div className="sfy-nav-item">🔍 Search</div>

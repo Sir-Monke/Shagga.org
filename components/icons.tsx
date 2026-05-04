@@ -235,62 +235,79 @@ export const SettingsIcon = ({ size }: { size?: number }) => {
 };
 
 export const GramIcon = ({ size }: { size?: number }) => {
+  // Original: a teal/cyan square with a flat aperture-style camera shape.
+  // Avoids Instagram's signature warm-gradient pink/orange palette.
   const s = sizeFor(size);
   return (
     <svg width={s} height={s} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id="gramG" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#feda77" />
-          <stop offset="50%" stopColor="#f58529" />
-          <stop offset="100%" stopColor="#dd2a7b" />
+        <linearGradient id="gramG2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#4fc3f7" />
+          <stop offset="100%" stopColor="#1565c0" />
         </linearGradient>
       </defs>
-      <rect x="1" y="1" width="14" height="14" rx="3" fill="url(#gramG)" />
-      <rect x="3.5" y="3.5" width="9" height="9" rx="2.5" fill="none" stroke="#fff" strokeWidth="1.2" />
-      <circle cx="8" cy="8" r="2.5" fill="none" stroke="#fff" strokeWidth="1.2" />
-      <circle cx="11.5" cy="4.5" r="0.6" fill="#fff" />
+      <rect x="1" y="1" width="14" height="14" rx="3" fill="url(#gramG2)" />
+      <polygon points="8,4 11.5,6 11.5,10 8,12 4.5,10 4.5,6" fill="none" stroke="#fff" strokeWidth="1.2" strokeLinejoin="round" />
+      <circle cx="8" cy="8" r="1.6" fill="#fff" />
     </svg>
   );
 };
 
 export const ShwitterIcon = ({ size }: { size?: number }) => {
+  // Original: speech-bubble pair on a teal background.
+  // No X glyph, no Twitter-blue.
   const s = sizeFor(size);
   return (
     <svg width={s} height={s} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-      <rect x="1" y="1" width="14" height="14" rx="2" fill="#000" />
-      <text x="3" y="12" fontFamily="Arial Black, sans-serif" fontSize="11" fontWeight="900" fill="#fff">𝕏</text>
+      <rect x="1" y="1" width="14" height="14" rx="3" fill="#0e7e7e" />
+      <path d="M 3 4 L 9 4 L 9 9 L 7 9 L 5 11 L 5 9 L 3 9 Z" fill="#fff" />
+      <path d="M 7.5 6 L 13 6 L 13 11 L 11 11 L 9 13 L 9 11 L 7.5 11 Z" fill="#a5e6e6" />
     </svg>
   );
 };
 
 export const TubeIcon = ({ size }: { size?: number }) => {
+  // Original: dark rounded rectangle (TV/monitor style) with a triangular play.
+  // Color is purple instead of YouTube red, body shape is taller and stylized.
   const s = sizeFor(size);
   return (
     <svg width={s} height={s} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-      <rect x="1" y="3" width="14" height="10" rx="2.5" fill="#ff0000" />
-      <polygon points="6,5.5 11,8 6,10.5" fill="#fff" />
+      <rect x="1.5" y="2" width="13" height="11" rx="2" fill="#5e35b1" />
+      <rect x="1.5" y="2" width="13" height="2.5" fill="#3f1f80" />
+      <circle cx="3.4" cy="3.25" r="0.45" fill="#ffea00" />
+      <circle cx="4.6" cy="3.25" r="0.45" fill="#fb8c00" />
+      <polygon points="6.5,6 11,8.5 6.5,11" fill="#fff" />
+      <rect x="5" y="13.5" width="6" height="0.7" rx="0.3" fill="#3f1f80" />
     </svg>
   );
 };
 
 export const BookIcon = ({ size }: { size?: number }) => {
+  // Original: orange rounded square with a stylized "S" — not Facebook's italic Georgia "f".
   const s = sizeFor(size);
   return (
     <svg width={s} height={s} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-      <rect x="1" y="1" width="14" height="14" rx="2" fill="#1877f2" />
-      <text x="5.5" y="13" fontFamily="Georgia, serif" fontSize="13" fontWeight="bold" fill="#fff" fontStyle="italic">f</text>
+      <rect x="1" y="1" width="14" height="14" rx="3" fill="#ef6c00" />
+      <path
+        d="M 11 5 Q 11 4 9.5 4 L 6.5 4 Q 5 4 5 5.5 Q 5 7 6.5 7.5 L 9.5 8.5 Q 11 9 11 10.5 Q 11 12 9.5 12 L 6 12 Q 5 12 5 11"
+        fill="none" stroke="#fff" strokeWidth="1.5" strokeLinecap="round"
+      />
     </svg>
   );
 };
 
 export const SfyIcon = ({ size }: { size?: number }) => {
+  // Original: deep purple circle with a stylized note silhouette.
+  // No green-and-arcs Spotify motif.
   const s = sizeFor(size);
   return (
     <svg width={s} height={s} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="8" cy="8" r="7" fill="#1db954" />
-      <path d="M 4 6 Q 8 4 12 6" stroke="#000" strokeWidth="1.2" fill="none" strokeLinecap="round" />
-      <path d="M 4.5 8.5 Q 8 7 11.5 8.5" stroke="#000" strokeWidth="1" fill="none" strokeLinecap="round" />
-      <path d="M 5 11 Q 8 10 11 11" stroke="#000" strokeWidth="0.8" fill="none" strokeLinecap="round" />
+      <circle cx="8" cy="8" r="7" fill="#6a1b9a" />
+      <path d="M 7 4 L 11.5 3 L 11.5 9.5" stroke="#fff" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+      <ellipse cx="6" cy="10" rx="1.6" ry="1.2" fill="#fff" />
+      <ellipse cx="10.3" cy="10.5" rx="1.4" ry="1" fill="#fff" />
+      <line x1="7.6" y1="10" x2="7.6" y2="4.7" stroke="#fff" strokeWidth="0.8" />
+      <line x1="11.7" y1="10.5" x2="11.7" y2="3.3" stroke="#fff" strokeWidth="0.8" />
     </svg>
   );
 };

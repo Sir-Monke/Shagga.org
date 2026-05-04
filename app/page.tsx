@@ -259,7 +259,7 @@ export default function Home() {
       gallery:        { title: 'Shagga Gallery',                 icon: <GalleryIcon />,   w: 600, h: 480 },
       shaggagram:     { title: 'Shagga-gram',                    icon: <GramIcon />,      w: 380, h: 540 },
       shwitter:       { title: 'Shwitter',                       icon: <ShwitterIcon />,  w: 480, h: 540 },
-      shaggatube:     { title: 'ShaggaTube',                     icon: <TubeIcon />,      w: 600, h: 480 },
+      shaggatube:     { title: 'ShaggaTube',                     icon: <TubeIcon />,      w: 880, h: 600 },
       shaggabook:     { title: 'ShaggaBook',                     icon: <BookIcon />,      w: 640, h: 520 },
       shaggafy:       { title: 'Shagga-fy',                      icon: <SfyIcon />,       w: 660, h: 480 },
       myshagga:       { title: 'My Shagga',                      icon: <MyShaggaIcon size={16} />,    w: 460, h: 380 },
