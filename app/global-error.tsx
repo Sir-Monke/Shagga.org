@@ -12,7 +12,6 @@ export default function GlobalError({
       <body
         style={{
           margin: 0,
-          padding: 0,
           background: '#0028a8',
           color: '#fff',
           fontFamily: 'Lucida Console, Consolas, monospace',
