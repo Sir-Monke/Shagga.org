@@ -261,7 +261,7 @@ export default function Home() {
       shwitter:       { title: 'Shwitter',                       icon: <ShwitterIcon />,  w: 480, h: 540 },
       shaggatube:     { title: 'ShaggaTube',                     icon: <TubeIcon />,      w: 880, h: 600 },
       shaggabook:     { title: 'ShaggaBook',                     icon: <BookIcon />,      w: 640, h: 520 },
-      shaggafy:       { title: 'Shagga-fy',                      icon: <SfyIcon />,       w: 660, h: 480 },
+      shaggafy:       { title: 'Shagga-fy',                      icon: <SfyIcon />,       w: 920, h: 640 },
       myshagga:       { title: 'My Shagga',                      icon: <MyShaggaIcon size={16} />,    w: 460, h: 380 },
       recyclebin:     { title: 'Recycle Bin',                    icon: <RecycleIcon />,   w: 460, h: 320 },
       taxreturns:     { title: 'tax_returns_DO_NOT_OPEN',        icon: <FolderIcon size={16} />,      w: 360, h: 280 },

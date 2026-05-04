@@ -19,10 +19,12 @@ export const SHAGGA_IMAGES = {
   shaggasCount: 16,
   galleryCount: 66,
   videosCount: 1,
+  audioCount: 0,
   productsExt: 'jpg' as const,
   shaggasExt: 'jpg' as const,
   galleryExt: 'jpg' as const,
   videosExt: 'mp4' as const,
+  audioExt: 'mp3' as const,
   /** While true, just shows placeholder.svg. Flip to false once you've added real images. */
   usePlaceholder: false,
 };
@@ -63,4 +65,11 @@ export function videoSrc(id: number): string | null {
   // Round-robin cycle: if user has fewer videos than items, reuse them.
   const v = ((id - 1) % SHAGGA_IMAGES.videosCount) + 1;
   return `/videos/${v}.${SHAGGA_IMAGES.videosExt}`;
+}
+
+/** Returns the URL for audio file #id (round-robin over available files), or null. */
+export function audioSrc(id: number): string | null {
+  if (SHAGGA_IMAGES.audioCount <= 0) return null;
+  const a = ((id - 1) % SHAGGA_IMAGES.audioCount) + 1;
+  return `/audio/${a}.${SHAGGA_IMAGES.audioExt}`;
 }
