@@ -43,6 +43,7 @@ import Clippy from '@/components/Clippy';
 import SnagCounter from '@/components/SnagCounter';
 import RaveMode from '@/components/RaveMode';
 import Toaster from '@/components/Toaster';
+import RunDialog from '@/components/RunDialog';
 
 import {
   NotepadIcon, NotepadIconLarge, PhotoIcon, MoneyIcon, SkullIcon,
@@ -142,6 +143,7 @@ export default function Home() {
   const [bsodActive, setBsodActive] = useState(false);
   const [raveActive, setRaveActive] = useState(false);
   const [clippyHidden, setClippyHidden] = useState(false);
+  const [runOpen, setRunOpen] = useState(false);
 
   // settings (persisted to localStorage)
   const [settings, setSettings] = useState<ShaggaSettings>(DEFAULT_SETTINGS);
@@ -374,6 +376,85 @@ export default function Home() {
   const openShaggaBook  = useCallback(() => openOrFocus('shaggabook'), [openOrFocus]);
   const openShaggaFy    = useCallback(() => openOrFocus('shaggafy'), [openOrFocus]);
 
+  // ----- Run command parser -----
+  const runCommand = useCallback((cmd: string) => {
+    const c = cmd.toLowerCase().trim();
+    // Map of aliases → opener
+    const map: Record<string, () => void> = {
+      'calc': openCalculator, 'calculator': openCalculator, 'calc.exe': openCalculator,
+      'mines': openMinesweeper, 'minesweeper': openMinesweeper, 'winmine': openMinesweeper, 'winmine.exe': openMinesweeper,
+      'iexplore': openIE, 'iexplore.exe': openIE, 'browser': openIE, 'internet': openIE,
+      'notepad': openShaggapad, 'notepad.exe': openShaggapad, 'shaggapad': openShaggapad, 'shagga.txt': openShaggapad,
+      'paint': openPaint, 'mspaint': openPaint, 'mspaint.exe': openPaint, 'shagga-paint': openPaint,
+      'mycomputer': openMyShagga, 'my computer': openMyShagga, 'myshagga': openMyShagga, 'explorer': openMyShagga, 'explorer.exe': openMyShagga,
+      'recyclebin': openRecycleBin, 'recycle': openRecycleBin, 'bin': openRecycleBin,
+      'tax': openTaxReturns, 'taxreturns': openTaxReturns, 'tax_returns': openTaxReturns,
+      'control': openSettings, 'control.exe': openSettings, 'controlpanel': openSettings, 'settings': openSettings,
+      'weather': openWeather,
+      'gallery': openGallery, 'photos': openGallery, 'pictures': openGallery,
+      'chat': openChat, 'msn': openChat, 'messenger': openChat,
+      'shaggatube': openShaggaTube, 'tube': openShaggaTube, 'youtube': openShaggaTube,
+      'shaggafy': openShaggaFy, 'spotify': openShaggaFy, 'music': openShaggaFy,
+      'shwitter': openShwitter, 'twitter': openShwitter, 'x': openShwitter,
+      'shaggagram': openShaggaGram, 'instagram': openShaggaGram, 'gram': openShaggaGram,
+      'shaggabook': openShaggaBook, 'facebook': openShaggaBook, 'fb': openShaggaBook,
+      'gooncalc': openGoonCalc, 'gc': openGoonCalc,
+    };
+    if (map[c]) { map[c](); return; }
+
+    // Easter eggs
+    if (c === 'doom' || c === 'crash' || c === 'bsod') { setBsodActive(true); return; }
+    if (c === 'rave' || c === 'party') { setRaveActive(true); return; }
+    if (c === 'clippy') { setClippyHidden(false); return; }
+    if (c === 'shagga' || c === 'random') { spawnRandom(); return; }
+    if (c === 'help' || c === '?' || c === 'man') {
+      alert('Run commands you can try:\n\n  calc, mines, notepad, paint, browser, music\n  shaggatube, shwitter, shaggagram, shaggabook\n  control, weather, gallery, chat\n\nAlso try: doom, rave, clippy, shagga, phil, tea');
+      return;
+    }
+    if (c === 'phil') { alert("phil's car can do 90mph in first gear. no redline. it just keeps going."); return; }
+    if (c === 'tea' || c === 'tea.exe') { alert('tea is in the kitchen. always.'); return; }
+    if (c === 'cmd' || c === 'cmd.exe' || c === 'powershell' || c === 'terminal') {
+      alert('command prompt is currently being used by your dad to "fix the printer". please try again later.');
+      return;
+    }
+    if (c === 'regedit' || c === 'regedit.exe') {
+      alert('access denied. only Margaret (90) has admin privileges and she has lost her phone.');
+      return;
+    }
+    if (c.startsWith('http://') || c.startsWith('https://') || c.startsWith('www.')) {
+      window.open(c.startsWith('http') ? c : `https://${c}`, '_blank', 'noopener,noreferrer');
+      return;
+    }
+    // Fallback
+    alert(`Cannot find: '${cmd}'\n\nTry typing 'help' to see what works.`);
+  }, [openCalculator, openMinesweeper, openIE, openShaggapad, openPaint, openMyShagga, openRecycleBin, openTaxReturns, openSettings, openWeather, openGallery, openChat, openShaggaTube, openShaggaFy, openShwitter, openShaggaGram, openShaggaBook, openGoonCalc, spawnRandom]);
+
+  // Show Desktop — minimize all windows
+  const showDesktop = useCallback(() => {
+    setWindows((ws) => ws.map((w) => ({ ...w, minimized: true })));
+  }, []);
+
+  // Keyboard shortcut: Win+R or Ctrl+R opens Run dialog
+  useEffect(() => {
+    if (!mounted || isMobile) return;
+    function onKey(e: KeyboardEvent) {
+      // Win+R (metaKey) or Ctrl+R, but not when typing in an input
+      const target = e.target as HTMLElement;
+      if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')) return;
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'r' && !e.shiftKey) {
+        e.preventDefault();
+        setRunOpen(true);
+      }
+      // Win+D = show desktop
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'd') {
+        e.preventDefault();
+        showDesktop();
+      }
+    }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [mounted, isMobile, showDesktop]);
+
   // ----- konami code -----
   useEffect(() => {
     const sequence = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
@@ -459,7 +540,7 @@ export default function Home() {
     { id: 'myshagga', label: 'My Shagga',     icon: <MyShaggaIcon size={20} />,    onClick: openMyShagga },
     { id: 'recycle',  label: 'Recycle Bin',   icon: <RecycleIcon size={20} />,     onClick: openRecycleBin },
     { id: 'tax',      label: 'tax_returns',   icon: <FolderIcon size={20} />,      onClick: openTaxReturns },
-    { id: 'run',      label: 'Run...',        icon: <RunIcon size={20} />,         onClick: () => open('hacker') },
+    { id: 'run',      label: 'Run...',        icon: <RunIcon size={20} />,         onClick: () => setRunOpen(true) },
     { id: 'update',   label: 'Windows Update',icon: <UpdateIcon size={20} />,      onClick: () => open('update') },
     { id: 'settings', label: 'Control Panel', icon: <SettingsIcon size={20} />,    onClick: openSettings },
   ];
@@ -592,6 +673,7 @@ export default function Home() {
         onTaskClick={toggleFromTaskbar}
         onStartClick={() => setStartOpen((o) => !o)}
         startOpen={startOpen}
+        onShowDesktop={showDesktop}
       />
 
       <StartMenu
@@ -610,6 +692,7 @@ export default function Home() {
       {bsodActive && <BSOD onComplete={() => setBsodActive(false)} />}
       {raveActive && <RaveMode onClose={() => setRaveActive(false)} />}
       <Toaster />
+      <RunDialog open={runOpen} onClose={() => setRunOpen(false)} onRun={runCommand} />
     </main>
   );
 }

@@ -4619,3 +4619,339 @@ body.wp-matrix {
 }
 .xp-cal-today:hover { background: linear-gradient(to bottom, #fff 0%, #c8c8c8 100%); }
 .xp-cal-fulldate { color: #555; font-size: 10px; }
+
+/* ====== Window snap preview ====== */
+.xp-snap-preview {
+  position: fixed;
+  background: linear-gradient(135deg, rgba(50, 110, 220, 0.18), rgba(80, 140, 240, 0.32));
+  border: 2px solid #3a7be0;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4), 0 0 24px rgba(50, 110, 220, 0.5);
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 6px;
+  transition: left 0.15s ease-out, top 0.15s ease-out, width 0.15s ease-out, height 0.15s ease-out;
+}
+
+/* ====== Tray panels (volume, wifi, battery shared) ====== */
+.xp-tray-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: white;
+  font-size: 14px;
+  padding: 2px 6px;
+  cursor: pointer;
+  border-radius: 3px;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.4));
+  height: 24px;
+  display: flex; align-items: center; justify-content: center;
+}
+.xp-tray-btn:hover { background: rgba(255, 255, 255, 0.15); }
+.xp-tray-btn.active { background: rgba(255, 255, 255, 0.22); border-color: rgba(255, 255, 255, 0.4); }
+
+.xp-clock.active { background: rgba(255, 255, 255, 0.18); }
+
+.xp-tray-panel {
+  position: fixed;
+  bottom: 36px;
+  right: 4px;
+  background: linear-gradient(to bottom, #fefefe 0%, #ece9d8 100%);
+  border: 1px solid #5a7edc;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  font-family: Tahoma, "MS Sans Serif", sans-serif;
+  z-index: 100;
+  overflow: hidden;
+  color: #000;
+}
+
+/* Volume panel */
+.xp-volume-panel { width: 220px; }
+.xp-vol-head {
+  background: linear-gradient(to bottom, #245edb 0%, #0a3393 100%);
+  color: white;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.xp-vol-body {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 10px;
+  background: white;
+}
+.xp-vol-mute-btn {
+  background: linear-gradient(to bottom, #fefefe 0%, #d8d8d8 100%);
+  border: 1px solid #888;
+  width: 30px; height: 30px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.xp-vol-mute-btn:hover { background: linear-gradient(to bottom, #fff, #c8c8c8); }
+.xp-vol-slider {
+  flex: 1;
+  appearance: none;
+  height: 4px;
+  background: linear-gradient(to right, #245edb, #5a7edc);
+  border-radius: 2px;
+  outline: none;
+}
+.xp-vol-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #245edb;
+  cursor: pointer;
+}
+.xp-vol-slider::-moz-range-thumb {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #245edb;
+  cursor: pointer;
+}
+.xp-vol-num { width: 28px; text-align: center; font-size: 12px; font-weight: bold; }
+.xp-vol-foot {
+  padding: 6px 10px;
+  font-size: 11px;
+  color: #555;
+  text-align: center;
+  font-style: italic;
+  background: #ece9d8;
+}
+
+/* Wi-Fi panel */
+.xp-wifi-panel { width: 280px; max-height: 320px; display: flex; flex-direction: column; }
+.xp-wifi-head {
+  background: linear-gradient(to bottom, #245edb 0%, #0a3393 100%);
+  color: white;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.xp-wifi-list {
+  background: white;
+  overflow-y: auto;
+}
+.xp-wifi-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 10px;
+  border-bottom: 1px solid #eee;
+}
+.xp-wifi-row.connected { background: #f0f7ff; }
+.xp-wifi-row:last-child { border-bottom: none; }
+.xp-wifi-bars {
+  display: flex; gap: 1px; align-items: flex-end;
+  width: 16px; height: 12px;
+  flex-shrink: 0;
+}
+.xp-wifi-bars span {
+  flex: 1;
+  background: #ddd;
+  border-radius: 1px;
+}
+.xp-wifi-bars span:nth-child(1) { height: 25%; }
+.xp-wifi-bars span:nth-child(2) { height: 50%; }
+.xp-wifi-bars span:nth-child(3) { height: 75%; }
+.xp-wifi-bars span:nth-child(4) { height: 100%; }
+.xp-wifi-bars.bars-1 span:nth-child(1) { background: #245edb; }
+.xp-wifi-bars.bars-2 span:nth-child(-n+2) { background: #245edb; }
+.xp-wifi-bars.bars-3 span:nth-child(-n+3) { background: #245edb; }
+.xp-wifi-bars.bars-4 span { background: #245edb; }
+.xp-wifi-info { flex: 1; min-width: 0; }
+.xp-wifi-ssid {
+  font-size: 11px;
+  font-weight: bold;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.xp-wifi-note { font-size: 10px; color: #666; }
+.xp-wifi-tag { font-size: 10px; color: #2e7d32; font-weight: bold; }
+.xp-wifi-connect {
+  background: linear-gradient(to bottom, #fefefe 0%, #d8d8d8 100%);
+  border: 1px solid #888;
+  border-radius: 3px;
+  padding: 3px 10px;
+  cursor: pointer;
+  font-size: 10px;
+  font-family: inherit;
+}
+.xp-wifi-connect:hover { background: linear-gradient(to bottom, #fff, #c8c8c8); }
+
+/* Battery panel */
+.xp-battery-panel { width: 240px; }
+.xp-batt-head {
+  background: linear-gradient(to bottom, #245edb 0%, #0a3393 100%);
+  color: white;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.xp-batt-big {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px;
+  background: white;
+}
+.xp-batt-icon { font-size: 36px; }
+.xp-batt-pct { font-size: 28px; font-weight: bold; }
+.xp-batt-bar {
+  height: 8px;
+  background: #ddd;
+  margin: 0 12px 12px;
+  border: 1px solid #888;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.xp-batt-bar-fill { height: 100%; transition: width 0.3s ease; }
+.xp-batt-info {
+  background: #ece9d8;
+  padding: 8px 12px;
+  font-size: 11px;
+}
+.xp-batt-info > div {
+  display: flex; justify-content: space-between;
+  padding: 2px 0;
+}
+.xp-batt-info span { color: #555; }
+.xp-batt-info strong { color: #000; }
+
+/* Show Desktop button (small, far right of taskbar) */
+.xp-show-desktop {
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(to bottom,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.18) 50%,
+    rgba(255, 255, 255, 0.05) 100%);
+  border: none;
+  border-left: 1px solid rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  margin-left: 4px;
+  transition: background 0.1s;
+}
+.xp-show-desktop:hover { background: rgba(255, 255, 255, 0.3); }
+.xp-show-desktop:active { background: rgba(255, 255, 255, 0.5); }
+
+/* ====== Run dialog ====== */
+.run-overlay {
+  position: fixed;
+  inset: 0;
+  background: transparent;
+  z-index: 200;
+}
+.run-dialog {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 380px;
+  background: linear-gradient(to bottom, #fefefe 0%, #ece9d8 100%);
+  border: 1px solid #5a7edc;
+  border-radius: 8px 8px 4px 4px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55);
+  font-family: Tahoma, "MS Sans Serif", sans-serif;
+  z-index: 201;
+  overflow: hidden;
+  animation: runIn 0.2s ease-out;
+}
+@keyframes runIn {
+  from { transform: translate(-50%, -10px); opacity: 0; }
+  to   { transform: translate(-50%, 0);     opacity: 1; }
+}
+.run-titlebar {
+  background: linear-gradient(to bottom, #2160c4 0%, #1145a8 100%);
+  color: white;
+  padding: 4px 6px 4px 8px;
+  display: flex; align-items: center; gap: 6px;
+  font-weight: bold;
+  font-size: 12px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+}
+.run-title-icon { font-size: 12px; }
+.run-title { flex: 1; }
+.run-close {
+  width: 22px; height: 18px;
+  background: linear-gradient(to bottom, #ec5050 0%, #b42424 100%);
+  border: 1px solid #8a1717;
+  color: white;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 11px;
+  line-height: 1;
+}
+.run-close:hover { background: linear-gradient(to bottom, #ff6868, #c93131); }
+.run-body {
+  padding: 12px 14px;
+  background: linear-gradient(to bottom, #f5f5f0 0%, #e8e4d4 100%);
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 8px 10px;
+  align-items: start;
+}
+.run-icon { grid-column: 1; padding-top: 3px; }
+.run-prompt {
+  grid-column: 2;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #1a1a1a;
+}
+.run-input-row {
+  grid-column: 1 / 3;
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 4px;
+}
+.run-label { font-size: 11px; }
+.run-input-wrap { position: relative; flex: 1; }
+.run-input {
+  width: 100%;
+  background: white;
+  border: 1px inset #888;
+  padding: 4px 6px;
+  font-family: Tahoma, "MS Sans Serif", sans-serif;
+  font-size: 11px;
+  outline: none;
+}
+.run-input:focus { border-color: #245edb; }
+.run-history {
+  position: absolute;
+  top: 100%; left: 0; right: 0;
+  background: white;
+  border: 1px solid #888;
+  border-top: none;
+  max-height: 140px;
+  overflow-y: auto;
+  z-index: 5;
+}
+.run-history-item {
+  display: block;
+  width: 100%;
+  background: white;
+  border: none;
+  text-align: left;
+  padding: 4px 6px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11px;
+}
+.run-history-item:hover { background: #245edb; color: white; }
+.run-buttons {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+  padding: 8px 14px;
+  background: #ece9d8;
+  border-top: 1px solid #aca899;
+}
+.run-btn {
+  background: linear-gradient(to bottom, #fefefe 0%, #d8d8d8 100%);
+  border: 1px solid #888;
+  border-radius: 3px;
+  padding: 4px 16px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11px;
+  min-width: 70px;
+}
+.run-btn:hover:not(:disabled) { background: linear-gradient(to bottom, #fff, #c8c8c8); border-color: #555; }
+.run-btn:active:not(:disabled) { background: linear-gradient(to bottom, #c8c8c8, #fff); }
+.run-btn:disabled { color: #999; cursor: not-allowed; }

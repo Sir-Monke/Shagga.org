@@ -50,6 +50,8 @@ export default function XPWindow({
 }: XPWindowProps) {
   const [pos, setPos] = useState({ x: initialX, y: initialY });
   const [size, setSize] = useState({ w: width, h: height });
+  const [snapPreview, setSnapPreview] = useState<{ x: number; y: number; w: number; h: number } | null>(null);
+  const snapPreviewRef = useRef<{ x: number; y: number; w: number; h: number } | null>(null);
   const dragging = useRef(false);
   const dragOffset = useRef({ x: 0, y: 0 });
   const resizing = useRef<ResizeDir | null>(null);
@@ -83,6 +85,26 @@ export default function XPWindow({
           point.clientY - dragOffset.current.y
         );
         setPos(next);
+
+        // Snap zone detection (Windows-style: drag to edge → snap preview)
+        const screenW = window.innerWidth;
+        const screenH = window.innerHeight;
+        const TASKBAR_H = 30;
+        const EDGE = 10;
+        let preview: { x: number; y: number; w: number; h: number } | null = null;
+        if (point.clientY <= EDGE) {
+          // Top edge → maximize preview
+          preview = { x: 0, y: 0, w: screenW, h: screenH - TASKBAR_H };
+        } else if (point.clientX <= EDGE) {
+          // Left edge → left half
+          preview = { x: 0, y: 0, w: Math.floor(screenW / 2), h: screenH - TASKBAR_H };
+        } else if (point.clientX >= screenW - EDGE) {
+          // Right edge → right half
+          preview = { x: Math.ceil(screenW / 2), y: 0, w: Math.floor(screenW / 2), h: screenH - TASKBAR_H };
+        }
+        snapPreviewRef.current = preview;
+        setSnapPreview(preview);
+
         if ('touches' in e) e.preventDefault();
       } else if (resizing.current) {
         if (maximized) return;
@@ -113,6 +135,14 @@ export default function XPWindow({
     }
 
     function handleUp() {
+      // If we were dragging and have a snap preview, apply it
+      if (dragging.current && snapPreviewRef.current) {
+        const sp = snapPreviewRef.current;
+        setPos({ x: sp.x, y: sp.y });
+        setSize({ w: sp.w, h: sp.h });
+      }
+      snapPreviewRef.current = null;
+      setSnapPreview(null);
       dragging.current = false;
       resizing.current = null;
     }
@@ -166,7 +196,19 @@ export default function XPWindow({
     : { left: pos.x, top: pos.y, width: size.w, height: size.h, zIndex };
 
   return (
-    <div
+    <>
+      {snapPreview && (
+        <div
+          className="xp-snap-preview"
+          style={{
+            left: snapPreview.x,
+            top: snapPreview.y,
+            width: snapPreview.w,
+            height: snapPreview.h,
+          }}
+        />
+      )}
+      <div
       className={`xp-window${animateIn ? ' popping-in' : ''}${maximized ? ' maximized' : ''}`}
       style={style}
       onMouseDown={onFocus}
@@ -240,5 +282,6 @@ export default function XPWindow({
         </>
       )}
     </div>
+    </>
   );
 }
