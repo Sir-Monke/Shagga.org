@@ -4851,7 +4851,6 @@ body.wp-matrix {
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55);
   font-family: Tahoma, "MS Sans Serif", sans-serif;
   z-index: 201;
-  overflow: hidden;
   animation: runIn 0.2s ease-out;
 }
 @keyframes runIn {
@@ -4866,6 +4865,7 @@ body.wp-matrix {
   font-weight: bold;
   font-size: 12px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+  border-radius: 7px 7px 0 0;
 }
 .run-title-icon { font-size: 12px; }
 .run-title { flex: 1; }
@@ -4914,13 +4914,16 @@ body.wp-matrix {
 .run-input:focus { border-color: #245edb; }
 .run-history {
   position: absolute;
-  top: 100%; left: 0; right: 0;
+  top: calc(100% + 1px);
+  left: 0;
+  right: 0;
   background: white;
-  border: 1px solid #888;
-  border-top: none;
-  max-height: 140px;
+  border: 1px solid #5a7edc;
+  border-radius: 0 0 4px 4px;
+  max-height: 180px;
   overflow-y: auto;
   z-index: 5;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
 .run-history-item {
   display: block;
@@ -4941,6 +4944,7 @@ body.wp-matrix {
   padding: 8px 14px;
   background: #ece9d8;
   border-top: 1px solid #aca899;
+  border-radius: 0 0 3px 3px;
 }
 .run-btn {
   background: linear-gradient(to bottom, #fefefe 0%, #d8d8d8 100%);

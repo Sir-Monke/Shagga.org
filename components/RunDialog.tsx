@@ -96,18 +96,25 @@ export default function RunDialog({ open, onClose, onRun }: Props) {
                 spellCheck={false}
                 autoComplete="off"
               />
-              {historyOpen && history.length > 0 && (
-                <div className="run-history">
-                  {history.filter((h) => h !== command).slice(0, 6).map((h) => (
-                    <button
-                      key={h}
-                      className="run-history-item"
-                      type="button"
-                      onMouseDown={(e) => { e.preventDefault(); setCommand(h); }}
-                    >{h}</button>
-                  ))}
-                </div>
-              )}
+              {historyOpen && (() => {
+                const q = command.toLowerCase().trim();
+                const matches = history.filter((h) =>
+                  h !== command && (q === '' || h.toLowerCase().includes(q))
+                ).slice(0, 6);
+                if (matches.length === 0) return null;
+                return (
+                  <div className="run-history">
+                    {matches.map((h) => (
+                      <button
+                        key={h}
+                        className="run-history-item"
+                        type="button"
+                        onMouseDown={(e) => { e.preventDefault(); setCommand(h); }}
+                      >{h}</button>
+                    ))}
+                  </div>
+                );
+              })()}
             </div>
           </div>
         </div>
