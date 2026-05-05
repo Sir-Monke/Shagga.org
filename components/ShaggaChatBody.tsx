@@ -30,6 +30,7 @@ const USERS: ChatUser[] = [
   { handle: 'shagga_seoul',      flag: '🇰🇷', color: '#5e35b1', online: true  },
   { handle: 'BigShaggaBR',       flag: '🇧🇷', color: '#43a047', online: true  },
   { handle: 'ShaggaIndia',       flag: '🇮🇳', color: '#fb8c00', online: false },
+  { handle: 'ross_buckley',      flag: '🕺', color: '#9c27b0', online: true  },
 ];
 
 // Universal "top shagga" problems — questions humans actually argue about.
@@ -62,6 +63,22 @@ const SCRIPT: { handle: string; text: string }[] = [
   { handle: 'sydney_shagga',  text: 'we are not going to agree on anything are we' },
   { handle: 'BigShagga_NYC',  text: 'no. but at least we are shaggas together.' },
   { handle: 'TopShaggaUK',    text: '🫡' },
+
+  // ross buckley arrives
+  { handle: 'ross_buckley',   text: 'shagga' },
+  { handle: 'ross_buckley',   text: 'shagga shagga' },
+  { handle: 'BigShagga_NYC',  text: 'who is this' },
+  { handle: 'TopShaggaUK',    text: 'idk he just joined. ross buckley?? never heard of him' },
+  { handle: 'ross_buckley',   text: 'see ya around shagga ✨' },
+  { handle: 'ross_buckley',   text: 'left chat' },
+  { handle: 'BigShagga_NYC',  text: 'wait he just gave me a business card via the screen somehow??' },
+  { handle: 'BigShagga_NYC',  text: 'it just says "see ya around shagga". no name. how did he do that' },
+  { handle: 'TopShaggaUK',    text: 'oh ross buckley does this. dont question it. just say shagga back next time u see him' },
+  { handle: 'ShaggaParis',    text: 'he gave me 10p once and told me to go buy a milkshake. it was somehow the kindest thing anyone has ever done' },
+  { handle: 'sydney_shagga',  text: 'genuine top shagga energy. one of the boys.' },
+  { handle: 'ross_buckley',   text: 'shagga' },
+  { handle: 'BigShagga_NYC',  text: 'ross???' },
+  { handle: 'ross_buckley',   text: 'left chat' },
 ];
 
 export default function ShaggaChatBody() {

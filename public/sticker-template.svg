@@ -1,155 +1,184 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="100 330 800 580" width="800" height="580">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 800 620" width="800" height="620">
   <defs>
-    <!-- XP titlebar gradient (luna blue) -->
     <linearGradient id="titleGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="#3a7be0"/>
+      <stop offset="0%"   stop-color="#0058ee"/>
+      <stop offset="6%"   stop-color="#3a7be0"/>
       <stop offset="40%"  stop-color="#2160c4"/>
-      <stop offset="100%" stop-color="#1145a8"/>
+      <stop offset="88%"  stop-color="#1145a8"/>
+      <stop offset="100%" stop-color="#0d3690"/>
     </linearGradient>
-    <linearGradient id="titleHi" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#7ba9ee" stop-opacity="0.9"/>
-      <stop offset="100%" stop-color="#7ba9ee" stop-opacity="0"/>
+    <linearGradient id="titleSheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.45"/>
+      <stop offset="55%"  stop-color="#ffffff" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
     </linearGradient>
-    <!-- XP body gradient -->
     <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="#fefefe"/>
+      <stop offset="0%"   stop-color="#fdfdfd"/>
       <stop offset="100%" stop-color="#ece9d8"/>
     </linearGradient>
-    <!-- Close button gradient -->
-    <linearGradient id="closeGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ec5050"/>
-      <stop offset="100%" stop-color="#b42424"/>
+    <linearGradient id="frameOuter" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a7be0"/>
+      <stop offset="100%" stop-color="#0a3393"/>
     </linearGradient>
-    <!-- Min/Max button gradient -->
-    <linearGradient id="ctlGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#5891e8"/>
-      <stop offset="100%" stop-color="#2c5cbe"/>
+    <radialGradient id="btnMinMax" cx="50%" cy="32%" r="68%">
+      <stop offset="0%"   stop-color="#a8d0ff"/>
+      <stop offset="45%"  stop-color="#5a91e8"/>
+      <stop offset="100%" stop-color="#0e3a82"/>
+    </radialGradient>
+    <radialGradient id="btnClose" cx="50%" cy="32%" r="72%">
+      <stop offset="0%"   stop-color="#ffaaaa"/>
+      <stop offset="45%"  stop-color="#e84545"/>
+      <stop offset="100%" stop-color="#7a0c0c"/>
+    </radialGradient>
+    <linearGradient id="faviconBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3a7be0"/>
+      <stop offset="50%" stop-color="#1858b8"/>
+      <stop offset="100%" stop-color="#0e3a82"/>
     </linearGradient>
-
-    <!-- Curved arc path for the headline. Drawn as a wide arc centered above the window. -->
-    <!-- Arc spans from (110,330) up over (500,170) and back down to (890,330). -->
-    <path id="arcPath" d="M 110 330 Q 500 90 890 330" fill="none"/>
-
-    <!-- Drop shadow for the window -->
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="6"/>
-      <feOffset dx="0" dy="6"/>
-      <feComponentTransfer><feFuncA type="linear" slope="0.35"/></feComponentTransfer>
-      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-
-    <!-- Sticker outline (rounded rect with bleed-friendly corner radius) -->
-    <clipPath id="stickerClip">
-      <rect x="20" y="20" width="960" height="960" rx="48" ry="48"/>
-    </clipPath>
+    <linearGradient id="faviconSnag" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#d2691e"/>
+      <stop offset="100%" stop-color="#8b3a0e"/>
+    </linearGradient>
+    <symbol id="favicon" viewBox="0 0 64 64">
+      <rect width="64" height="64" rx="11" fill="url(#faviconBg)"/>
+      <text x="32" y="44" font-family="Tahoma, Verdana, sans-serif" font-size="38"
+            font-weight="bold" fill="#ffffff" text-anchor="middle"
+            stroke="#0a3a82" stroke-width="0.8">S</text>
+      <ellipse cx="50" cy="14" rx="9" ry="4.2" fill="url(#faviconSnag)"
+               stroke="#5a2305" stroke-width="0.8" transform="rotate(-22 50 14)"/>
+    </symbol>
   </defs>
 
-  <!-- ============= STICKER BACKGROUND (transparent) ============= -->
-  <!-- (no background — only window renders) -->
+  <!-- ================ OUTER CHROME ================ -->
+  <rect x="20" y="40" width="760" height="540" rx="9" ry="9" fill="url(#frameOuter)"/>
+  <rect x="22" y="42" width="756" height="536" rx="8" ry="8" fill="none" stroke="#0a3393" stroke-width="1" opacity="0.55"/>
 
-  <!-- ============= XP WINDOW ============= -->
-  <g filter="url(#shadow)">
-    <!-- Window body -->
-    <rect x="120" y="350" width="760" height="540" rx="10" ry="10" fill="url(#bodyGrad)" stroke="#0a3393" stroke-width="2"/>
+  <!-- ================ TITLE BAR ================ -->
+  <!-- Titlebar fills the chrome area: x=23 to x=777, y=45 to y=92 -->
+  <path d="M 23 45 L 777 45 Q 779 45 779 47 L 779 92 L 23 92 L 23 47 Q 23 45 25 45 Z"
+        fill="url(#titleGrad)"/>
+  <rect x="26" y="47" width="751" height="14" rx="4" ry="4" fill="url(#titleSheen)"/>
+  <rect x="22" y="90" width="756" height="2" fill="#0a3393"/>
 
-    <!-- Title bar -->
-    <rect x="120" y="350" width="760" height="50" rx="10" ry="10" fill="url(#titleGrad)"/>
-    <rect x="120" y="380" width="760" height="20" fill="url(#titleGrad)"/>
-    <!-- titlebar highlight -->
-    <rect x="125" y="354" width="750" height="14" rx="6" ry="6" fill="url(#titleHi)" opacity="0.4"/>
+  <!-- Titlebar contents -->
+  <use href="#favicon" x="34" y="50" width="36" height="36"/>
+  <text x="80" y="76" font-family="Tahoma, &apos;MS Sans Serif&apos;, sans-serif"
+        font-weight="900" font-size="19" fill="#ffffff"
+        stroke="#0a3393" stroke-width="0.4" style="paint-order: stroke fill;">
+    shagga.org &#8212; scan me, legend
+  </text>
 
-    <!-- Title text + icon -->
-    <g transform="translate(140, 365)">
-      <!-- Tiny window icon -->
-      <rect x="0" y="2" width="22" height="20" rx="2" fill="#fff" stroke="#0a3393" stroke-width="1"/>
-      <rect x="0" y="2" width="22" height="6" fill="#0a3393"/>
-      <circle cx="4" cy="5" r="1" fill="#fbc02d"/>
-      <circle cx="8" cy="5" r="1" fill="#fbc02d"/>
-      <text x="32" y="20" font-family="Tahoma, 'MS Sans Serif', sans-serif"
-            font-weight="700" font-size="18" fill="#ffffff">
-        shagga.org — scan me, legend
-      </text>
-    </g>
+  <!-- ================ TITLE BAR BUTTONS ================
+       Title bar right edge is at x=777 (with 2px corner radius)
+       Buttons: 3 × 33px wide + 2 × 5px gap = 109px total
+       Right margin from edge: 14px (proper Luna spacing)
+       Group origin: 777 - 109 - 14 = 654
+       Vertical: titlebar is 45..90 (45px tall). Buttons 26px → top = 45 + (45-26)/2 = 54.5 → 54
+  -->
+  <g transform="translate(654, 54)">
+    <!-- Minimize -->
+    <rect x="0" y="0" width="33" height="26" rx="3" ry="3" fill="url(#btnMinMax)" stroke="#0a3393" stroke-width="1.2"/>
+    <rect x="1.5" y="1" width="30" height="7" rx="2" fill="#ffffff" opacity="0.3"/>
+    <rect x="9" y="18" width="15" height="3.5" fill="#ffffff" rx="1"/>
 
-    <!-- Title bar control buttons (min, max, close) -->
-    <g transform="translate(770, 360)">
-      <!-- minimize -->
-      <rect x="0" y="0" width="32" height="28" rx="4" fill="url(#ctlGrad)" stroke="#0a3393" stroke-width="1"/>
-      <rect x="8" y="22" width="16" height="3" fill="#fff"/>
-      <!-- maximize -->
-      <rect x="36" y="0" width="32" height="28" rx="4" fill="url(#ctlGrad)" stroke="#0a3393" stroke-width="1"/>
-      <rect x="44" y="6" width="16" height="16" fill="none" stroke="#fff" stroke-width="2"/>
-      <!-- close -->
-      <rect x="72" y="0" width="32" height="28" rx="4" fill="url(#closeGrad)" stroke="#8a1717" stroke-width="1"/>
-      <line x1="80" y1="8" x2="96" y2="22" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="96" y1="8" x2="80" y2="22" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
-    </g>
+    <!-- Maximize -->
+    <rect x="38" y="0" width="33" height="26" rx="3" ry="3" fill="url(#btnMinMax)" stroke="#0a3393" stroke-width="1.2"/>
+    <rect x="39.5" y="1" width="30" height="7" rx="2" fill="#ffffff" opacity="0.3"/>
+    <rect x="46" y="7" width="17" height="13" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <rect x="46" y="7" width="17" height="3.5" fill="#ffffff"/>
 
-    <!-- ===== Window content ===== -->
-    <!-- QR code placeholder area -->
-    <rect x="320" y="430" width="360" height="360" fill="#ffffff" stroke="#0a3393" stroke-width="3"/>
-    <!-- Inner instruction overlay (delete the next 4 elements when you paste a real QR) -->
-    <rect x="320" y="430" width="360" height="360" fill="#f5f5f5" opacity="0.95"/>
-    <text x="500" y="580" font-family="Tahoma, sans-serif" font-size="22" font-weight="bold"
-          fill="#777" text-anchor="middle">[ DROP YOUR QR CODE HERE ]</text>
-    <text x="500" y="610" font-family="Tahoma, sans-serif" font-size="14"
-          fill="#999" text-anchor="middle">point a free QR generator at:</text>
-    <text x="500" y="635" font-family="Tahoma, sans-serif" font-size="16" font-weight="bold"
-          fill="#1a237e" text-anchor="middle">https://shagga.org/reviews</text>
-    <text x="500" y="670" font-family="Tahoma, sans-serif" font-size="12"
-          fill="#999" text-anchor="middle">(360×360 px, transparent or white bg)</text>
-    <!-- Decorative QR-look frame: 4 finder squares to suggest where it goes -->
-    <g fill="none" stroke="#cccccc" stroke-width="3">
-      <rect x="332" y="442" width="50" height="50"/>
-      <rect x="618" y="442" width="50" height="50"/>
-      <rect x="332" y="728" width="50" height="50"/>
-    </g>
-    <g fill="#cccccc">
-      <rect x="343" y="453" width="28" height="28"/>
-      <rect x="629" y="453" width="28" height="28"/>
-      <rect x="343" y="739" width="28" height="28"/>
-    </g>
+    <!-- Close -->
+    <rect x="76" y="0" width="33" height="26" rx="3" ry="3" fill="url(#btnClose)" stroke="#7a0c0c" stroke-width="1.2"/>
+    <rect x="77.5" y="1" width="30" height="7" rx="2" fill="#ffffff" opacity="0.35"/>
+    <line x1="84" y1="8" x2="100" y2="20" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/>
+    <line x1="100" y1="8" x2="84" y2="20" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/>
+  </g>
 
-    <!-- Left side text -->
-    <g font-family="Tahoma, sans-serif" fill="#1a237e">
-      <text x="155" y="465" font-size="20" font-weight="bold">SCAN HERE</text>
-      <text x="155" y="490" font-size="14" fill="#444">to see what i think of</text>
-      <text x="155" y="510" font-size="14" fill="#444">your local</text>
+  <!-- ================ BODY INSET ================ -->
+  <rect x="23" y="93" width="754" height="483" fill="url(#bodyGrad)"/>
+  <rect x="23" y="93" width="754" height="1" fill="#ffffff" opacity="0.6"/>
+  <rect x="23" y="575" width="754" height="1" fill="#aaa899" opacity="0.5"/>
 
-      <text x="155" y="560" font-size="16" font-weight="bold" fill="#d32f2f">⚠ WARNING:</text>
-      <text x="155" y="582" font-size="12" fill="#444">contains opinions.</text>
-      <text x="155" y="600" font-size="12" fill="#444">unsolicited ones.</text>
+  <!-- ================ QR CODE ================ -->
+  <!-- Centered at x=400. QR + frame total 270px wide. Left edge: 400-135 = 265 -->
+  <rect x="265" y="125" width="270" height="270" fill="#808080"/>
+  <rect x="266" y="126" width="268" height="268" fill="#ffffff"/>
+  <rect x="267" y="127" width="266" height="266" fill="#ffffff" stroke="#404040" stroke-width="1"/>
+  <image x="269" y="129" width="262" height="262" preserveAspectRatio="xMidYMid meet"
+         href="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiCgkgdmlld0JveD0iMCAwIDEwMCAxMDAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDEwMCAxMDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPgoJCjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDIwMDAgMjAwMCIgeD0iMCIgeT0iMCIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIj48ZGVmcy8+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjIwMDAiIGhlaWdodD0iMjAwMCIgZmlsbD0iI2ZmZmZmZiIvPjxyZWN0IHg9Ijc3NiIgeT0iMjAwIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMDk2IiB5PSIyMDAiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjExNjAiIHk9IjIwMCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTIyNCIgeT0iMjAwIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI3MTIiIHk9IjI2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iNzc2IiB5PSIyNjQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjkwNCIgeT0iMjY0IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI5NjgiIHk9IjI2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTAzMiIgeT0iMjY0IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMDk2IiB5PSIyNjQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjExNjAiIHk9IjI2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iNzc2IiB5PSIzMjgiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9Ijg0MCIgeT0iMzI4IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI5MDQiIHk9IjMyOCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTA5NiIgeT0iMzI4IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMjI0IiB5PSIzMjgiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjcxMiIgeT0iMzkyIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI3NzYiIHk9IjM5MiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iOTA0IiB5PSIzOTIiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEwMzIiIHk9IjM5MiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTA5NiIgeT0iMzkyIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMTYwIiB5PSIzOTIiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEyMjQiIHk9IjM5MiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iODQwIiB5PSI0NTYiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9Ijk2OCIgeT0iNDU2IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMDk2IiB5PSI0NTYiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjExNjAiIHk9IjQ1NiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iNzEyIiB5PSI1MjAiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9Ijg0MCIgeT0iNTIwIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMDMyIiB5PSI1MjAiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEwOTYiIHk9IjUyMCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iNzEyIiB5PSI1ODQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9Ijg0MCIgeT0iNTg0IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI5NjgiIHk9IjU4NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTA5NiIgeT0iNTg0IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMjI0IiB5PSI1ODQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9Ijk2OCIgeT0iNjQ4IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMDk2IiB5PSI2NDgiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEyMjQiIHk9IjY0OCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMjAwIiB5PSI3MTIiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjI2NCIgeT0iNzEyIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIzMjgiIHk9IjcxMiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMzkyIiB5PSI3MTIiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjQ1NiIgeT0iNzEyIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI1ODQiIHk9IjcxMiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iNjQ4IiB5PSI3MTIiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjcxMiIgeT0iNzEyIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI3NzYiIHk9IjcxMiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iODQwIiB5PSI3MTIiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9Ijk2OCIgeT0iNzEyIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMDMyIiB5PSI3MTIiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjExNjAiIHk9IjcxMiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTI4OCIgeT0iNzEyIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxNDE2IiB5PSI3MTIiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjE1NDQiIHk9IjcxMiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTY3MiIgeT0iNzEyIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIyNjQiIHk9Ijc3NiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMzI4IiB5PSI3NzYiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjQ1NiIgeT0iNzc2IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI1MjAiIHk9Ijc3NiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iNjQ4IiB5PSI3NzYiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9Ijc3NiIgeT0iNzc2IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMDk2IiB5PSI3NzYiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEyMjQiIHk9Ijc3NiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTI4OCIgeT0iNzc2IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxNDE2IiB5PSI3NzYiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjE0ODAiIHk9Ijc3NiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTY3MiIgeT0iNzc2IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIyNjQiIHk9Ijg0MCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMzkyIiB5PSI4NDAiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjU4NCIgeT0iODQwIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI3NzYiIHk9Ijg0MCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iOTA0IiB5PSI4NDAiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9Ijk2OCIgeT0iODQwIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMTYwIiB5PSI4NDAiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEyMjQiIHk9Ijg0MCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTI4OCIgeT0iODQwIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMzUyIiB5PSI4NDAiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjE0ODAiIHk9Ijg0MCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTU0NCIgeT0iODQwIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxNjA4IiB5PSI4NDAiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjE3MzYiIHk9Ijg0MCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMjAwIiB5PSI5MDQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjY0OCIgeT0iOTA0IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI3NzYiIHk9IjkwNCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iODQwIiB5PSI5MDQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjkwNCIgeT0iOTA0IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMjI0IiB5PSI5MDQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEyODgiIHk9IjkwNCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTQxNiIgeT0iOTA0IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxNTQ0IiB5PSI5MDQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjE2MDgiIHk9IjkwNCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTY3MiIgeT0iOTA0IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIyMDAiIHk9Ijk2OCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMzI4IiB5PSI5NjgiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjUyMCIgeT0iOTY4IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI1ODQiIHk9Ijk2OCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iNzEyIiB5PSI5NjgiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9Ijc3NiIgeT0iOTY4IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI5MDQiIHk9Ijk2OCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTE2MCIgeT0iOTY4IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMjI0IiB5PSI5NjgiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEzNTIiIHk9Ijk2OCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTQ4MCIgeT0iOTY4IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxNTQ0IiB5PSI5NjgiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjE2NzIiIHk9Ijk2OCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTczNiIgeT0iOTY4IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIyMDAiIHk9IjEwMzIiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjI2NCIgeT0iMTAzMiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMzI4IiB5PSIxMDMyIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIzOTIiIHk9IjEwMzIiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjQ1NiIgeT0iMTAzMiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iNzEyIiB5PSIxMDMyIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI4NDAiIHk9IjEwMzIiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9Ijk2OCIgeT0iMTAzMiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTAzMiIgeT0iMTAzMiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTE2MCIgeT0iMTAzMiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTIyNCIgeT0iMTAzMiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTQxNiIgeT0iMTAzMiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTQ4MCIgeT0iMTAzMiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMjAwIiB5PSIxMDk2IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIzMjgiIHk9IjEwOTYiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjQ1NiIgeT0iMTA5NiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iNTIwIiB5PSIxMDk2IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI1ODQiIHk9IjEwOTYiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjY0OCIgeT0iMTA5NiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iNzEyIiB5PSIxMDk2IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI3NzYiIHk9IjEwOTYiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9Ijg0MCIgeT0iMTA5NiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTAzMiIgeT0iMTA5NiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTA5NiIgeT0iMTA5NiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTE2MCIgeT0iMTA5NiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTI4OCIgeT0iMTA5NiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTM1MiIgeT0iMTA5NiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTQ4MCIgeT0iMTA5NiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTU0NCIgeT0iMTA5NiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTYwOCIgeT0iMTA5NiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTczNiIgeT0iMTA5NiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMjAwIiB5PSIxMTYwIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIzMjgiIHk9IjExNjAiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjM5MiIgeT0iMTE2MCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iNDU2IiB5PSIxMTYwIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI3MTIiIHk9IjExNjAiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9Ijk2OCIgeT0iMTE2MCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTAzMiIgeT0iMTE2MCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTIyNCIgeT0iMTE2MCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTU0NCIgeT0iMTE2MCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTY3MiIgeT0iMTE2MCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTczNiIgeT0iMTE2MCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMjAwIiB5PSIxMjI0IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI0NTYiIHk9IjEyMjQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjUyMCIgeT0iMTIyNCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iNTg0IiB5PSIxMjI0IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI2NDgiIHk9IjEyMjQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjcxMiIgeT0iMTIyNCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iODQwIiB5PSIxMjI0IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI5NjgiIHk9IjEyMjQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEwOTYiIHk9IjEyMjQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjExNjAiIHk9IjEyMjQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEyMjQiIHk9IjEyMjQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEyODgiIHk9IjEyMjQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEzNTIiIHk9IjEyMjQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjE0MTYiIHk9IjEyMjQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjE0ODAiIHk9IjEyMjQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjE3MzYiIHk9IjEyMjQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjcxMiIgeT0iMTI4OCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iNzc2IiB5PSIxMjg4IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMTYwIiB5PSIxMjg4IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMjI0IiB5PSIxMjg4IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxNDgwIiB5PSIxMjg4IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxNzM2IiB5PSIxMjg4IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI3MTIiIHk9IjEzNTIiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9Ijc3NiIgeT0iMTM1MiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iODQwIiB5PSIxMzUyIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI5MDQiIHk9IjEzNTIiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9Ijk2OCIgeT0iMTM1MiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTIyNCIgeT0iMTM1MiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTM1MiIgeT0iMTM1MiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTQ4MCIgeT0iMTM1MiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTU0NCIgeT0iMTM1MiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTYwOCIgeT0iMTM1MiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTY3MiIgeT0iMTM1MiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTczNiIgeT0iMTM1MiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iNzc2IiB5PSIxNDE2IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI5MDQiIHk9IjE0MTYiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEwOTYiIHk9IjE0MTYiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjExNjAiIHk9IjE0MTYiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEyMjQiIHk9IjE0MTYiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjE0ODAiIHk9IjE0MTYiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjcxMiIgeT0iMTQ4MCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iODQwIiB5PSIxNDgwIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI5MDQiIHk9IjE0ODAiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjExNjAiIHk9IjE0ODAiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEyMjQiIHk9IjE0ODAiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEyODgiIHk9IjE0ODAiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEzNTIiIHk9IjE0ODAiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjE0MTYiIHk9IjE0ODAiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjE0ODAiIHk9IjE0ODAiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjE2MDgiIHk9IjE0ODAiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjcxMiIgeT0iMTU0NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iODQwIiB5PSIxNTQ0IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI5NjgiIHk9IjE1NDQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEwMzIiIHk9IjE1NDQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEwOTYiIHk9IjE1NDQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEyMjQiIHk9IjE1NDQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEyODgiIHk9IjE1NDQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEzNTIiIHk9IjE1NDQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjE0MTYiIHk9IjE1NDQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjE2NzIiIHk9IjE1NDQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjE3MzYiIHk9IjE1NDQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjcxMiIgeT0iMTYwOCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iNzc2IiB5PSIxNjA4IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI4NDAiIHk9IjE2MDgiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEwMzIiIHk9IjE2MDgiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEwOTYiIHk9IjE2MDgiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEyODgiIHk9IjE2MDgiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjE1NDQiIHk9IjE2MDgiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjE2MDgiIHk9IjE2MDgiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjE3MzYiIHk9IjE2MDgiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjcxMiIgeT0iMTY3MiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iOTY4IiB5PSIxNjcyIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMDMyIiB5PSIxNjcyIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMjI0IiB5PSIxNjcyIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMzUyIiB5PSIxNjcyIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxNDgwIiB5PSIxNjcyIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxNjcyIiB5PSIxNjcyIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI3MTIiIHk9IjE3MzYiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9Ijg0MCIgeT0iMTczNiIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iOTY4IiB5PSIxNzM2IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMDk2IiB5PSIxNzM2IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxMjI0IiB5PSIxNzM2IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxNDE2IiB5PSIxNzM2IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxNjA4IiB5PSIxNzM2IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxNjcyIiB5PSIxNzM2IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSIxNzM2IiB5PSIxNzM2IiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiMwMDAwMDAiLz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkViZW5lXzEiIHg9IjIwMCIgeT0iMjAwIiB3aWR0aD0iNDQ4IiBoZWlnaHQ9IjQ0OCIgdmlld0JveD0iMCAwIDY5OS45ODggNjk5Ljk4NiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNjk5Ljk4OCA2OTkuOTg2IiB4bWw6c3BhY2U9InByZXNlcnZlIiBzaGFwZS1yZW5kZXJpbmc9ImF1dG8iPgo8cGF0aCBmaWxsPSIjMDAwMDAwIiBkPSJNNjAwLjk5LDBoLTEwMGgtOTkuOTk3aC0wLjAwMWgtOTkuOTk3aC05OS45OThoLTk5Ljk5OEgxdjk5Ljk5OHY5OS45OTh2OTkuOTk4djk5Ljk5OXY5OS45OTd2OTkuOTk4djk5Ljk5OCAgaDk5Ljk5OWg5OS45OThoOTkuOTk4aDk5Ljk5N2gwLjAwMWg5OS45OTdoMTAwaDk5Ljk5OHYtOTkuOTk4VjQ5OS45OXYtOTkuOTk3di05OS45OTl2LTk5Ljk5OFY5OS45OThWMEg2MDAuOTl6IE02MDAuOTksMTk5Ljk5NiAgdjk5Ljk5OHY5OS45OTl2OTkuOTk3djk5Ljk5OGgtMTAwaC05OS45OTdoLTAuMDAxaC05OS45OTdoLTk5Ljk5OGgtOTkuOTk4VjQ5OS45OXYtOTkuOTk3di05OS45OTl2LTk5Ljk5OFY5OS45OThoOTkuOTk4aDk5Ljk5OCAgaDk5Ljk5N2gwLjAwMWg5OS45OTdoMTAwVjE5OS45OTZ6Ii8+Cjwvc3ZnPgo8c3ZnIHZlcnNpb249IjEuMCIgaWQ9IkViZW5lXzEiIHg9IjIwMCIgeT0iMjAwIiB3aWR0aD0iNDQ4IiBoZWlnaHQ9IjQ0OCIgdmlld0JveD0iMCAwIDY5OS45ODggNjk5Ljk4OCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNjk5Ljk4OCA2OTkuOTg4IiB4bWw6c3BhY2U9InByZXNlcnZlIiBzaGFwZS1yZW5kZXJpbmc9ImF1dG8iPgo8cG9seWdvbiBmaWxsPSIjMDAwMDAwIiBwb2ludHM9IjM5OS45OTQsMTk5Ljk5NyAzOTkuOTkyLDE5OS45OTcgMjk5Ljk5NiwxOTkuOTk3IDE5OS45OTgsMTk5Ljk5NyAxOTkuOTk4LDI5OS45OTQgMTk5Ljk5OCwzOTkuOTk0ICAgMTk5Ljk5OCw0OTkuOTkxIDI5OS45OTYsNDk5Ljk5MSAzOTkuOTkyLDQ5OS45OTEgMzk5Ljk5NCw0OTkuOTkxIDQ5OS45OSw0OTkuOTkxIDQ5OS45OSwzOTkuOTk0IDQ5OS45OSwyOTkuOTk0IDQ5OS45OSwxOTkuOTk3ICIvPgo8L3N2Zz4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJFYmVuZV8xIiB4PSIxMzUyIiB5PSIyMDAiIHdpZHRoPSI0NDgiIGhlaWdodD0iNDQ4IiB2aWV3Qm94PSIwIDAgNjk5Ljk4OCA2OTkuOTg2IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA2OTkuOTg4IDY5OS45ODYiIHhtbDpzcGFjZT0icHJlc2VydmUiIHNoYXBlLXJlbmRlcmluZz0iYXV0byI+CjxwYXRoIGZpbGw9IiMwMDAwMDAiIGQ9Ik02MDAuOTksMGgtMTAwaC05OS45OTdoLTAuMDAxaC05OS45OTdoLTk5Ljk5OGgtOTkuOTk4SDF2OTkuOTk4djk5Ljk5OHY5OS45OTh2OTkuOTk5djk5Ljk5N3Y5OS45OTh2OTkuOTk4ICBoOTkuOTk5aDk5Ljk5OGg5OS45OThoOTkuOTk3aDAuMDAxaDk5Ljk5N2gxMDBoOTkuOTk4di05OS45OThWNDk5Ljk5di05OS45OTd2LTk5Ljk5OXYtOTkuOTk4Vjk5Ljk5OFYwSDYwMC45OXogTTYwMC45OSwxOTkuOTk2ICB2OTkuOTk4djk5Ljk5OXY5OS45OTd2OTkuOTk4aC0xMDBoLTk5Ljk5N2gtMC4wMDFoLTk5Ljk5N2gtOTkuOTk4aC05OS45OThWNDk5Ljk5di05OS45OTd2LTk5Ljk5OXYtOTkuOTk4Vjk5Ljk5OGg5OS45OThoOTkuOTk4ICBoOTkuOTk3aDAuMDAxaDk5Ljk5N2gxMDBWMTk5Ljk5NnoiLz4KPC9zdmc+CjxzdmcgdmVyc2lvbj0iMS4wIiBpZD0iRWJlbmVfMSIgeD0iMTM1MiIgeT0iMjAwIiB3aWR0aD0iNDQ4IiBoZWlnaHQ9IjQ0OCIgdmlld0JveD0iMCAwIDY5OS45ODggNjk5Ljk4OCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNjk5Ljk4OCA2OTkuOTg4IiB4bWw6c3BhY2U9InByZXNlcnZlIiBzaGFwZS1yZW5kZXJpbmc9ImF1dG8iPgo8cG9seWdvbiBmaWxsPSIjMDAwMDAwIiBwb2ludHM9IjM5OS45OTQsMTk5Ljk5NyAzOTkuOTkyLDE5OS45OTcgMjk5Ljk5NiwxOTkuOTk3IDE5OS45OTgsMTk5Ljk5NyAxOTkuOTk4LDI5OS45OTQgMTk5Ljk5OCwzOTkuOTk0ICAgMTk5Ljk5OCw0OTkuOTkxIDI5OS45OTYsNDk5Ljk5MSAzOTkuOTkyLDQ5OS45OTEgMzk5Ljk5NCw0OTkuOTkxIDQ5OS45OSw0OTkuOTkxIDQ5OS45OSwzOTkuOTk0IDQ5OS45OSwyOTkuOTk0IDQ5OS45OSwxOTkuOTk3ICIvPgo8L3N2Zz4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJFYmVuZV8xIiB4PSIyMDAiIHk9IjEzNTIiIHdpZHRoPSI0NDgiIGhlaWdodD0iNDQ4IiB2aWV3Qm94PSIwIDAgNjk5Ljk4OCA2OTkuOTg2IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA2OTkuOTg4IDY5OS45ODYiIHhtbDpzcGFjZT0icHJlc2VydmUiIHNoYXBlLXJlbmRlcmluZz0iYXV0byI+CjxwYXRoIGZpbGw9IiMwMDAwMDAiIGQ9Ik02MDAuOTksMGgtMTAwaC05OS45OTdoLTAuMDAxaC05OS45OTdoLTk5Ljk5OGgtOTkuOTk4SDF2OTkuOTk4djk5Ljk5OHY5OS45OTh2OTkuOTk5djk5Ljk5N3Y5OS45OTh2OTkuOTk4ICBoOTkuOTk5aDk5Ljk5OGg5OS45OThoOTkuOTk3aDAuMDAxaDk5Ljk5N2gxMDBoOTkuOTk4di05OS45OThWNDk5Ljk5di05OS45OTd2LTk5Ljk5OXYtOTkuOTk4Vjk5Ljk5OFYwSDYwMC45OXogTTYwMC45OSwxOTkuOTk2ICB2OTkuOTk4djk5Ljk5OXY5OS45OTd2OTkuOTk4aC0xMDBoLTk5Ljk5N2gtMC4wMDFoLTk5Ljk5N2gtOTkuOTk4aC05OS45OThWNDk5Ljk5di05OS45OTd2LTk5Ljk5OXYtOTkuOTk4Vjk5Ljk5OGg5OS45OThoOTkuOTk4ICBoOTkuOTk3aDAuMDAxaDk5Ljk5N2gxMDBWMTk5Ljk5NnoiLz4KPC9zdmc+CjxzdmcgdmVyc2lvbj0iMS4wIiBpZD0iRWJlbmVfMSIgeD0iMjAwIiB5PSIxMzUyIiB3aWR0aD0iNDQ4IiBoZWlnaHQ9IjQ0OCIgdmlld0JveD0iMCAwIDY5OS45ODggNjk5Ljk4OCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNjk5Ljk4OCA2OTkuOTg4IiB4bWw6c3BhY2U9InByZXNlcnZlIiBzaGFwZS1yZW5kZXJpbmc9ImF1dG8iPgo8cG9seWdvbiBmaWxsPSIjMDAwMDAwIiBwb2ludHM9IjM5OS45OTQsMTk5Ljk5NyAzOTkuOTkyLDE5OS45OTcgMjk5Ljk5NiwxOTkuOTk3IDE5OS45OTgsMTk5Ljk5NyAxOTkuOTk4LDI5OS45OTQgMTk5Ljk5OCwzOTkuOTk0ICAgMTk5Ljk5OCw0OTkuOTkxIDI5OS45OTYsNDk5Ljk5MSAzOTkuOTkyLDQ5OS45OTEgMzk5Ljk5NCw0OTkuOTkxIDQ5OS45OSw0OTkuOTkxIDQ5OS45OSwzOTkuOTk0IDQ5OS45OSwyOTkuOTk0IDQ5OS45OSwxOTkuOTk3ICIvPgo8L3N2Zz4KPC9zdmc+Cgo8L3N2Zz4K"/>
 
-      <text x="155" y="650" font-size="14" font-weight="bold">⭐ FEATURING:</text>
-      <text x="155" y="672" font-size="11" fill="#444">• reviews of Liverpool</text>
-      <text x="155" y="690" font-size="11" fill="#444">• an XP themed website</text>
-      <text x="155" y="708" font-size="11" fill="#444">• 47 popups you can&#39;t close</text>
-      <text x="155" y="726" font-size="11" fill="#444">• Phil&#39;s car saga</text>
-      <text x="155" y="744" font-size="11" fill="#444">• actual nan content</text>
-    </g>
+  <!-- ================ LEFT COLUMN TEXT ================ -->
+  <!-- Column bounds: x=40 .. 240 (200px wide). Right-aligned to 240 by using divider. -->
+  <g font-family="Tahoma, &apos;MS Sans Serif&apos;, Verdana, sans-serif">
+    <text x="40" y="145" font-size="18" font-weight="900" fill="#0a3393">SCAN HERE</text>
+    <line x1="40" y1="153" x2="240" y2="153" stroke="#7d9bce" stroke-width="2"/>
+    <text x="40" y="178" font-size="14" font-weight="600" fill="#1a1a1a">or purple aki</text>
+    <text x="40" y="198" font-size="14" font-weight="600" fill="#1a1a1a">will haunt u</text>
 
-    <!-- Right side text -->
-    <g font-family="Tahoma, sans-serif" fill="#1a237e" text-anchor="end">
-      <text x="845" y="465" font-size="20" font-weight="bold">FREE TO USE!</text>
-      <text x="845" y="490" font-size="14" fill="#444">no signup required</text>
-      <text x="845" y="510" font-size="14" fill="#444">(this is huge)</text>
+    <text x="40" y="250" font-size="18" font-weight="900" fill="#b91c1c">
+      <tspan fill="#b91c1c">&#9888;</tspan>
+      <tspan dx="3">WARNING</tspan>
+    </text>
+    <line x1="40" y1="258" x2="240" y2="258" stroke="#cc7777" stroke-width="2"/>
+    <text x="40" y="283" font-size="13" font-weight="600" fill="#1a1a1a">cannot guarantee</text>
+    <text x="40" y="302" font-size="13" font-weight="600" fill="#1a1a1a">phil won&#39;t steal</text>
+    <text x="40" y="321" font-size="13" font-weight="600" fill="#1a1a1a">ur sausage roll</text>
 
-      <text x="845" y="560" font-size="16" font-weight="bold" fill="#2e7d32">★ EST. 2025</text>
-      <text x="845" y="582" font-size="12" fill="#444">made by a top shagga</text>
-      <text x="845" y="600" font-size="12" fill="#444">in Liverpool, UK</text>
+    <text x="40" y="378" font-size="14" font-weight="900" fill="#5a5a5a">FILE</text>
+    <line x1="40" y1="385" x2="240" y2="385" stroke="#bbb" stroke-width="1.5"/>
+    <text x="40" y="406" font-size="13" font-weight="600" fill="#444">type: .url</text>
+    <text x="40" y="424" font-size="13" font-weight="600" fill="#444">made in: liverpool</text>
+  </g>
 
-      <text x="845" y="650" font-size="14" font-weight="bold">📍 LOCATIONS:</text>
-      <text x="845" y="672" font-size="11" fill="#444">pubs · cafés · takeaways</text>
-      <text x="845" y="690" font-size="11" fill="#444">parks · barbers · more</text>
-      <text x="845" y="708" font-size="11" fill="#444">all rated /10</text>
-      <text x="845" y="726" font-size="11" fill="#444">most are honest, some</text>
-      <text x="845" y="744" font-size="11" fill="#444">are emotionally driven</text>
-    </g>
+  <!-- ================ RIGHT COLUMN TEXT ================ -->
+  <g font-family="Tahoma, &apos;MS Sans Serif&apos;, Verdana, sans-serif" text-anchor="end">
+    <text x="760" y="145" font-size="18" font-weight="900" fill="#0a3393">FREE TO USE</text>
+    <line x1="560" y1="153" x2="760" y2="153" stroke="#7d9bce" stroke-width="2"/>
+    <text x="760" y="178" font-size="14" font-weight="600" fill="#1a1a1a">no signup needed</text>
+    <text x="760" y="198" font-size="14" font-weight="600" fill="#1a1a1a">(this is huge)</text>
 
-    <!-- Bottom URL bar -->
-    <rect x="140" y="820" width="720" height="50" rx="6" fill="#ece9d8" stroke="#0a3393" stroke-width="1"/>
-    <text x="500" y="853" font-family="Tahoma, sans-serif" font-size="22" font-weight="bold"
-          fill="#1a237e" text-anchor="middle">shagga.org/reviews</text>
+    <text x="760" y="250" font-size="18" font-weight="900" fill="#0d7a3a">
+      <tspan fill="#0d7a3a">&#9733;</tspan>
+      <tspan dx="3">FREE GREGGS</tspan>
+    </text>
+    <line x1="560" y1="258" x2="760" y2="258" stroke="#7eb091" stroke-width="2"/>
+    <text x="760" y="283" font-size="13" font-weight="600" fill="#1a1a1a">awarded on scan</text>
+    <text x="760" y="302" font-size="12" font-weight="700" fill="#777" font-style="italic">(no greggs given.</text>
+    <text x="760" y="320" font-size="12" font-weight="700" fill="#777" font-style="italic">this is a lie.)</text>
+
+    <text x="760" y="378" font-size="14" font-weight="900" fill="#5a5a5a">DETAILS</text>
+    <line x1="560" y1="385" x2="760" y2="385" stroke="#bbb" stroke-width="1.5"/>
+    <text x="760" y="406" font-size="13" font-weight="600" fill="#444">version: 1.0</text>
+    <text x="760" y="424" font-size="13" font-weight="600" fill="#444">support: yeah nah</text>
+  </g>
+
+  <!-- ================ DOOBIES CALLOUT ================ -->
+  <g transform="translate(140, 450)">
+    <rect x="0" y="0" width="520" height="50" rx="5" ry="5" fill="#fff8e1" stroke="#e0c44a" stroke-width="2"/>
+    <rect x="0" y="0" width="6" height="50" fill="#fbc02d"/>
+    <text x="263" y="22" font-family="Tahoma, sans-serif" font-size="14" font-weight="900" fill="#5d4037" text-anchor="middle">
+      doobies + boobies (with doobies) highly appreciated
+    </text>
+    <text x="263" y="40" font-family="Tahoma, sans-serif" font-size="12" font-weight="700" fill="#7d6037" font-style="italic" text-anchor="middle">
+      if brought &#8212; not required, but encouraged
+    </text>
+  </g>
+
+  <!-- ================ STATUS BAR ================ -->
+  <g transform="translate(45, 515)">
+    <rect x="0" y="0" width="710" height="38" fill="#ece9d8" stroke="#7a7a6f" stroke-width="1"/>
+    <rect x="1" y="1" width="708" height="1" fill="#7a7a6f"/>
+    <rect x="1" y="1" width="1" height="36" fill="#7a7a6f"/>
+    <rect x="1" y="36" width="708" height="1" fill="#ffffff"/>
+    <rect x="708" y="1" width="1" height="36" fill="#ffffff"/>
+    <line x1="100" y1="3" x2="100" y2="35" stroke="#888" stroke-width="1"/>
+    <line x1="101" y1="3" x2="101" y2="35" stroke="#fff" stroke-width="1"/>
+    <line x1="610" y1="3" x2="610" y2="35" stroke="#888" stroke-width="1"/>
+    <line x1="611" y1="3" x2="611" y2="35" stroke="#fff" stroke-width="1"/>
+    <text x="14" y="25" font-family="Tahoma, sans-serif" font-size="13" font-weight="700" fill="#222">Ready</text>
+    <text x="355" y="26" font-family="Tahoma, sans-serif" font-size="18" font-weight="900" fill="#0a3393" text-anchor="middle">shagga.org/reviews</text>
+    <text x="696" y="25" font-family="Tahoma, sans-serif" font-size="13" font-weight="700" fill="#222" text-anchor="end">100%</text>
   </g>
 </svg>

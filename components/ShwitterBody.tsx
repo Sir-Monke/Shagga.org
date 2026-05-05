@@ -49,6 +49,7 @@ const AUTHORS: Author[] = [
   { handle: 'doreen_57',       name: 'Auntie Doreen',       avatar: '👩‍🦰', color: '#ad1457', bio: 'sent from my iphone. i think.',                       location: 'cornwall',                                  },
   { handle: 'sharon_from_acc', name: 'Sharon from Accounts', avatar: '💼', color: '#388e3c', bio: 'reply all to all emails. mistakes were made.',         location: 'the office printer',                                  },
   { handle: 'ranga_tim',       name: 'tim',                 avatar: '🧑', color: '#bf360c', bio: 'just a regular shagga',                                location: 'idk man',                                  },
+  { handle: 'ross_buckley',    name: 'Ross Buckley',        avatar: '🕺', color: '#9c27b0', bio: 'shagga shagga shagga. see ya around shagga. hmu for thongs (10pk).', location: 'somewhere fabulous',                       },
 ];
 
 // ---------- Initial shweets ----------
@@ -83,9 +84,23 @@ const INITIAL_SHWEETS: Shweet[] = [
   { id: 28, authorHandle: 'tech_helpline',  text: "BREAKING: 'have you tried turning it off and on again' has now resolved 89% of all known issues. study peer-reviewed.",  ageMin: 3600, initialLikes: 47281, initialReposts: 8472, initialReplies: 1247 },
   { id: 29, authorHandle: 'margaret_90',    text: "just liked my own photo from 2007 by accident. delete how. love nan",                                  ageMin: 4500, initialLikes: 12847,  initialReposts: 2104,  initialReplies: 891 },
   { id: 30, authorHandle: 'big_shagga_94',  text: "left my phone in the fridge for 3 hours. battery now full. cold to the touch. science.",               ageMin: 7200, initialLikes: 8472,   initialReposts: 1247,  initialReplies: 412 },
+
+  // Ross Buckley arc — sprinkled through the timeline
+  { id: 31, authorHandle: 'ross_buckley',  text: "shagga shagga shagga shagga. see ya around shagga ✨",                                                       ageMin: 25,    initialLikes: 47281, initialReposts: 8472,  initialReplies: 1247 },
+  { id: 32, authorHandle: 'ross_buckley',  text: "told the lad at the till to go buy himself a milkshake. handed him 10p. winked. left. unstoppable energy.", ageMin: 90,    initialLikes: 89724, initialReposts: 14728, initialReplies: 4128 },
+  { id: 33, authorHandle: 'ross_buckley',  text: "looking to bulk-purchase a 10pk of thongs for me and the boys for a good time. others welcome to join. dm shagga", ageMin: 200, initialLikes: 47281, initialReposts: 12847, initialReplies: 8472 },
+  { id: 34, authorHandle: 'big_shagga_94', text: "ross buckley just handed me a business card. it says 'see ya around shagga'. nothing else. no number. no name. genuinely cooked.", ageMin: 220,  initialLikes: 89724, initialReposts: 14728, initialReplies: 4128, parentId: 33 },
+  { id: 35, authorHandle: 'ross_buckley',  text: "the cards have been printed. the business is real. the business is shagga. shagga shagga shagga.",          ageMin: 230,  initialLikes: 47281, initialReposts: 8472,  initialReplies: 2104 },
+  { id: 36, authorHandle: 'ross_buckley',  text: "watched a man drop his sausage roll. picked it up. handed it back. winked. said 'shagga'. he cried.",       ageMin: 480,  initialLikes: 14728, initialReposts: 4128,  initialReplies: 891 },
+  { id: 37, authorHandle: 'ross_buckley',  text: "10pk thong update: 7 confirmed. 3 maybes. need 2 more for the discount. don't be shy lads. shagga.",        ageMin: 1000, initialLikes: 8472,  initialReposts: 1247,  initialReplies: 412 },
+  { id: 38, authorHandle: 'shaggas_mate',  text: "ross buckley walked into the office today. said 'shagga'. left. nobody knows who he is. nobody asked.",     ageMin: 1500, initialLikes: 47281, initialReposts: 8472,  initialReplies: 2104 },
+  { id: 39, authorHandle: 'ross_buckley',  text: "if u see me around just say shagga. that's it. that's the interaction. shagga.",                            ageMin: 2200, initialLikes: 14728, initialReposts: 2104,  initialReplies: 891 },
+  { id: 40, authorHandle: 'auntie_linda',  text: "FWD: FWD: who is this lovely man ross buckley?? he gave me a business card!! it just says 'see ya around shagga' 🌹💕 such a gentleman", ageMin: 3000, initialLikes: 47281, initialReposts: 8472, initialReplies: 1247 },
 ];
 
 const TRENDING = [
+  { topic: 'Ross Buckley',       count: '89k posts' },
+  { topic: 'See Ya Around Shagga', count: '47k posts' },
   { topic: 'Phils Car',          count: '47k posts' },
   { topic: 'Margaret 90',        count: '14k posts' },
   { topic: 'Reply All Disaster', count: '8.9k posts' },

@@ -37,6 +37,7 @@ const CHANNELS: Channel[] = [
   { id: 'sleepy',  name: 'sleepy shagga',  handle: '@sleepyshagga', subs: '47',   emoji: '😴', color: '#4a148c' },
   { id: 'global',  name: 'Shagga Council', handle: '@shaggacouncil', subs: '8.9M', emoji: '🌍', color: '#0066cc' },
   { id: 'cooks',   name: 'Cooking with Shagga', handle: '@shaggacooks', subs: '1.4M', emoji: '🍳', color: '#ffa500' },
+  { id: 'rossbk',  name: 'Ross Buckley',     handle: '@rossbuckley',   subs: '47.2M', emoji: '🕺', color: '#9c27b0' },
 ];
 
 const VIDEOS: Video[] = [
@@ -60,6 +61,11 @@ const VIDEOS: Video[] = [
   { id: 18, title: 'lofi shagga beats - to chill / cook a snag to',                       channelId: 'sleepy',  views: 124_000,   ageDays: 200,  durationSec: 7200,  thumbBg: 'linear-gradient(135deg, #ff7e5f 0%, #6b1a8c 100%)', emoji: '🎵', description: 'two hours. uninterrupted. sometimes a magpie chirps.', tags: ['music', 'asmr'] },
   { id: 19, title: 'my dad tries to use shaggatube (CHAOS)',                                channelId: 'reacts',  views: 234_000,   ageDays: 6,    durationSec: 612,   thumbBg: 'linear-gradient(135deg, #6b1a8c 0%, #1a237e 100%)', emoji: '👨', description: 'he hit upload by accident and now hes a creator.', tags: ['reaction'] },
   { id: 20, title: 'I followed a Snaggas sausage sizzle queue for 8 hours',              channelId: 'topsh',   views: 412_000,   ageDays: 11,   durationSec: 28800, thumbBg: 'linear-gradient(135deg, #f00 0%, #ffa500 100%)',    emoji: '🌭', description: 'the queue is a microcosm of society.', tags: ['vlog', 'documentary'] },
+
+  // Ross Buckley channel videos
+  { id: 21, title: 'i gave a man 10p and told him to buy a milkshake (HE CRIED)',         channelId: 'rossbk',  views: 47_200_000, ageDays: 1,    durationSec: 27,    thumbBg: 'linear-gradient(135deg, #9c27b0 0%, #6a1b9a 100%)', emoji: '🥤', description: 'shagga shagga shagga. see ya around shagga ✨', tags: ['shagga', 'kindness'] },
+  { id: 22, title: 'unboxing my 10pk thongs (for me and the lads)',                        channelId: 'rossbk',  views: 14_700_000, ageDays: 4,    durationSec: 482,   thumbBg: 'linear-gradient(135deg, #ad1457 0%, #6a1b9a 100%)', emoji: '🩲', description: 'bulk buy. plenty of room. all welcome. shagga 💜', tags: ['unboxing', 'shagga'] },
+  { id: 23, title: 'handing out business cards that just say "see ya around shagga"',     channelId: 'rossbk',  views: 8_900_000,  ageDays: 9,    durationSec: 691,   thumbBg: 'linear-gradient(135deg, #5e35b1 0%, #311b92 100%)', emoji: '🃏', description: 'no name. no number. just shagga. they work perfectly.', tags: ['shagga', 'lifestyle'] },
 ];
 
 // ---------- Helpers ----------

@@ -49,6 +49,7 @@ const USERS: User[] = [
   { handle: 'sharon_accounts',  name: 'Sharon from Accounts', avatar: '💼', color: '#388e3c', online: true },
   { handle: 'tech_helpline',    name: 'Tech Support',        avatar: '💻', color: '#455a64', online: true },
   { handle: 'midaisle_middle',      name: 'Mid-Aisle (the shop)',   avatar: '🛒', color: '#ef6c00' },
+  { handle: 'ross_buckley',     name: 'Ross Buckley',        avatar: '🕺', color: '#9c27b0', online: true },
 ];
 
 const POST_TEMPLATES: Omit<FBPost, 'id'>[] = [
@@ -64,6 +65,11 @@ const POST_TEMPLATES: Omit<FBPost, 'id'>[] = [
   { userHandle: 'concerned_mum',    time: '3 days ago',  content: 'call me when you get a chance', emoji: undefined, initialReactions: { like: 47, love: 0, haha: 0, wow: 89, sad: 412, angry: 234 }, initialComments: [{ user: 'Big Shagga', text: 'is everyone ok' }, { user: 'Mom', text: 'k' }], initialShares: 0 },
   { userHandle: 'dad_browser',      time: '4 days ago',  content: 'how do u close a tab. asking for a friend. its me. 247 of them. asking for me.', emoji: '💻', bg: 'linear-gradient(135deg, #3949ab, #1a237e)', initialReactions: { like: 891, love: 47, haha: 4128, wow: 234, sad: 412, angry: 0 }, initialComments: [{ user: 'Tech Support', text: 'have you tried turning it off and on again' }], initialShares: 47 },
   { userHandle: 'tech_helpline',    time: '5 days ago',  content: 'have you tried turning it off and on again', emoji: '💻', bg: 'linear-gradient(135deg, #455a64, #263238)', initialReactions: { like: 14728, love: 234, haha: 891, wow: 47, sad: 0, angry: 0 }, initialComments: [{ user: 'Dad', text: 'i have not. let me try' }], initialShares: 234 },
+
+  // Ross Buckley posts
+  { userHandle: 'ross_buckley',     time: '15 mins ago', content: 'walked into the chippy. handed the lad 10p. told him to go buy himself a milkshake. winked. left. shagga 💜✨', emoji: '🥤', bg: 'linear-gradient(135deg, #9c27b0, #6a1b9a)', initialReactions: { like: 47281, love: 14728, haha: 89724, wow: 4128, sad: 12, angry: 47 }, initialComments: [{ user: 'Big Shagga', text: 'ross what the hell does this mean' }, { user: 'Margaret', text: 'such a lovely young man 🌹' }, { user: 'Auntie Linda', text: '💕💕💕 BLESS U ROSS' }], initialShares: 8472 },
+  { userHandle: 'ross_buckley',     time: '2 hours ago', content: 'looking to bulk buy a 10pk of thongs for me and the lads for a good time this weekend. plenty of room in the group. all welcome. dm shagga ✨🩲', emoji: '🩲', bg: 'linear-gradient(135deg, #ad1457, #6a1b9a)', initialReactions: { like: 12847, love: 4128, haha: 47281, wow: 8472, sad: 0, angry: 234 }, initialComments: [{ user: 'Phil', text: 'count me in pal' }, { user: 'Uncle Dave', text: '👍' }, { user: 'Big Shagga', text: 'this needs context' }, { user: 'Sharon from Accounts', text: 'ALL: please disregard this thread' }], initialShares: 4128 },
+  { userHandle: 'big_shagga_94',    time: '4 hours ago', content: 'ross buckley just walked up to me at greggs. handed me a business card. it says "see ya around shagga". no name. no number. nothing else. winked. left. who IS this man', emoji: '🃏', bg: 'linear-gradient(135deg, #5e35b1, #311b92)', initialReactions: { like: 47281, love: 8472, haha: 89724, wow: 14728, sad: 0, angry: 0 }, initialComments: [{ user: 'Phil', text: 'i got one too last week' }, { user: 'Auntie Linda', text: 'me too! such a gentleman 🌹' }, { user: 'Mom', text: 'k' }, { user: 'Margaret', text: 'lovely young man' }], initialShares: 12047 },
 ];
 
 const FRIENDS = USERS;
@@ -74,6 +80,7 @@ const EVENTS = [
   { name: 'Dad\'s 247 Tabs Closing Ceremony',when: 'Some time in 2027', going: 4, location: 'the spare room' },
   { name: 'Mid-Aisle (the shop) Reset',          when: 'Tuesday 8am',     going: 89,  location: 'aisle 3' },
   { name: 'Sharon\'s Email Recall Party',     when: 'Pending recall',  going: 47,  location: 'TBD (recalled)' },
+  { name: 'Ross Buckley\'s 10pk Thong Pickup', when: 'This Friday 7pm', going: 14,  location: 'TBD - he&apos;ll see u around shagga' },
 ];
 
 // ---------- Helpers ----------

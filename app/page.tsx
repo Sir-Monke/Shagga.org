@@ -256,42 +256,86 @@ export function ShaggaDesktop({ autoOpen, suppressPopups }: ShaggaDesktopProps =
       hacker:         { title: 'h4ck4_5h4gg4.exe',               icon: <SkullIcon />,     w: 380, h: 280 },
       norton:         { title: 'Norton AntiShagga 2003',         icon: <NortonIcon />,    w: 360, h: 340 },
       limewire:       { title: 'LimeShagga 4.18.8',              icon: <LimewireIcon />,  w: 460, h: 260 },
-      chat:           { title: 'Shagga Chat',                    icon: <ChatIcon />,      w: 560, h: 420 },
+      chat:           { title: 'Shagga Chat',                    icon: <ChatIcon />,      w: 720, h: 560 },
       visitor:        { title: 'CONGRATULATIONS!!!',             icon: <StarIcon />,      w: 300, h: 360 },
       update:         { title: 'ShaggaOS Update',                icon: <UpdateIcon />,    w: 360, h: 320 },
       chainemail:     { title: 'FWD: FWD: FWD: ⚠ READ NOW',     icon: <EmailIcon />,     w: 380, h: 440 },
-      shaggapad:      { title: 'shagga.txt - Shaggapad',         icon: <NotepadIcon />,   w: 540, h: 460 },
-      calculator:     { title: 'Calculator',                     icon: <CalculatorIcon />,w: 220, h: 280, resizable: false },
-      minesweeper:    { title: 'Punt Sweeper',                   icon: <MineIcon />,      w: 248, h: 320, resizable: false },
-      internetshagga: { title: 'Internet Shagga',                icon: <IEIcon />,        w: 640, h: 480 },
-      paint:          { title: 'Shagga-Paint',                   icon: <PaintIcon />,     w: 540, h: 460 },
-      settings:       { title: 'Shagga Control Panel',           icon: <SettingsIcon />,  w: 460, h: 540 },
-      gallery:        { title: 'Shagga Gallery',                 icon: <GalleryIcon />,   w: 600, h: 480 },
-      shaggagram:     { title: 'Shagga-gram',                    icon: <GramIcon />,      w: 380, h: 540 },
-      shwitter:       { title: 'Shwitter',                       icon: <ShwitterIcon />,  w: 480, h: 540 },
-      shaggatube:     { title: 'ShaggaTube',                     icon: <TubeIcon />,      w: 880, h: 600 },
-      shaggabook:     { title: 'ShaggaBook',                     icon: <BookIcon />,      w: 640, h: 520 },
-      shaggafy:       { title: 'Shagga-fy',                      icon: <SfyIcon />,       w: 920, h: 640 },
-      shaggareviews:  { title: 'Shagga Reviews — Liverpool',     icon: <ReviewIcon />,    w: 720, h: 600 },
-      myshagga:       { title: 'My Shagga',                      icon: <MyShaggaIcon size={16} />,    w: 460, h: 380 },
-      recyclebin:     { title: 'Recycle Bin',                    icon: <RecycleIcon />,   w: 460, h: 320 },
-      taxreturns:     { title: 'tax_returns_DO_NOT_OPEN',        icon: <FolderIcon size={16} />,      w: 360, h: 280 },
+      shaggapad:      { title: 'shagga.txt - Shaggapad',         icon: <NotepadIcon />,   w: 640, h: 540 },
+      calculator:     { title: 'Calculator',                     icon: <CalculatorIcon />,w: 240, h: 320, resizable: false },
+      minesweeper:    { title: 'Punt Sweeper',                   icon: <MineIcon />,      w: 280, h: 360, resizable: false },
+      internetshagga: { title: 'Internet Shagga',                icon: <IEIcon />,        w: 800, h: 600 },
+      paint:          { title: 'Shagga-Paint',                   icon: <PaintIcon />,     w: 720, h: 560 },
+      settings:       { title: 'Shagga Control Panel',           icon: <SettingsIcon />,  w: 540, h: 600 },
+      gallery:        { title: 'Shagga Gallery',                 icon: <GalleryIcon />,   w: 800, h: 600 },
+      shaggagram:     { title: 'Shagga-gram',                    icon: <GramIcon />,      w: 720, h: 640 },
+      shwitter:       { title: 'Shwitter',                       icon: <ShwitterIcon />,  w: 880, h: 640 },
+      shaggatube:     { title: 'ShaggaTube',                     icon: <TubeIcon />,      w: 1000, h: 680 },
+      shaggabook:     { title: 'ShaggaBook',                     icon: <BookIcon />,      w: 880, h: 640 },
+      shaggafy:       { title: 'Shagga-fy',                      icon: <SfyIcon />,       w: 1000, h: 700 },
+      shaggareviews:  { title: 'Shagga Reviews — Liverpool',     icon: <ReviewIcon />,    w: 880, h: 640 },
+      myshagga:       { title: 'My Shagga',                      icon: <MyShaggaIcon size={16} />,    w: 600, h: 460 },
+      recyclebin:     { title: 'Recycle Bin',                    icon: <RecycleIcon />,   w: 540, h: 400 },
+      taxreturns:     { title: 'tax_returns_DO_NOT_OPEN',        icon: <FolderIcon size={16} />,      w: 480, h: 360 },
     };
     const def = baseDefaults[kind];
-    const w = opts.width ?? def.w;
-    const h = opts.height ?? def.h;
-    const { x, y } = randomPosition(w, h);
+    let w = opts.width ?? def.w;
+    let h = opts.height ?? def.h;
+
+    // Clamp to viewport so apps don't clip off-screen
+    // Note: this runs client-side only (mounted), defaults to sane fallbacks for SSR
+    const screenW = typeof window !== 'undefined' ? window.innerWidth : 1280;
+    const screenH = typeof window !== 'undefined' ? window.innerHeight : 720;
+    const TASKBAR = 30;
+    const usableW = screenW - 16;        // 8px margin each side
+    const usableH = screenH - TASKBAR - 16;
+
+    // For non-popup app windows: if too big for screen, shrink. If still cramped, auto-maximize.
+    const isPopup = kind === 'area' || kind === 'ad' || kind === 'hacker' || kind === 'norton' ||
+                    kind === 'limewire' || kind === 'visitor' || kind === 'update' || kind === 'chainemail';
+
+    let shouldMaximize = opts.maximized ?? false;
+    if (!isPopup) {
+      // If the default would clip, either shrink to fit or maximize
+      if (w > usableW) w = usableW;
+      if (h > usableH) h = usableH;
+      // If the screen is so small we'd still cramp, maximize instead
+      if (screenW < 760 || screenH < 560) {
+        shouldMaximize = true;
+      }
+    } else {
+      // Popups: just clamp to never exceed screen
+      w = Math.min(w, usableW);
+      h = Math.min(h, usableH);
+    }
+
+    // Position: prefer opts, else center for non-popup apps, else random for popups
+    let x: number, y: number;
+    if (opts.initialX != null && opts.initialY != null) {
+      x = opts.initialX;
+      y = opts.initialY;
+    } else if (isPopup) {
+      const r = randomPosition(w, h);
+      x = r.x; y = r.y;
+    } else {
+      // Center non-popup apps
+      x = Math.max(8, Math.floor((screenW - w) / 2));
+      y = Math.max(8, Math.floor((screenH - TASKBAR - h) / 2));
+    }
+    // Final clamp: never let the window start off-screen
+    x = Math.max(0, Math.min(x, screenW - w));
+    y = Math.max(0, Math.min(y, screenH - TASKBAR - h));
+
     return {
       id,
       kind,
       title: opts.title ?? def.title,
       iconNode: opts.iconNode ?? def.icon,
-      initialX: opts.initialX ?? x,
-      initialY: opts.initialY ?? y,
+      initialX: x,
+      initialY: y,
       width: w,
       height: h,
       minimized: false,
-      maximized: opts.maximized ?? false,
+      maximized: shouldMaximize,
       resizable: opts.resizable ?? def.resizable ?? true,
       imageSrc: opts.imageSrc,
       shaggapadText: opts.shaggapadText,
@@ -354,12 +398,12 @@ export function ShaggaDesktop({ autoOpen, suppressPopups }: ShaggaDesktopProps =
     if (!settings.popupsEnabled) return;
     if (suppressPopups) return;
     const rateMap = {
-      slow:   { min: 8000,  range: 7000 },
-      normal: { min: 4000,  range: 5000 },
-      fast:   { min: 1500,  range: 2500 },
+      slow:   { min: 30000, range: 30000 },  // 30-60s between popups
+      normal: { min: 18000, range: 12000 },  // 18-30s
+      fast:   { min: 8000,  range: 7000 },   // 8-15s
     };
     const { min, range } = rateMap[settings.spawnRate];
-    const first = setTimeout(spawnRandom, 1300);
+    const first = setTimeout(spawnRandom, 4000);  // give the user a moment before first popup
     let cancelled = false;
     function loop() {
       if (cancelled) return;

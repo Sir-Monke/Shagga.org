@@ -170,6 +170,22 @@ body::before {
   padding: 0;
 }
 
+/* Touch devices: bigger window controls so you can actually tap them */
+@media (pointer: coarse) {
+  .xp-control-btn {
+    width: 32px;
+    height: 28px;
+  }
+  .xp-control-btn svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  .xp-titlebar {
+    min-height: 34px;
+    padding: 4px 6px !important;
+  }
+}
+
 .xp-control-btn:hover {
   background: linear-gradient(
     to bottom,
@@ -376,6 +392,17 @@ body::before {
   z-index: 1;
   background: transparent;
   border: 1px dotted transparent;
+}
+
+/* On short viewports, compress vertical icon spacing */
+@media (max-height: 800px) {
+  .desktop-icon { transform: scale(0.85); transform-origin: top left; }
+}
+@media (max-height: 700px) {
+  .desktop-icon { transform: scale(0.72); transform-origin: top left; }
+}
+@media (max-height: 600px) {
+  .desktop-icon { transform: scale(0.6); transform-origin: top left; }
 }
 
 .desktop-icon:hover .desktop-icon-label {
@@ -760,15 +787,37 @@ body::before {
 /* ==========================================================
    RESIZE HANDLES
    ========================================================== */
-.xp-resize { position: absolute; z-index: 2; }
-.xp-resize-n  { top: 0; left: 8px; right: 8px; height: 5px; cursor: ns-resize; }
-.xp-resize-s  { bottom: 0; left: 8px; right: 8px; height: 5px; cursor: ns-resize; }
-.xp-resize-e  { top: 28px; right: 0; bottom: 8px; width: 5px; cursor: ew-resize; }
-.xp-resize-w  { top: 28px; left: 0; bottom: 8px; width: 5px; cursor: ew-resize; }
-.xp-resize-ne { top: 0; right: 0; width: 8px; height: 8px; cursor: nesw-resize; }
-.xp-resize-nw { top: 0; left: 0; width: 8px; height: 8px; cursor: nwse-resize; }
-.xp-resize-se { bottom: 0; right: 0; width: 8px; height: 8px; cursor: nwse-resize; }
-.xp-resize-sw { bottom: 0; left: 0; width: 8px; height: 8px; cursor: nesw-resize; }
+.xp-resize { position: absolute; z-index: 2; touch-action: none; }
+.xp-resize-n  { top: 0; left: 12px; right: 12px; height: 6px; cursor: ns-resize; }
+.xp-resize-s  { bottom: 0; left: 12px; right: 12px; height: 6px; cursor: ns-resize; }
+.xp-resize-e  { top: 28px; right: 0; bottom: 12px; width: 6px; cursor: ew-resize; }
+.xp-resize-w  { top: 28px; left: 0; bottom: 12px; width: 6px; cursor: ew-resize; }
+.xp-resize-ne { top: 0; right: 0; width: 12px; height: 12px; cursor: nesw-resize; }
+.xp-resize-nw { top: 0; left: 0; width: 12px; height: 12px; cursor: nwse-resize; }
+.xp-resize-se { bottom: 0; right: 0; width: 16px; height: 16px; cursor: nwse-resize; background: linear-gradient(135deg, transparent 50%, rgba(0,0,0,0.18) 50%, rgba(0,0,0,0.18) 60%, transparent 60%, transparent 70%, rgba(0,0,0,0.18) 70%, rgba(0,0,0,0.18) 80%, transparent 80%); }
+.xp-resize-sw { bottom: 0; left: 0; width: 12px; height: 12px; cursor: nesw-resize; }
+
+/* Touch devices: bigger handles you can actually grab with a finger */
+@media (pointer: coarse) {
+  .xp-resize-n  { height: 18px; left: 24px; right: 24px; }
+  .xp-resize-s  { height: 22px; left: 24px; right: 24px; }
+  .xp-resize-e  { width: 18px; top: 36px; bottom: 32px; }
+  .xp-resize-w  { width: 18px; top: 36px; bottom: 32px; }
+  .xp-resize-ne, .xp-resize-nw, .xp-resize-sw { width: 28px; height: 28px; }
+  .xp-resize-se {
+    width: 40px;
+    height: 40px;
+    background:
+      linear-gradient(135deg,
+        transparent 35%,
+        rgba(0,0,0,0.30) 35%, rgba(0,0,0,0.30) 42%,
+        transparent 42%, transparent 50%,
+        rgba(0,0,0,0.30) 50%, rgba(0,0,0,0.30) 57%,
+        transparent 57%, transparent 65%,
+        rgba(0,0,0,0.30) 65%, rgba(0,0,0,0.30) 72%,
+        transparent 72%);
+  }
+}
 
 /* ==========================================================
    GENERIC BUTTON

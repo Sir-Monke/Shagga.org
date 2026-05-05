@@ -29,6 +29,15 @@ const SHAGGA_EVENTS: Omit<Toast, 'id'>[] = [
   { icon: '🛞', title: 'Phil',           app: 'Group chat',body: 'discovered his car has a "sport mode". has not driven in any other mode since 2019.' },
   { icon: '⛽', title: 'Phil',           app: 'Group chat',body: 'put diesel in his petrol car for the third time. blames the pump.' },
 
+  // Ross Buckley — see ya around shagga
+  { icon: '🕺', title: 'Ross Buckley',   app: 'Group chat',body: 'shagga shagga shagga shagga. see ya around shagga ✨' },
+  { icon: '🕺', title: 'Ross Buckley',   app: 'Messages',  body: 'gave the lad at the chippy 10p. told him to go buy himself a milkshake. winked. left.' },
+  { icon: '🩲', title: 'Ross Buckley',   app: 'Group chat',body: '10pk thongs ordered. me + the lads + however many more want in. all welcome.' },
+  { icon: '🃏', title: 'Ross Buckley',   app: 'WhatsApp',  body: "handed u a business card. it just says 'see ya around shagga'. no name. no number. shagga." },
+  { icon: '🕺', title: 'Ross Buckley',   app: 'Messages',  body: "if u see me around just say shagga. that's it. that's the interaction. shagga." },
+  { icon: '💜', title: 'Ross Buckley',   app: 'Voicemail', body: '"hello?? shagga?? shagga it\'s ross. shagga around. shagga see u around. shagga." [9 mins]' },
+  { icon: '🕺', title: 'Ross Buckley',   app: 'Email',     body: "Subject: shagga\\nBody: shagga shagga shagga. see ya around shagga ✨\\nSent from my Phone" },
+
   // Uncle Dave — wholesome but reads emojis wrong
   { icon: '🧓', title: 'Uncle Dave',     app: 'ShaggaBook',  body: 'reacted 👍 to a death announcement. genuinely thinks it\'s supportive.' },
   { icon: '🧓', title: 'Uncle Dave',     app: 'ShaggaBook',  body: "wished aunt sheila happy birthday. she's been gone 3 years. nobody has the heart." },
@@ -114,11 +123,11 @@ export default function Toaster() {
       }, 8000);
     }
 
-    // First one quickly so user sees it works, then every 25-50s randomly
-    const initial = setTimeout(spawn, 12000);
+    // First toast appears after ~25s, then ~once every 60-90s
+    const initial = setTimeout(spawn, 25000);
     const interval = setInterval(() => {
-      if (Math.random() < 0.65) spawn();
-    }, 28000);
+      if (Math.random() < 0.5) spawn();
+    }, 60000);
 
     return () => {
       clearTimeout(initial);
