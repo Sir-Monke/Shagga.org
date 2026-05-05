@@ -76,18 +76,26 @@ const TRACKS: Track[] = [
   { id: 38, title: 'Sausage Roll Slowdance',          artist: 'Big Shagga',          album: 'Top Shagga',          durationSec: 264, emoji: '🥖', bg: 'linear-gradient(135deg, #d4a574, #8d6e63)' },
   { id: 39, title: 'Lo-fi Snaggas Lobby',            artist: 'sleepy shagga',       album: 'Beats to Snag To',    durationSec: 442, emoji: '🛒', bg: 'linear-gradient(135deg, #ef6c00, #5d4037)' },
   { id: 40, title: 'Final Shagga (10 Min Mix)',       artist: 'Big Shagga',          album: 'Top Shagga (Live)',   durationSec: 614, emoji: '🤠', bg: 'linear-gradient(135deg, #5d4037, #1a237e)' },
+  { id: 41, title: 'See Ya Around Shagga',            artist: 'Ross Buckley',        album: 'Cards & Milkshakes',  durationSec: 207, emoji: '🃏', bg: 'linear-gradient(135deg, #9c27b0, #6a1b9a)' },
+  { id: 42, title: 'Shagga (Single)',                 artist: 'Ross Buckley',        album: 'Cards & Milkshakes',  durationSec: 14,  emoji: '✨', bg: 'linear-gradient(135deg, #6a1b9a, #311b92)' },
+  { id: 43, title: '10p for a Milkshake',             artist: 'Ross Buckley',        album: 'Cards & Milkshakes',  durationSec: 248, emoji: '🥤', bg: 'linear-gradient(135deg, #4a148c, #311b92)' },
+  { id: 44, title: '10pk Thong Anthem (feat. The Lads)', artist: 'Ross Buckley',     album: 'Cards & Milkshakes',  durationSec: 196, emoji: '🩲', bg: 'linear-gradient(135deg, #ad1457, #6a1b9a)' },
+  { id: 45, title: 'shagga shagga shagga (10 hour loop)', artist: 'sleepy shagga',  album: 'Beats to Snag To',    durationSec: 36000, emoji: '😴', bg: 'linear-gradient(135deg, #4a148c, #9c27b0)' },
+  { id: 46, title: 'Ross Was Here (Tribute)',         artist: 'The Council',         album: 'Universal Problems',  durationSec: 234, emoji: '🃏', bg: 'linear-gradient(135deg, #5e35b1, #1976d2)' },
+  { id: 47, title: 'Wink (Instrumental)',             artist: 'Ross Buckley',        album: 'Cards & Milkshakes',  durationSec: 89,  emoji: '✨', bg: 'linear-gradient(135deg, #9c27b0, #4a148c)' },
 ];
 
 // ---------- Default playlists ----------
 const DEFAULT_PLAYLISTS: Playlist[] = [
+  { id: 'rossbuckley', name: 'The Ross Buckley Experience', description: 'shagga shagga shagga ✨ see ya around shagga', emoji: '🃏', bg: 'linear-gradient(135deg, #9c27b0, #4a148c)', trackIds: [41, 42, 43, 44, 47, 46] },
   { id: 'top2003',   name: 'Top Shagga 2003',     description: 'the originals. accept no substitutes.', emoji: '🌭', bg: 'linear-gradient(135deg, #ff7e5f, #c44569)', trackIds: [1, 2, 3, 7, 10, 21] },
   { id: 'snaggas',  name: 'Snaggas Bangers',    description: 'sausage sizzle adjacent.',              emoji: '🔨', bg: 'linear-gradient(135deg, #c40, #f00)',           trackIds: [3, 5, 19, 24, 37, 39] },
-  { id: 'sunday',    name: 'Cooked Sunday Vibes', description: 'low energy, high vibes.',               emoji: '🌊', bg: 'linear-gradient(135deg, #00838f, #006064)', trackIds: [8, 11, 12, 22, 35, 38] },
+  { id: 'sunday',    name: 'Cooked Sunday Vibes', description: 'low energy, high vibes.',               emoji: '🌊', bg: 'linear-gradient(135deg, #00838f, #006064)', trackIds: [8, 11, 12, 22, 35, 38, 47] },
   { id: 'shower',    name: 'Shower Singalongs',   description: 'lukewarm. always lukewarm.',            emoji: '🚿', bg: 'linear-gradient(135deg, #4fc3f7, #29b6f6)', trackIds: [9, 13, 32] },
-  { id: 'goon',      name: 'Goon Bag Gold',       description: 'the back fence calls.',                 emoji: '🍷', bg: 'linear-gradient(135deg, #6a1b9a, #c4006c)', trackIds: [2, 6, 16, 20, 26] },
+  { id: 'goon',      name: 'Goon Bag Gold',       description: 'the back fence calls.',                 emoji: '🍷', bg: 'linear-gradient(135deg, #6a1b9a, #c4006c)', trackIds: [2, 6, 16, 20, 26, 44] },
   { id: 'bbq',       name: 'BBQ Bops',            description: 'meat-adjacent music.',                  emoji: '🥩', bg: 'linear-gradient(135deg, #c40, #802)',         trackIds: [3, 16, 24, 28, 29, 38] },
   { id: 'maggie',    name: 'Maggie Swoop Season', description: 'helmet on. zip ties up.',               emoji: '🪶', bg: 'linear-gradient(135deg, #1c1c1c, #5a5a5a)', trackIds: [4, 23, 33] },
-  { id: 'lofi',      name: 'Lo-fi Shagga',        description: 'study, snag, sleep, repeat.',           emoji: '😴', bg: 'linear-gradient(135deg, #4a148c, #1a237e)', trackIds: [11, 22, 39, 27, 36] },
+  { id: 'lofi',      name: 'Lo-fi Shagga',        description: 'study, snag, sleep, repeat.',           emoji: '😴', bg: 'linear-gradient(135deg, #4a148c, #1a237e)', trackIds: [11, 22, 39, 27, 36, 45] },
 ];
 
 // ---------- Helpers ----------

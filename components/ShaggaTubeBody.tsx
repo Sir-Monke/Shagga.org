@@ -66,6 +66,13 @@ const VIDEOS: Video[] = [
   { id: 21, title: 'i gave a man 10p and told him to buy a milkshake (HE CRIED)',         channelId: 'rossbk',  views: 47_200_000, ageDays: 1,    durationSec: 27,    thumbBg: 'linear-gradient(135deg, #9c27b0 0%, #6a1b9a 100%)', emoji: '🥤', description: 'shagga shagga shagga. see ya around shagga ✨', tags: ['shagga', 'kindness'] },
   { id: 22, title: 'unboxing my 10pk thongs (for me and the lads)',                        channelId: 'rossbk',  views: 14_700_000, ageDays: 4,    durationSec: 482,   thumbBg: 'linear-gradient(135deg, #ad1457 0%, #6a1b9a 100%)', emoji: '🩲', description: 'bulk buy. plenty of room. all welcome. shagga 💜', tags: ['unboxing', 'shagga'] },
   { id: 23, title: 'handing out business cards that just say "see ya around shagga"',     channelId: 'rossbk',  views: 8_900_000,  ageDays: 9,    durationSec: 691,   thumbBg: 'linear-gradient(135deg, #5e35b1 0%, #311b92 100%)', emoji: '🃏', description: 'no name. no number. just shagga. they work perfectly.', tags: ['shagga', 'lifestyle'] },
+
+  // Cross-channel videos referencing Ross
+  { id: 24, title: 'WHO IS ROSS BUCKLEY?? (deep dive investigation)',                       channelId: 'staint',  views: 12_400_000, ageDays: 2,    durationSec: 1782,  thumbBg: 'linear-gradient(135deg, #fff200 0%, #9c27b0 100%)', emoji: '🕵️', description: 'i tried to track down ross buckley for 6 weeks. he found me first. he handed me a business card.', tags: ['investigation', 'shagga'] },
+  { id: 25, title: 'reacting to ross buckley business cards (i have 47)',                   channelId: 'reacts',  views: 4_700_000,  ageDays: 5,    durationSec: 612,   thumbBg: 'linear-gradient(135deg, #ff3b6b 0%, #9c27b0 100%)', emoji: '🃏', description: 'every card says "see ya around shagga". every single one. nobody knows where they keep coming from.', tags: ['reaction', 'shagga'] },
+  { id: 26, title: 'i gave 47 strangers 10p and told them to buy milkshakes (ross buckley method)', channelId: 'topsh',  views: 8_400_000, ageDays: 7, durationSec: 1041,  thumbBg: 'linear-gradient(135deg, #00a86b 0%, #9c27b0 100%)', emoji: '🥤', description: '23 of them cried. 7 proposed marriage. 1 said "ah ross". he knew.', tags: ['challenge', 'shagga'] },
+  { id: 27, title: 'is ross buckley a real person? (the council decides)',                  channelId: 'global',  views: 14_200_000, ageDays: 14,   durationSec: 1421,  thumbBg: 'linear-gradient(135deg, #0066cc 0%, #9c27b0 100%)', emoji: '🌍', description: 'final answer revealed at 14:47. spoiler: nobody knows.', tags: ['debate', 'shagga'] },
+  { id: 28, title: 'ASMR - ross buckley whispering "shagga" for 10 hours',                   channelId: 'sleepy',  views: 891_000,    ageDays: 30,   durationSec: 36000, thumbBg: 'linear-gradient(135deg, #4a148c 0%, #9c27b0 100%)', emoji: '😴', description: 'one word. ten hours. transcendent. you will sleep deeply.', tags: ['asmr', 'shagga'] },
 ];
 
 // ---------- Helpers ----------
@@ -103,6 +110,13 @@ const COMMENT_POOL = [
   { user: '@ShaggaParis', text: 'magnifique. truly cooked.' },
   { user: '@ranga_tim', text: 'the algorithm has me in chains' },
   { user: '@shazza_baz', text: 'why is this in my recommendations at 3am' },
+  { user: '@ross_buckley', text: 'shagga ✨' },
+  { user: '@ross_buckley', text: 'see ya around shagga' },
+  { user: '@bigshagga94', text: 'ross is in every comment section now somehow' },
+  { user: '@phil_drives', text: 'ross buckley taped a business card to my dashboard last week, my engine has been smoother ever since' },
+  { user: '@auntie_linda', text: 'ross buckley liked this comment 💕💕💕 SUCH A LOVELY MAN 🌹' },
+  { user: '@nanofashagga', text: 'ross popped over for a brew yesterday. lovely young man ❤️' },
+  { user: '@cooked_dave', text: 'ross handed me 10p at the dam. didnt say a word. just winked. been thinking about it for 6 weeks' },
 ];
 
 function commentsForVideo(videoId: number) {
