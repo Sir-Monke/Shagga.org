@@ -68,7 +68,7 @@ const POST_TEMPLATES: Omit<Post, 'id'>[] = [
   // Ross Buckley posts
   { userHandle: 'ross_buckley',     bg: 'linear-gradient(135deg, #9c27b0, #6a1b9a)', emoji: '🥤', caption: 'gave the lad at the chippy 10p. told him go buy himself a milkshake. winked. left. shagga ✨💜', initialLikes: 89724, initialComments: [{ user: '@big_shagga_94', text: 'ross what does any of this mean' }, { user: '@shaggas_nan', text: 'such a lovely young man 🌹' }, { user: '@auntie_linda', text: '💕💕💕 BLESS U ROSS' }] },
   { userHandle: 'ross_buckley',     bg: 'linear-gradient(135deg, #ad1457, #6a1b9a)', emoji: '🩲', caption: '10pk thongs ordered. me + the lads + however many more want in. plenty of room. all welcome. shagga 💜✨', initialLikes: 47281, initialComments: [{ user: '@tradielife', text: 'count me in' }, { user: '@cooked_dave', text: 'pin location?' }, { user: '@big_shagga_94', text: 'ross please' }] },
-  { userHandle: 'ross_buckley',     bg: 'linear-gradient(135deg, #5e35b1, #311b92)', emoji: '🃏', caption: 'business cards just dropped. front: "see ya around shagga". back: nothing. they\\'re working perfectly.', initialLikes: 14728, initialComments: [{ user: '@big_shagga_94', text: 'why did u give me 47 of these' }, { user: '@phil_drives', text: 'i taped one to my dashboard' }] },
+  { userHandle: 'ross_buckley',     bg: 'linear-gradient(135deg, #5e35b1, #311b92)', emoji: '🃏', caption: "business cards just dropped. front: see ya around shagga. back: nothing. they are working perfectly.", initialLikes: 14728, initialComments: [{ user: '@big_shagga_94', text: 'why did u give me 47 of these' }, { user: '@phil_drives', text: 'i taped one to my dashboard' }] },
 ];
 
 const STORIES: User[] = USERS.slice(0, 8);
