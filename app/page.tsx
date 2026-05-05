@@ -19,8 +19,7 @@ import CalculatorBody from '@/components/CalculatorBody';
 import MinesweeperBody from '@/components/MinesweeperBody';
 import InternetShaggaBody from '@/components/InternetShaggaBody';
 import PaintBody from '@/components/PaintBody';
-import GoonCalcBody from '@/components/GoonCalcBody';
-import WeatherBody from '@/components/WeatherBody';
+import ShaggaReviewsBody from '@/components/ShaggaReviewsBody';
 import SettingsBody, { ShaggaSettings, DEFAULT_SETTINGS } from '@/components/SettingsBody';
 import ShaggaGramBody from '@/components/ShaggaGramBody';
 import ShwitterBody from '@/components/ShwitterBody';
@@ -40,7 +39,6 @@ import StartMenu, { StartMenuItem } from '@/components/StartMenu';
 import ContextMenu, { ContextMenuItem } from '@/components/ContextMenu';
 import BSOD from '@/components/BSOD';
 import Clippy from '@/components/Clippy';
-import SnagCounter from '@/components/SnagCounter';
 import RaveMode from '@/components/RaveMode';
 import Toaster from '@/components/Toaster';
 import RunDialog from '@/components/RunDialog';
@@ -50,8 +48,8 @@ import {
   NortonIcon, LimewireIcon, StarIcon, UpdateIcon, EmailIcon,
   CalculatorIcon, MineIcon, IEIcon, RecycleIcon, RecycleIconLarge,
   FolderIcon, MyShaggaIcon, GameIcon, RunIcon,
-  SettingsIcon, GramIcon, ShwitterIcon, TubeIcon, BookIcon, SfyIcon,
-  PaintIcon, PaintIconLarge, SunIcon, GoonIcon, ChatIcon, ChatIconLarge, GalleryIcon,
+  SettingsIcon, GramIcon, ShwitterIcon, TubeIcon, BookIcon, SfyIcon, ReviewIcon, ReviewIconLarge,
+  PaintIcon, PaintIconLarge, ChatIcon, ChatIconLarge, GalleryIcon,
 } from '@/components/icons';
 
 import { productsList, shaggasList } from '@/components/imageManifest';
@@ -62,8 +60,8 @@ type WindowKind =
   | 'area' | 'ad' | 'hacker'
   | 'norton' | 'limewire' | 'chat' | 'visitor' | 'update' | 'chainemail'
   | 'shaggapad' | 'calculator' | 'minesweeper' | 'internetshagga'
-  | 'paint' | 'gooncalc' | 'weather' | 'settings' | 'gallery'
-  | 'shaggagram' | 'shwitter' | 'shaggatube' | 'shaggabook' | 'shaggafy'
+  | 'paint' | 'settings' | 'gallery'
+  | 'shaggagram' | 'shwitter' | 'shaggatube' | 'shaggabook' | 'shaggafy' | 'shaggareviews'
   | 'myshagga' | 'recyclebin' | 'taxreturns';
 
 interface OpenWindow {
@@ -129,7 +127,18 @@ function detectMobileLikeDevice(): boolean {
 
 // ====================================================================
 
+interface ShaggaDesktopProps {
+  /** Auto-open this app on mount */
+  autoOpen?: WindowKind;
+  /** Suppress random popups (used on /reviews to keep it focused) */
+  suppressPopups?: boolean;
+}
+
 export default function Home() {
+  return <ShaggaDesktop />;
+}
+
+export function ShaggaDesktop({ autoOpen, suppressPopups }: ShaggaDesktopProps = {}) {
   const [windows, setWindows] = useState<OpenWindow[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -256,8 +265,6 @@ export default function Home() {
       minesweeper:    { title: 'Punt Sweeper',                   icon: <MineIcon />,      w: 248, h: 320, resizable: false },
       internetshagga: { title: 'Internet Shagga',                icon: <IEIcon />,        w: 640, h: 480 },
       paint:          { title: 'Shagga-Paint',                   icon: <PaintIcon />,     w: 540, h: 460 },
-      gooncalc:       { title: 'Goon Calculator',                icon: <GoonIcon />,      w: 320, h: 320, resizable: false },
-      weather:        { title: 'Shagga Weather',                 icon: <SunIcon />,       w: 280, h: 320, resizable: false },
       settings:       { title: 'Shagga Control Panel',           icon: <SettingsIcon />,  w: 460, h: 540 },
       gallery:        { title: 'Shagga Gallery',                 icon: <GalleryIcon />,   w: 600, h: 480 },
       shaggagram:     { title: 'Shagga-gram',                    icon: <GramIcon />,      w: 380, h: 540 },
@@ -265,6 +272,7 @@ export default function Home() {
       shaggatube:     { title: 'ShaggaTube',                     icon: <TubeIcon />,      w: 880, h: 600 },
       shaggabook:     { title: 'ShaggaBook',                     icon: <BookIcon />,      w: 640, h: 520 },
       shaggafy:       { title: 'Shagga-fy',                      icon: <SfyIcon />,       w: 920, h: 640 },
+      shaggareviews:  { title: 'Shagga Reviews — Liverpool',     icon: <ReviewIcon />,    w: 720, h: 600 },
       myshagga:       { title: 'My Shagga',                      icon: <MyShaggaIcon size={16} />,    w: 460, h: 380 },
       recyclebin:     { title: 'Recycle Bin',                    icon: <RecycleIcon />,   w: 460, h: 320 },
       taxreturns:     { title: 'tax_returns_DO_NOT_OPEN',        icon: <FolderIcon size={16} />,      w: 360, h: 280 },
@@ -283,7 +291,7 @@ export default function Home() {
       width: w,
       height: h,
       minimized: false,
-      maximized: false,
+      maximized: opts.maximized ?? false,
       resizable: opts.resizable ?? def.resizable ?? true,
       imageSrc: opts.imageSrc,
       shaggapadText: opts.shaggapadText,
@@ -306,6 +314,32 @@ export default function Home() {
     return open(kind, opts);
   }, [windows, focus, open]);
 
+  // Auto-open a specific app on mount (for /reviews and similar landing routes)
+  const autoOpenedRef = useRef(false);
+  useEffect(() => {
+    if (!mounted || isMobile) return;
+    if (!autoOpen || autoOpenedRef.current) return;
+    autoOpenedRef.current = true;
+    // Center it and make it big enough to see everything.
+    const id = setTimeout(() => {
+      const screenW = window.innerWidth;
+      const screenH = window.innerHeight - 30; // taskbar
+      // For reviews landing: nice big centered window
+      const targetW = Math.min(960, Math.max(720, Math.floor(screenW * 0.75)));
+      const targetH = Math.min(720, Math.max(560, Math.floor(screenH * 0.85)));
+      const cx = Math.floor((screenW - targetW) / 2);
+      const cy = Math.floor((screenH - targetH) / 2);
+      open(autoOpen, {
+        width: targetW,
+        height: targetH,
+        initialX: Math.max(20, cx),
+        initialY: Math.max(20, cy),
+        maximized: screenW < 700,
+      });
+    }, 200);
+    return () => clearTimeout(id);
+  }, [mounted, isMobile, autoOpen, open]);
+
   const spawnRandom = useCallback(() => {
     const kind = weightedRandomKind();
     const opts: Partial<OpenWindow> = {};
@@ -318,6 +352,7 @@ export default function Home() {
   useEffect(() => {
     if (!mounted || isMobile) return;
     if (!settings.popupsEnabled) return;
+    if (suppressPopups) return;
     const rateMap = {
       slow:   { min: 8000,  range: 7000 },
       normal: { min: 4000,  range: 5000 },
@@ -340,12 +375,13 @@ export default function Home() {
     }
     loop();
     return () => { cancelled = true; clearTimeout(first); };
-  }, [mounted, isMobile, spawnRandom, settings.popupsEnabled, settings.spawnRate]);
+  }, [mounted, isMobile, spawnRandom, settings.popupsEnabled, settings.spawnRate, suppressPopups]);
 
-  // periodic random BSOD
+  // periodic random BSOD (also suppressed by suppressPopups for focused experiences)
   useEffect(() => {
     if (!mounted || isMobile) return;
     if (!settings.bsodEnabled) return;
+    if (suppressPopups) return;
     function schedule() {
       const delay = 240_000 + Math.random() * 240_000; // 4-8 min
       return setTimeout(() => {
@@ -354,7 +390,7 @@ export default function Home() {
     }
     const id = schedule();
     return () => clearTimeout(id);
-  }, [mounted, isMobile, bsodActive, settings.bsodEnabled]);
+  }, [mounted, isMobile, bsodActive, settings.bsodEnabled, suppressPopups]);
 
   // ----- desktop icons -----
   const openShaggapad   = useCallback(() => openOrFocus('shaggapad', { shaggapadText }), [openOrFocus, shaggapadText]);
@@ -365,8 +401,6 @@ export default function Home() {
   const openMinesweeper = useCallback(() => openOrFocus('minesweeper'), [openOrFocus]);
   const openIE          = useCallback(() => openOrFocus('internetshagga'), [openOrFocus]);
   const openPaint       = useCallback(() => openOrFocus('paint'), [openOrFocus]);
-  const openGoonCalc    = useCallback(() => openOrFocus('gooncalc'), [openOrFocus]);
-  const openWeather     = useCallback(() => openOrFocus('weather'), [openOrFocus]);
   const openSettings    = useCallback(() => openOrFocus('settings'), [openOrFocus]);
   const openChat        = useCallback(() => openOrFocus('chat'), [openOrFocus]);
   const openGallery     = useCallback(() => openOrFocus('gallery'), [openOrFocus]);
@@ -375,6 +409,7 @@ export default function Home() {
   const openShaggaTube  = useCallback(() => openOrFocus('shaggatube'), [openOrFocus]);
   const openShaggaBook  = useCallback(() => openOrFocus('shaggabook'), [openOrFocus]);
   const openShaggaFy    = useCallback(() => openOrFocus('shaggafy'), [openOrFocus]);
+  const openShaggaReviews = useCallback(() => openOrFocus('shaggareviews'), [openOrFocus]);
 
   // ----- Run command parser -----
   const runCommand = useCallback((cmd: string) => {
@@ -390,7 +425,6 @@ export default function Home() {
       'recyclebin': openRecycleBin, 'recycle': openRecycleBin, 'bin': openRecycleBin,
       'tax': openTaxReturns, 'taxreturns': openTaxReturns, 'tax_returns': openTaxReturns,
       'control': openSettings, 'control.exe': openSettings, 'controlpanel': openSettings, 'settings': openSettings,
-      'weather': openWeather,
       'gallery': openGallery, 'photos': openGallery, 'pictures': openGallery,
       'chat': openChat, 'msn': openChat, 'messenger': openChat,
       'shaggatube': openShaggaTube, 'tube': openShaggaTube, 'youtube': openShaggaTube,
@@ -398,7 +432,7 @@ export default function Home() {
       'shwitter': openShwitter, 'twitter': openShwitter, 'x': openShwitter,
       'shaggagram': openShaggaGram, 'instagram': openShaggaGram, 'gram': openShaggaGram,
       'shaggabook': openShaggaBook, 'facebook': openShaggaBook, 'fb': openShaggaBook,
-      'gooncalc': openGoonCalc, 'gc': openGoonCalc,
+      'reviews': openShaggaReviews, 'shaggareviews': openShaggaReviews, 'liverpool': openShaggaReviews,
     };
     if (map[c]) { map[c](); return; }
 
@@ -427,7 +461,7 @@ export default function Home() {
     }
     // Fallback
     alert(`Cannot find: '${cmd}'\n\nTry typing 'help' to see what works.`);
-  }, [openCalculator, openMinesweeper, openIE, openShaggapad, openPaint, openMyShagga, openRecycleBin, openTaxReturns, openSettings, openWeather, openGallery, openChat, openShaggaTube, openShaggaFy, openShwitter, openShaggaGram, openShaggaBook, openGoonCalc, spawnRandom]);
+  }, [openCalculator, openMinesweeper, openIE, openShaggapad, openPaint, openMyShagga, openRecycleBin, openTaxReturns, openSettings, openGallery, openChat, openShaggaTube, openShaggaFy, openShwitter, openShaggaGram, openShaggaBook, openShaggaReviews, spawnRandom]);
 
   // Show Desktop — minimize all windows
   const showDesktop = useCallback(() => {
@@ -527,13 +561,12 @@ export default function Home() {
     { id: 'tube',   label: 'ShaggaTube',         icon: <TubeIcon size={20} />,       onClick: openShaggaTube },
     { id: 'fbook',  label: 'ShaggaBook',         icon: <BookIcon size={20} />,       onClick: openShaggaBook },
     { id: 'sfy',    label: 'Shagga-fy',          icon: <SfyIcon size={20} />,        onClick: openShaggaFy },
+    { id: 'reviews',label: 'Shagga Reviews',     icon: <ReviewIcon size={20} />,     onClick: openShaggaReviews, bold: true },
     { id: 'pad',    label: 'Shaggapad',          icon: <NotepadIcon size={20} />,    onClick: openShaggapad },
     { id: 'calc',   label: 'Calculator',         icon: <CalculatorIcon size={20} />, onClick: openCalculator },
     { id: 'mine',   label: 'Punt Sweeper',       icon: <MineIcon size={20} />,       onClick: openMinesweeper },
     { id: 'paint',  label: 'Shagga-Paint',       icon: <PaintIcon size={20} />,      onClick: openPaint },
     { id: 'gallery',label: 'Shagga Gallery',     icon: <GalleryIcon size={20} />,    onClick: openGallery },
-    { id: 'goon',   label: 'Goon Calculator',    icon: <GoonIcon size={20} />,       onClick: openGoonCalc },
-    { id: 'weather',label: 'Shagga Weather',     icon: <SunIcon size={20} />,        onClick: openWeather },
     { id: 'norton', label: 'Norton AntiShagga',  icon: <NortonIcon size={20} />,     onClick: () => open('norton') },
   ];
   const startRight: StartMenuItem[] = [
@@ -591,30 +624,29 @@ export default function Home() {
       }}
     >
       <CurvedHero />
-      <SnagCounter />
 
       {/* Desktop icons (left column) */}
-      <DesktopIcon label="shagga.txt"   icon={<NotepadIconLarge />}  x={20}  y={20}  onOpen={openShaggapad} />
-      <DesktopIcon label="My Shagga"    icon={<MyShaggaIcon />}       x={20}  y={120} onOpen={openMyShagga} />
+      {/* COLUMN 1 — system / files */}
+      <DesktopIcon label="shagga.txt"      icon={<NotepadIconLarge />}       x={20}  y={20}  onOpen={openShaggapad} />
+      <DesktopIcon label="My Shagga"       icon={<MyShaggaIcon />}            x={20}  y={120} onOpen={openMyShagga} />
       <DesktopIcon label="Internet Shagga" icon={
         <svg width="48" height="48" viewBox="0 0 48 48"><text x="24" y="38" textAnchor="middle" fontFamily="Times New Roman" fontWeight="bold" fontSize="40" fill="#0066ff">e</text><ellipse cx="24" cy="24" rx="18" ry="8" fill="none" stroke="#ffaa00" strokeWidth="2.4" transform="rotate(-20 24 24)" /></svg>
       } x={20} y={220} onOpen={openIE} />
-      <DesktopIcon label="tax_returns" icon={<FolderIcon />}          x={20}  y={320} onOpen={openTaxReturns} />
+      <DesktopIcon label="tax_returns"     icon={<FolderIcon />}              x={20}  y={320} onOpen={openTaxReturns} />
+      <DesktopIcon label="Recycle Bin"     icon={<RecycleIconLarge />}        x={20}  y={420} onOpen={openRecycleBin} />
 
-      {/* Desktop icons (right column) */}
-      <DesktopIcon label="Recycle Bin"  icon={<RecycleIconLarge />}   x={20}  y={420} onOpen={openRecycleBin} />
-
-      {/* Desktop icons (second column - parody apps) */}
-      <DesktopIcon label="Shagga-gram" icon={<GramIcon size={48} />}     x={120} y={20}  onOpen={openShaggaGram} />
-      <DesktopIcon label="Shwitter"    icon={<ShwitterIcon size={48} />} x={120} y={120} onOpen={openShwitter} />
-      <DesktopIcon label="ShaggaTube"  icon={<TubeIcon size={48} />}     x={120} y={220} onOpen={openShaggaTube} />
-      <DesktopIcon label="ShaggaBook"  icon={<BookIcon size={48} />}     x={120} y={320} onOpen={openShaggaBook} />
-      <DesktopIcon label="Shagga-fy"   icon={<SfyIcon size={48} />}      x={120} y={420} onOpen={openShaggaFy} />
-      <DesktopIcon label="Settings"    icon={<SettingsIcon size={48} />} x={220} y={20}  onOpen={openSettings} />
+      {/* COLUMN 2 — apps */}
+      <DesktopIcon label="Reviews"     icon={<ReviewIconLarge />}        x={120} y={20}  onOpen={openShaggaReviews} />
+      <DesktopIcon label="Settings"    icon={<SettingsIcon size={48} />} x={120} y={120} onOpen={openSettings} />
+      <DesktopIcon label="Shagga-gram" icon={<GramIcon size={48} />}     x={120} y={220} onOpen={openShaggaGram} />
+      <DesktopIcon label="Shwitter"    icon={<ShwitterIcon size={48} />} x={120} y={320} onOpen={openShwitter} />
+      <DesktopIcon label="ShaggaTube"  icon={<TubeIcon size={48} />}     x={120} y={420} onOpen={openShaggaTube} />
+      <DesktopIcon label="ShaggaBook"  icon={<BookIcon size={48} />}     x={120} y={520} onOpen={openShaggaBook} />
+      <DesktopIcon label="Shagga-fy"   icon={<SfyIcon size={48} />}      x={120} y={620} onOpen={openShaggaFy} />
 
       {/* Open windows */}
       {windows.map((w, idx) => {
-        const z = 100 + idx;
+        const z = w.maximized ? 5000 + idx : 100 + idx;
         const isActive = activeId === w.id;
         return (
           <XPWindow
@@ -650,8 +682,6 @@ export default function Home() {
             {w.kind === 'minesweeper' && <MinesweeperBody />}
             {w.kind === 'internetshagga' && <InternetShaggaBody />}
             {w.kind === 'paint' && <PaintBody />}
-            {w.kind === 'gooncalc' && <GoonCalcBody />}
-            {w.kind === 'weather' && <WeatherBody />}
             {w.kind === 'settings' && <SettingsBody settings={settings} onChange={setSettings} />}
             {w.kind === 'gallery' && <GalleryBody />}
             {w.kind === 'shaggagram' && <ShaggaGramBody />}
@@ -659,6 +689,7 @@ export default function Home() {
             {w.kind === 'shaggatube' && <ShaggaTubeBody />}
             {w.kind === 'shaggabook' && <ShaggaBookBody />}
             {w.kind === 'shaggafy' && <ShaggaFyBody />}
+            {w.kind === 'shaggareviews' && <ShaggaReviewsBody />}
             {w.kind === 'myshagga' && <MyShaggaBody />}
             {w.kind === 'recyclebin' && <RecycleBinBody />}
             {w.kind === 'taxreturns' && <TaxReturnsBody />}

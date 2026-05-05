@@ -38,7 +38,7 @@ type View =
 const TRACKS: Track[] = [
   { id: 1,  title: "Down Under (but cooked)",         artist: 'Men At Snag',         album: 'Cooked Classics',     durationSec: 227, emoji: '🌭', bg: 'linear-gradient(135deg, #ff7e5f, #c44569)' },
   { id: 2,  title: 'Goon of Fortune',                 artist: 'The Hills Hoists',    album: 'Backyard Bangers',    durationSec: 252, emoji: '🍷', bg: 'linear-gradient(135deg, #6a1b9a, #c4006c)' },
-  { id: 3,  title: 'Sausage Sizzle Saturday',         artist: 'Bunnings Boys',       album: 'Hardware & Heart',    durationSec: 178, emoji: '🔨', bg: 'linear-gradient(135deg, #c40, #f00)' },
+  { id: 3,  title: 'Sausage Sizzle Saturday',         artist: 'Snaggas Boys',       album: 'Hardware & Heart',    durationSec: 178, emoji: '🔨', bg: 'linear-gradient(135deg, #c40, #f00)' },
   { id: 4,  title: 'Maggie Swoop Anthem',             artist: 'Beak Riot',           album: 'Spring Terror',       durationSec: 303, emoji: '🪶', bg: 'linear-gradient(135deg, #1c1c1c, #5a5a5a)' },
   { id: 5,  title: "She'll Be Right (Extended Mix)",  artist: 'Tradies Anonymous',   album: 'Apathy in C Major',   durationSec: 467, emoji: '🛠️', bg: 'linear-gradient(135deg, #ffa500, #ff6b00)' },
   { id: 6,  title: 'Yeah Nah Yeah Nah',               artist: 'The Bazzas',          album: 'Yeah Nah',            durationSec: 151, emoji: '🤙', bg: 'linear-gradient(135deg, #00897b, #1976d2)' },
@@ -54,7 +54,7 @@ const TRACKS: Track[] = [
   { id: 16, title: 'BBQ at Daves',                    artist: 'The Bazzas',          album: 'Yeah Nah',            durationSec: 263, emoji: '🥩', bg: 'linear-gradient(135deg, #c40, #802)' },
   { id: 17, title: 'Cereal is Not a Soup',            artist: 'The Council',         album: 'Universal Problems',  durationSec: 187, emoji: '🥣', bg: 'linear-gradient(135deg, #ffa500, #ffd54f)' },
   { id: 18, title: 'Hot Dog (Sandwich Remix)',        artist: 'MC Snag',             album: 'Hardware Beef',       durationSec: 224, emoji: '🌭', bg: 'linear-gradient(135deg, #ef6c00, #d32f2f)' },
-  { id: 19, title: 'Bunnings After Dark',             artist: 'Bunnings Boys',       album: 'Hardware & Heart',    durationSec: 312, emoji: '🌙', bg: 'linear-gradient(135deg, #1a237e, #311b92)' },
+  { id: 19, title: 'Snaggas After Dark',             artist: 'Snaggas Boys',       album: 'Hardware & Heart',    durationSec: 312, emoji: '🌙', bg: 'linear-gradient(135deg, #1a237e, #311b92)' },
   { id: 20, title: 'Goon of Fortune (Acoustic)',      artist: 'The Hills Hoists',    album: 'Acoustic Bag',        durationSec: 271, emoji: '🍷', bg: 'linear-gradient(135deg, #ad1457, #6a1b9a)' },
   { id: 21, title: 'Top Shagga (Live at the Dam)',    artist: 'Big Shagga',          album: 'Top Shagga (Live)',   durationSec: 412, emoji: '🤠', bg: 'linear-gradient(135deg, #5d4037, #3e2723)' },
   { id: 22, title: 'Lo-fi Shower Beats',              artist: 'sleepy shagga',       album: 'Beats to Snag To',    durationSec: 532, emoji: '😴', bg: 'linear-gradient(135deg, #5392d6, #4a148c)' },
@@ -74,14 +74,14 @@ const TRACKS: Track[] = [
   { id: 36, title: 'Nans WiFi Password',              artist: 'shagga reacts',       album: 'Family Anxiety',      durationSec: 174, emoji: '📡', bg: 'linear-gradient(135deg, #6a1b9a, #4a148c)' },
   { id: 37, title: 'Tradie Smoko Anthem',             artist: 'Tradies Anonymous',   album: 'Apathy in C Major',   durationSec: 219, emoji: '🚬', bg: 'linear-gradient(135deg, #ffa726, #ef6c00)' },
   { id: 38, title: 'Sausage Roll Slowdance',          artist: 'Big Shagga',          album: 'Top Shagga',          durationSec: 264, emoji: '🥖', bg: 'linear-gradient(135deg, #d4a574, #8d6e63)' },
-  { id: 39, title: 'Lo-fi Bunnings Lobby',            artist: 'sleepy shagga',       album: 'Beats to Snag To',    durationSec: 442, emoji: '🛒', bg: 'linear-gradient(135deg, #ef6c00, #5d4037)' },
+  { id: 39, title: 'Lo-fi Snaggas Lobby',            artist: 'sleepy shagga',       album: 'Beats to Snag To',    durationSec: 442, emoji: '🛒', bg: 'linear-gradient(135deg, #ef6c00, #5d4037)' },
   { id: 40, title: 'Final Shagga (10 Min Mix)',       artist: 'Big Shagga',          album: 'Top Shagga (Live)',   durationSec: 614, emoji: '🤠', bg: 'linear-gradient(135deg, #5d4037, #1a237e)' },
 ];
 
 // ---------- Default playlists ----------
 const DEFAULT_PLAYLISTS: Playlist[] = [
   { id: 'top2003',   name: 'Top Shagga 2003',     description: 'the originals. accept no substitutes.', emoji: '🌭', bg: 'linear-gradient(135deg, #ff7e5f, #c44569)', trackIds: [1, 2, 3, 7, 10, 21] },
-  { id: 'bunnings',  name: 'Bunnings Bangers',    description: 'sausage sizzle adjacent.',              emoji: '🔨', bg: 'linear-gradient(135deg, #c40, #f00)',           trackIds: [3, 5, 19, 24, 37, 39] },
+  { id: 'snaggas',  name: 'Snaggas Bangers',    description: 'sausage sizzle adjacent.',              emoji: '🔨', bg: 'linear-gradient(135deg, #c40, #f00)',           trackIds: [3, 5, 19, 24, 37, 39] },
   { id: 'sunday',    name: 'Cooked Sunday Vibes', description: 'low energy, high vibes.',               emoji: '🌊', bg: 'linear-gradient(135deg, #00838f, #006064)', trackIds: [8, 11, 12, 22, 35, 38] },
   { id: 'shower',    name: 'Shower Singalongs',   description: 'lukewarm. always lukewarm.',            emoji: '🚿', bg: 'linear-gradient(135deg, #4fc3f7, #29b6f6)', trackIds: [9, 13, 32] },
   { id: 'goon',      name: 'Goon Bag Gold',       description: 'the back fence calls.',                 emoji: '🍷', bg: 'linear-gradient(135deg, #6a1b9a, #c4006c)', trackIds: [2, 6, 16, 20, 26] },

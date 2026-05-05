@@ -48,7 +48,7 @@ const USERS: User[] = [
   { handle: 'dad_browser',      name: 'Dad',                 avatar: '👨', color: '#3949ab' },
   { handle: 'sharon_accounts',  name: 'Sharon from Accounts', avatar: '💼', color: '#388e3c', online: true },
   { handle: 'tech_helpline',    name: 'Tech Support',        avatar: '💻', color: '#455a64', online: true },
-  { handle: 'aldi_middle',      name: 'Aldi Middle Aisle',   avatar: '🛒', color: '#ef6c00' },
+  { handle: 'midaisle_middle',      name: 'Mid-Aisle (the shop)',   avatar: '🛒', color: '#ef6c00' },
 ];
 
 const POST_TEMPLATES: Omit<FBPost, 'id'>[] = [
@@ -60,7 +60,7 @@ const POST_TEMPLATES: Omit<FBPost, 'id'>[] = [
   { userHandle: 'shagga_memories',  time: '6 hours ago', content: '✨ On this day in 2007 ✨ you were tagged in 47 photos. all sideways. simpler times ❤️', emoji: '📸', bg: 'linear-gradient(135deg, #5e35b1, #311b92)', initialReactions: { like: 891, love: 234, haha: 47, wow: 12, sad: 412, angry: 0 }, initialComments: [{ user: 'Big Shagga', text: 'why was my phone always sideways' }], initialShares: 12 },
   { userHandle: 'genuine_news',     time: '12 hours ago',content: 'BREAKING: Local man "Phil" allegedly taught his automatic car to think it is a manual. Witnesses describe his driving as "concerning but committed". More at 7. 🚨', emoji: '🚨', bg: 'linear-gradient(135deg, #d32f2f, #b71c1c)', initialReactions: { like: 12847, love: 234, haha: 47281, wow: 891, sad: 12, angry: 47 }, initialComments: [{ user: 'Phil', text: 'genuine news again my goat' }, { user: 'Mom', text: 'phil call me' }], initialShares: 8421 },
   { userHandle: 'sharon_accounts',  time: '1 day ago',   content: 'ALL: please disregard my previous email. and the one before that. and the one before that. and the one i am about to send. — Sharon', emoji: '📧', bg: 'linear-gradient(135deg, #2e7d32, #1b5e20)', initialReactions: { like: 8472, love: 412, haha: 14728, wow: 47, sad: 234, angry: 12 }, initialComments: [{ user: 'IT', text: 'sharon please stop reply-all' }, { user: 'Big Shagga', text: 'sharon never stop' }], initialShares: 4128 },
-  { userHandle: 'aldi_middle',      time: '2 days ago',  content: 'THIS WEEK IN THE MIDDLE AISLE: a kayak. a chainsaw. 47 garden gnomes. one (1) astronaut suit. a ukulele. £14.99 each. while stocks last 🛒', emoji: '🛒', bg: 'linear-gradient(135deg, #ef6c00, #d84315)', initialReactions: { like: 47281, love: 8472, haha: 4128, wow: 891, sad: 0, angry: 0 }, initialComments: [{ user: 'Phil', text: 'kayak booked' }, { user: 'Big Shagga', text: 'astronaut suit booked' }], initialShares: 12047 },
+  { userHandle: 'midaisle_middle',      time: '2 days ago',  content: 'THIS WEEK IN THE MIDDLE AISLE: a kayak. a chainsaw. 47 garden gnomes. one (1) astronaut suit. a ukulele. £14.99 each. while stocks last 🛒', emoji: '🛒', bg: 'linear-gradient(135deg, #ef6c00, #d84315)', initialReactions: { like: 47281, love: 8472, haha: 4128, wow: 891, sad: 0, angry: 0 }, initialComments: [{ user: 'Phil', text: 'kayak booked' }, { user: 'Big Shagga', text: 'astronaut suit booked' }], initialShares: 12047 },
   { userHandle: 'concerned_mum',    time: '3 days ago',  content: 'call me when you get a chance', emoji: undefined, initialReactions: { like: 47, love: 0, haha: 0, wow: 89, sad: 412, angry: 234 }, initialComments: [{ user: 'Big Shagga', text: 'is everyone ok' }, { user: 'Mom', text: 'k' }], initialShares: 0 },
   { userHandle: 'dad_browser',      time: '4 days ago',  content: 'how do u close a tab. asking for a friend. its me. 247 of them. asking for me.', emoji: '💻', bg: 'linear-gradient(135deg, #3949ab, #1a237e)', initialReactions: { like: 891, love: 47, haha: 4128, wow: 234, sad: 412, angry: 0 }, initialComments: [{ user: 'Tech Support', text: 'have you tried turning it off and on again' }], initialShares: 47 },
   { userHandle: 'tech_helpline',    time: '5 days ago',  content: 'have you tried turning it off and on again', emoji: '💻', bg: 'linear-gradient(135deg, #455a64, #263238)', initialReactions: { like: 14728, love: 234, haha: 891, wow: 47, sad: 0, angry: 0 }, initialComments: [{ user: 'Dad', text: 'i have not. let me try' }], initialShares: 234 },
@@ -72,7 +72,7 @@ const EVENTS = [
   { name: 'Margaret 90th Birthday',          when: 'Next Sunday',     going: 234, location: 'her house, dont be late' },
   { name: 'Phil\'s Car Show & Tell',         when: 'This Saturday',   going: 12,  location: 'his driveway, may end early' },
   { name: 'Dad\'s 247 Tabs Closing Ceremony',when: 'Some time in 2027', going: 4, location: 'the spare room' },
-  { name: 'Aldi Middle Aisle Reset',          when: 'Tuesday 8am',     going: 89,  location: 'aisle 3' },
+  { name: 'Mid-Aisle (the shop) Reset',          when: 'Tuesday 8am',     going: 89,  location: 'aisle 3' },
   { name: 'Sharon\'s Email Recall Party',     when: 'Pending recall',  going: 47,  location: 'TBD (recalled)' },
 ];
 
@@ -431,7 +431,7 @@ function PostCard({ post, user, myReaction, onReact, extraComments, onAddComment
 // ---------- Marketplace ----------
 function MarketplaceView({ products, placeholder }: { products: string[]; placeholder: boolean }) {
   const items = [
-    { name: 'Used Astronaut Suit (Aldi 2024)',  price: 14, desc: 'worn once. middle aisle classic. some moon dust included.' },
+    { name: 'Used Astronaut Suit (Mid-Aisle 2024)',  price: 14, desc: 'worn once. middle aisle classic. some moon dust included.' },
     { name: 'Phil\'s Old Manual Gearbox',        price: 47, desc: 'no longer needed. its automatic now. and a manual. and paddle shift. weirdly all 3.' },
     { name: 'Margaret\'s Phone (allegedly lost)', price: 0, desc: 'she keeps finding it then losing it. taking offers.' },
     { name: 'Garden Gnome Collection (47)',      price: 12, desc: 'middle aisle haul. all named "kevin". non-negotiable.' },

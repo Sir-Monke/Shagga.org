@@ -10,7 +10,7 @@ const SHAGGA_FILES = [
   'C:\\Windows\\Drivers\\maggie_swoop_v2.sys',
   'C:\\Program Files\\GoonBag\\cask.dat',
   'C:\\Users\\Owner\\Pictures\\thong_collection_007.jpg',
-  'C:\\Windows\\System32\\BunningsSnag.exe',
+  'C:\\Windows\\System32\\snaggasizzle.exe',
   'C:\\ProgramData\\Shagga\\registry_breach.shg',
   'C:\\Users\\Owner\\Desktop\\evidence.zip',
 ];

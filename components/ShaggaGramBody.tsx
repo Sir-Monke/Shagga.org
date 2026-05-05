@@ -32,7 +32,7 @@ type View =
 const USERS: User[] = [
   { handle: 'big_shagga_94',     name: 'Big Shagga',         avatar: '🤠', color: '#1976d2', bio: 'cooked. mostly.' },
   { handle: 'shaggas_nan',       name: "Shagga's Nan",       avatar: '👵', color: '#c2185b', bio: 'please call me ❤️' },
-  { handle: 'bunnings_official', name: 'Bunnings (parody)',  avatar: '🔨', color: '#ef6c00', bio: 'the home of snags', verified: true },
+  { handle: 'snaggas_brand', name: 'Snaggas (parody)',  avatar: '🔨', color: '#ef6c00', bio: 'the home of snags', verified: true },
   { handle: 'maggie_swooper',    name: 'maggie_swooper',     avatar: '🐦‍⬛', color: '#1c1c1c', bio: 'professional swooper' },
   { handle: 'goon_lord_3000',    name: 'Goon Lord',          avatar: '🍷', color: '#7b1fa2', bio: 'back fence forever' },
   { handle: 'cooked_dave',       name: 'Cooked Dave',        avatar: '🌊', color: '#00838f', bio: 'lukewarm at the dam' },
@@ -45,7 +45,7 @@ const USERS: User[] = [
 const POST_TEMPLATES: Omit<Post, 'id'>[] = [
   { userHandle: 'big_shagga_94',    bg: 'linear-gradient(135deg, #ff7e2d, #ff3b3b)', emoji: '🌭', caption: 'cooked snag check 👌', initialLikes: 2347, initialComments: [{ user: '@cooked_dave', text: 'thats a 10/10 snag' }, { user: '@nan', text: 'CALL UR MOTHER' }] },
   { userHandle: 'shaggas_nan',      bg: 'linear-gradient(135deg, #84cf6a, #16805e)', emoji: '🌅', caption: 'GOOD MORNING family !! beautiful sunrise photo. GOD BLESS', initialLikes: 47892, initialComments: [{ user: '@big_shagga_94', text: 'love u nan' }, { user: '@shazza_official', text: 'amen 🙏' }] },
-  { userHandle: 'bunnings_official', bg: 'linear-gradient(135deg, #fff200, #f00)',   emoji: '🍖', caption: 'sausage sizzle saturday. onions UNDER. we will fight u on this.', initialLikes: 198_472, initialComments: [{ user: '@goonlord', text: 'on top is heresy' }, { user: '@daz', text: 'see u there' }] },
+  { userHandle: 'snaggas_brand', bg: 'linear-gradient(135deg, #fff200, #f00)',   emoji: '🍖', caption: 'sausage sizzle saturday. onions UNDER. we will fight u on this.', initialLikes: 198_472, initialComments: [{ user: '@goonlord', text: 'on top is heresy' }, { user: '@daz', text: 'see u there' }] },
   { userHandle: 'maggie_swooper',   bg: 'linear-gradient(135deg, #1c1c1c, #444)',     emoji: '🪶', caption: 'just swooped a cyclist. tuesday vibes.', initialLikes: 12, initialComments: [] },
   { userHandle: 'goon_lord_3000',   bg: 'linear-gradient(135deg, #c4006c, #6c0040)', emoji: '🍷', caption: 'goon of fortune at the back fence. 7pm. byo peg.', initialLikes: 891, initialComments: [{ user: '@daz', text: 'count me in' }] },
   { userHandle: 'cooked_dave',      bg: 'linear-gradient(135deg, #2c5364, #0f2027)', emoji: '🌊', caption: 'the dam is lukewarm. perfect.', initialLikes: 412, initialComments: [{ user: '@shaggas_nan', text: 'pls dont swim there' }] },
@@ -57,7 +57,7 @@ const POST_TEMPLATES: Omit<Post, 'id'>[] = [
   { userHandle: 'cooked_dave',      bg: 'linear-gradient(135deg, #c40, #802)',       emoji: '🥩', caption: 'BBQ at daves. as is tradition.', initialLikes: 3214, initialComments: [{ user: '@daz', text: 'count me in' }, { user: '@bazza', text: 'on my way' }] },
   { userHandle: 'goon_lord_3000',   bg: 'linear-gradient(135deg, #ad1457, #6a1b9a)', emoji: '🍷', caption: 'goon bag in the wild. respect.', initialLikes: 412, initialComments: [] },
   { userHandle: 'shaggas_nan',      bg: 'linear-gradient(135deg, #ff7e5f, #feb47b)', emoji: '🌹', caption: 'thinking of u all. love nan x', initialLikes: 14728, initialComments: [{ user: '@everyone', text: '❤️' }] },
-  { userHandle: 'bunnings_official', bg: 'linear-gradient(135deg, #c40, #f00)',      emoji: '🔨', caption: 'new aisle just dropped. all snag-related items.', initialLikes: 47281, initialComments: [{ user: '@tradielife', text: 'on my way' }] },
+  { userHandle: 'snaggas_brand', bg: 'linear-gradient(135deg, #c40, #f00)',      emoji: '🔨', caption: 'new aisle just dropped. all snag-related items.', initialLikes: 47281, initialComments: [{ user: '@tradielife', text: 'on my way' }] },
   { userHandle: 'maggie_swooper',   bg: 'linear-gradient(135deg, #2f4f4f, #696969)', emoji: '⚡', caption: 'speedrun: 47 swoops in 3 minutes. world record?', initialLikes: 89, initialComments: [{ user: '@cyclist', text: 'leave me alone' }] },
   { userHandle: 'tradielife',       bg: 'linear-gradient(135deg, #5d4037, #3e2723)', emoji: '🥪', caption: 'snag sandwich. 11am breakfast. peak shagga.', initialLikes: 612, initialComments: [{ user: '@cookwithshagga', text: 'this is art' }] },
   { userHandle: 'big_shagga_94',    bg: 'linear-gradient(135deg, #00838f, #006064)', emoji: '🦘', caption: 'this roo just stole my snag. unbelievable.', initialLikes: 4128, initialComments: [{ user: '@maggie_swooper', text: 'we have an ally' }] },

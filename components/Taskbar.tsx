@@ -30,7 +30,7 @@ const WIFI_NETWORKS = [
   { ssid: 'TELL_MY_WIFI_LOVE_HER',        bars: 4, secure: true,  connected: false, note: 'secure' },
   { ssid: 'BT-WiFi-with-FON',             bars: 1, secure: true,  connected: false, note: 'secure (weak)' },
   { ssid: 'NSA_VAN_42',                    bars: 4, secure: true,  connected: false, note: 'secure' },
-  { ssid: 'aldi-middle-aisle-public',      bars: 2, secure: false, connected: false, note: 'open · this week: kayaks' },
+  { ssid: 'midaisle-public',      bars: 2, secure: false, connected: false, note: 'open · this week: kayaks' },
 ];
 
 export default function Taskbar({ items, onTaskClick, onStartClick, startOpen, onShowDesktop }: Props) {

@@ -44,7 +44,7 @@ const AUTHORS: Author[] = [
   { handle: 'big_shagga_94',   name: 'Big Shagga',          avatar: '🤠', color: '#0e7e7e', bio: 'a top shagga. (cant prove it tho)',                    location: '?',                              verified: true },
   { handle: 'shaggacouncil',   name: 'Shagga Council',      avatar: '🌍', color: '#0e7e7e', bio: 'official global ruling body. unofficial.',              location: 'the meeting',           verified: true },
   { handle: 'tech_helpline',   name: 'Tech Support',        avatar: '💻', color: '#455a64', bio: 'have you tried turning it off and on again',           location: 'a call centre',                       },
-  { handle: 'aldi_middle',     name: 'Aldi Middle Aisle',   avatar: '🛒', color: '#ef6c00', bio: 'this week: kayak, chainsaw, gnomes, an astronaut suit', location: 'aisle 3',               verified: true },
+  { handle: 'midaisle_middle',     name: 'Mid-Aisle (the shop)',   avatar: '🛒', color: '#ef6c00', bio: 'this week: kayak, chainsaw, gnomes, an astronaut suit', location: 'aisle 3',               verified: true },
   { handle: 'shaggas_mate',    name: 'gareth from work',    avatar: '🧑', color: '#1565c0', bio: 'the lads.',                                            location: 'the office',                                  },
   { handle: 'doreen_57',       name: 'Auntie Doreen',       avatar: '👩‍🦰', color: '#ad1457', bio: 'sent from my iphone. i think.',                       location: 'cornwall',                                  },
   { handle: 'sharon_from_acc', name: 'Sharon from Accounts', avatar: '💼', color: '#388e3c', bio: 'reply all to all emails. mistakes were made.',         location: 'the office printer',                                  },
@@ -61,7 +61,7 @@ const INITIAL_SHWEETS: Shweet[] = [
   { id: 6,  authorHandle: 'auntie_linda',   text: "🌹🌹🌹🌹🌹🌹🌹🌹🌹 GOOD MORNING ANGELS 🌹🌹🌹🌹🌹🌹🌹🌹🌹 GOD BLESS ❤️❤️❤️❤️❤️",                          ageMin: 47,   initialLikes: 412,    initialReposts: 47,    initialReplies: 234 },
   { id: 7,  authorHandle: 'tech_helpline',  text: "have you tried turning it off and on again",                                                            ageMin: 90,   initialLikes: 47281,  initialReposts: 8472,  initialReplies: 234 },
   { id: 8,  authorHandle: 'big_shagga_94',  text: "found out my dad has been searching things by typing them into the address bar AND the search engine. like a relay system. unstoppable",  ageMin: 120, initialLikes: 12847, initialReposts: 4128, initialReplies: 891 },
-  { id: 9,  authorHandle: 'aldi_middle',    text: "this week in the middle aisle: a kayak, a chainsaw, 47 garden gnomes, and one (1) astronaut suit. £14.99 each.",  ageMin: 180, initialLikes: 47281, initialReposts: 12847, initialReplies: 1247 },
+  { id: 9,  authorHandle: 'midaisle_middle',    text: "this week in the middle aisle: a kayak, a chainsaw, 47 garden gnomes, and one (1) astronaut suit. £14.99 each.",  ageMin: 180, initialLikes: 47281, initialReposts: 12847, initialReplies: 1247 },
   { id: 10, authorHandle: 'doreen_57',      text: "sent from my iphone",                                                                                  ageMin: 240,  initialLikes: 89,     initialReposts: 12,    initialReplies: 47 },
   { id: 11, authorHandle: 'big_shagga_94',  text: "she said k. one letter. an entire generation gap.",                                                     ageMin: 300,  initialLikes: 14728,  initialReposts: 2104,  initialReplies: 891 },
   { id: 12, authorHandle: 'phil_drives',    text: "i now play 'gear shift sound effect' from a bluetooth speaker when i shift in my automatic. for immersion.",  ageMin: 360, initialLikes: 8472, initialReposts: 1247, initialReplies: 412 },
@@ -91,7 +91,7 @@ const TRENDING = [
   { topic: 'Reply All Disaster', count: '8.9k posts' },
   { topic: 'Dad Browser Tabs',   count: '12k posts' },
   { topic: 'Just Said K',        count: '128k posts' },
-  { topic: 'Aldi Middle Aisle',  count: '47k posts' },
+  { topic: 'Mid-Aisle (the shop)',  count: '47k posts' },
 ];
 
 // ---------- Helpers ----------

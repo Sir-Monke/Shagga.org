@@ -419,3 +419,31 @@ export const WallpaperIcon = ({ size }: { size?: number }) => {
     </svg>
   );
 };
+
+export const ReviewIcon = ({ size }: { size?: number }) => {
+  // Original star/clipboard hybrid — gold star on a notepad-shape
+  const s = sizeFor(size);
+  return (
+    <svg width={s} height={s} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="2" width="12" height="13" rx="1.5" fill="#ffd54f" stroke="#a87a00" strokeWidth="0.6" />
+      <rect x="2" y="2" width="12" height="2.5" fill="#a87a00" />
+      <polygon
+        points="8,5.5 9,7.7 11.4,7.9 9.6,9.5 10.1,11.8 8,10.7 5.9,11.8 6.4,9.5 4.6,7.9 7,7.7"
+        fill="#fff" stroke="#5b3f00" strokeWidth="0.4" strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const ReviewIconLarge = () => (
+  <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <rect x="3" y="3" width="26" height="27" rx="2" fill="#ffd54f" stroke="#a87a00" strokeWidth="1.2" />
+    <rect x="3" y="3" width="26" height="5" fill="#a87a00" />
+    <circle cx="6" cy="5.5" r="0.7" fill="#ffd54f" />
+    <circle cx="8.5" cy="5.5" r="0.7" fill="#ffd54f" />
+    <polygon
+      points="16,11 17.9,15.3 22.6,15.7 19,18.7 20.1,23.2 16,20.7 11.9,23.2 13,18.7 9.4,15.7 14.1,15.3"
+      fill="#fff" stroke="#5b3f00" strokeWidth="0.7" strokeLinejoin="round"
+    />
+  </svg>
+);

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="100 330 800 580" width="800" height="580">
+  <defs>
+    <!-- XP titlebar gradient (luna blue) -->
+    <linearGradient id="titleGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#3a7be0"/>
+      <stop offset="40%"  stop-color="#2160c4"/>
+      <stop offset="100%" stop-color="#1145a8"/>
+    </linearGradient>
+    <linearGradient id="titleHi" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7ba9ee" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#7ba9ee" stop-opacity="0"/>
+    </linearGradient>
+    <!-- XP body gradient -->
+    <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#fefefe"/>
+      <stop offset="100%" stop-color="#ece9d8"/>
+    </linearGradient>
+    <!-- Close button gradient -->
+    <linearGradient id="closeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ec5050"/>
+      <stop offset="100%" stop-color="#b42424"/>
+    </linearGradient>
+    <!-- Min/Max button gradient -->
+    <linearGradient id="ctlGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5891e8"/>
+      <stop offset="100%" stop-color="#2c5cbe"/>
+    </linearGradient>
+
+    <!-- Curved arc path for the headline. Drawn as a wide arc centered above the window. -->
+    <!-- Arc spans from (110,330) up over (500,170) and back down to (890,330). -->
+    <path id="arcPath" d="M 110 330 Q 500 90 890 330" fill="none"/>
+
+    <!-- Drop shadow for the window -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6"/>
+      <feOffset dx="0" dy="6"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.35"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Sticker outline (rounded rect with bleed-friendly corner radius) -->
+    <clipPath id="stickerClip">
+      <rect x="20" y="20" width="960" height="960" rx="48" ry="48"/>
+    </clipPath>
+  </defs>
+
+  <!-- ============= STICKER BACKGROUND (transparent) ============= -->
+  <!-- (no background — only window renders) -->
+
+  <!-- ============= XP WINDOW ============= -->
+  <g filter="url(#shadow)">
+    <!-- Window body -->
+    <rect x="120" y="350" width="760" height="540" rx="10" ry="10" fill="url(#bodyGrad)" stroke="#0a3393" stroke-width="2"/>
+
+    <!-- Title bar -->
+    <rect x="120" y="350" width="760" height="50" rx="10" ry="10" fill="url(#titleGrad)"/>
+    <rect x="120" y="380" width="760" height="20" fill="url(#titleGrad)"/>
+    <!-- titlebar highlight -->
+    <rect x="125" y="354" width="750" height="14" rx="6" ry="6" fill="url(#titleHi)" opacity="0.4"/>
+
+    <!-- Title text + icon -->
+    <g transform="translate(140, 365)">
+      <!-- Tiny window icon -->
+      <rect x="0" y="2" width="22" height="20" rx="2" fill="#fff" stroke="#0a3393" stroke-width="1"/>
+      <rect x="0" y="2" width="22" height="6" fill="#0a3393"/>
+      <circle cx="4" cy="5" r="1" fill="#fbc02d"/>
+      <circle cx="8" cy="5" r="1" fill="#fbc02d"/>
+      <text x="32" y="20" font-family="Tahoma, 'MS Sans Serif', sans-serif"
+            font-weight="700" font-size="18" fill="#ffffff">
+        shagga.org — scan me, legend
+      </text>
+    </g>
+
+    <!-- Title bar control buttons (min, max, close) -->
+    <g transform="translate(770, 360)">
+      <!-- minimize -->
+      <rect x="0" y="0" width="32" height="28" rx="4" fill="url(#ctlGrad)" stroke="#0a3393" stroke-width="1"/>
+      <rect x="8" y="22" width="16" height="3" fill="#fff"/>
+      <!-- maximize -->
+      <rect x="36" y="0" width="32" height="28" rx="4" fill="url(#ctlGrad)" stroke="#0a3393" stroke-width="1"/>
+      <rect x="44" y="6" width="16" height="16" fill="none" stroke="#fff" stroke-width="2"/>
+      <!-- close -->
+      <rect x="72" y="0" width="32" height="28" rx="4" fill="url(#closeGrad)" stroke="#8a1717" stroke-width="1"/>
+      <line x1="80" y1="8" x2="96" y2="22" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="96" y1="8" x2="80" y2="22" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+
+    <!-- ===== Window content ===== -->
+    <!-- QR code placeholder area -->
+    <rect x="320" y="430" width="360" height="360" fill="#ffffff" stroke="#0a3393" stroke-width="3"/>
+    <!-- Inner instruction overlay (delete the next 4 elements when you paste a real QR) -->
+    <rect x="320" y="430" width="360" height="360" fill="#f5f5f5" opacity="0.95"/>
+    <text x="500" y="580" font-family="Tahoma, sans-serif" font-size="22" font-weight="bold"
+          fill="#777" text-anchor="middle">[ DROP YOUR QR CODE HERE ]</text>
+    <text x="500" y="610" font-family="Tahoma, sans-serif" font-size="14"
+          fill="#999" text-anchor="middle">point a free QR generator at:</text>
+    <text x="500" y="635" font-family="Tahoma, sans-serif" font-size="16" font-weight="bold"
+          fill="#1a237e" text-anchor="middle">https://shagga.org/reviews</text>
+    <text x="500" y="670" font-family="Tahoma, sans-serif" font-size="12"
+          fill="#999" text-anchor="middle">(360×360 px, transparent or white bg)</text>
+    <!-- Decorative QR-look frame: 4 finder squares to suggest where it goes -->
+    <g fill="none" stroke="#cccccc" stroke-width="3">
+      <rect x="332" y="442" width="50" height="50"/>
+      <rect x="618" y="442" width="50" height="50"/>
+      <rect x="332" y="728" width="50" height="50"/>
+    </g>
+    <g fill="#cccccc">
+      <rect x="343" y="453" width="28" height="28"/>
+      <rect x="629" y="453" width="28" height="28"/>
+      <rect x="343" y="739" width="28" height="28"/>
+    </g>
+
+    <!-- Left side text -->
+    <g font-family="Tahoma, sans-serif" fill="#1a237e">
+      <text x="155" y="465" font-size="20" font-weight="bold">SCAN HERE</text>
+      <text x="155" y="490" font-size="14" fill="#444">to see what i think of</text>
+      <text x="155" y="510" font-size="14" fill="#444">your local</text>
+
+      <text x="155" y="560" font-size="16" font-weight="bold" fill="#d32f2f">⚠ WARNING:</text>
+      <text x="155" y="582" font-size="12" fill="#444">contains opinions.</text>
+      <text x="155" y="600" font-size="12" fill="#444">unsolicited ones.</text>
+
+      <text x="155" y="650" font-size="14" font-weight="bold">⭐ FEATURING:</text>
+      <text x="155" y="672" font-size="11" fill="#444">• reviews of Liverpool</text>
+      <text x="155" y="690" font-size="11" fill="#444">• an XP themed website</text>
+      <text x="155" y="708" font-size="11" fill="#444">• 47 popups you can&#39;t close</text>
+      <text x="155" y="726" font-size="11" fill="#444">• Phil&#39;s car saga</text>
+      <text x="155" y="744" font-size="11" fill="#444">• actual nan content</text>
+    </g>
+
+    <!-- Right side text -->
+    <g font-family="Tahoma, sans-serif" fill="#1a237e" text-anchor="end">
+      <text x="845" y="465" font-size="20" font-weight="bold">FREE TO USE!</text>
+      <text x="845" y="490" font-size="14" fill="#444">no signup required</text>
+      <text x="845" y="510" font-size="14" fill="#444">(this is huge)</text>
+
+      <text x="845" y="560" font-size="16" font-weight="bold" fill="#2e7d32">★ EST. 2025</text>
+      <text x="845" y="582" font-size="12" fill="#444">made by a top shagga</text>
+      <text x="845" y="600" font-size="12" fill="#444">in Liverpool, UK</text>
+
+      <text x="845" y="650" font-size="14" font-weight="bold">📍 LOCATIONS:</text>
+      <text x="845" y="672" font-size="11" fill="#444">pubs · cafés · takeaways</text>
+      <text x="845" y="690" font-size="11" fill="#444">parks · barbers · more</text>
+      <text x="845" y="708" font-size="11" fill="#444">all rated /10</text>
+      <text x="845" y="726" font-size="11" fill="#444">most are honest, some</text>
+      <text x="845" y="744" font-size="11" fill="#444">are emotionally driven</text>
+    </g>
+
+    <!-- Bottom URL bar -->
+    <rect x="140" y="820" width="720" height="50" rx="6" fill="#ece9d8" stroke="#0a3393" stroke-width="1"/>
+    <text x="500" y="853" font-family="Tahoma, sans-serif" font-size="22" font-weight="bold"
+          fill="#1a237e" text-anchor="middle">shagga.org/reviews</text>
+  </g>
+</svg>

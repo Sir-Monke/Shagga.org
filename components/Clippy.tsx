@@ -15,7 +15,7 @@ const TIPS = [
   "U look great today legend. carry on.",
   "Phil installed a manual handbrake on his automatic. for the feel of it. legend.",
   "Pro tip: if it says 'reply all' do not click reply all. ask Sharon.",
-  "Aldi middle aisle this week: kayak, chainsaw, gnomes. invest now.",
+  "mid-aisle this week: kayak, chainsaw, gnomes. invest now.",
   "Drink some water mate. its been a while.",
 ];
 
