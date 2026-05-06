@@ -4,7 +4,8 @@ import { REVIEWS, CATEGORY_META, ratingTier, priceLabel, type Review, type Categ
 
 /* ============================================================
    MOBILE REVIEWS — used by /reviews route on phones.
-   Clean native-feeling UI. No XP chrome, no popups.
+   Windows XP themed, full-screen window, internal body scroll.
+   Single scroll container = the .mr-body element.
    ============================================================ */
 
 type SortKey = 'recent' | 'highest' | 'lowest' | 'priceLow' | 'priceHigh';
@@ -15,7 +16,6 @@ export default function MobileReviews() {
   const [filter, setFilter] = useState<'all' | Category>('all');
   const [openId, setOpenId] = useState<number | null>(null);
 
-  // Active categories — only show filter pills for categories that have reviews
   const activeCats = useMemo(() => {
     const set = new Set<Category>();
     REVIEWS.forEach((r) => set.add(r.category));
@@ -52,33 +52,42 @@ export default function MobileReviews() {
 
   return (
     <div className="mr-page">
-      {/* Header */}
-      <header className="mr-header">
-        <div className="mr-header-inner">
-          <div className="mr-brand">
-            <span className="mr-brand-mark">★</span>
-            <div className="mr-brand-text">
-              <span className="mr-brand-title">Shagga Reviews</span>
-              <span className="mr-brand-sub">Liverpool · unsolicited opinions</span>
-            </div>
+      <div className="mr-window">
+        {/* Title bar */}
+        <div className="mr-titlebar">
+          <div className="mr-titlebar-left">
+            <span className="mr-favicon" aria-hidden>★</span>
+            <span className="mr-title-text">Shagga Reviews — Liverpool.exe</span>
+          </div>
+          <div className="mr-titlebar-buttons" aria-hidden>
+            <button className="mr-tb-btn" tabIndex={-1}>_</button>
+            <button className="mr-tb-btn" tabIndex={-1}>▢</button>
+            <button className="mr-tb-btn mr-tb-close" tabIndex={-1}>×</button>
           </div>
         </div>
 
-        {/* Search */}
-        <div className="mr-search-wrap">
-          <span className="mr-search-icon" aria-hidden>🔍</span>
-          <input
-            type="search"
-            placeholder="Search venues, areas, tags…"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="mr-search"
-            aria-label="Search reviews"
-          />
+        {/* Menu bar */}
+        <div className="mr-menubar">
+          <span className="mr-menu-item"><u>F</u>ile</span>
+          <span className="mr-menu-item"><u>E</u>dit</span>
+          <span className="mr-menu-item"><u>V</u>iew</span>
+          <span className="mr-menu-item"><u>H</u>elp</span>
         </div>
 
-        {/* Sort */}
-        <div className="mr-sort-wrap">
+        {/* Toolbar — search, sort, pills */}
+        <div className="mr-toolbar">
+          <div className="mr-search-wrap">
+            <span className="mr-search-icon" aria-hidden>🔍</span>
+            <input
+              type="search"
+              placeholder="Search venues, areas, tags…"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="mr-search"
+              aria-label="Search reviews"
+            />
+          </div>
+
           <select
             className="mr-sort"
             value={sort}
@@ -91,54 +100,60 @@ export default function MobileReviews() {
             <option value="priceLow">Sort: Price ↑</option>
             <option value="priceHigh">Sort: Price ↓</option>
           </select>
-        </div>
 
-        {/* Category pills */}
-        <div className="mr-pills">
-          <button
-            className={`mr-pill ${filter === 'all' ? 'mr-pill-active' : ''}`}
-            onClick={() => setFilter('all')}
-          >
-            All ({REVIEWS.length})
-          </button>
-          {activeCats.map((c) => (
+          <div className="mr-pills">
             <button
-              key={c}
-              className={`mr-pill ${filter === c ? 'mr-pill-active' : ''}`}
-              onClick={() => setFilter(c)}
+              className={`mr-pill ${filter === 'all' ? 'mr-pill-active' : ''}`}
+              onClick={() => setFilter('all')}
             >
-              <span className="mr-pill-emoji" aria-hidden>{CATEGORY_META[c].emoji}</span>
-              {CATEGORY_META[c].label}
+              All ({REVIEWS.length})
             </button>
-          ))}
-        </div>
-      </header>
-
-      {/* List */}
-      <main className="mr-list" role="list">
-        {visible.length === 0 && (
-          <div className="mr-empty">
-            <div className="mr-empty-emoji">🤷</div>
-            <p>Nothing matches that.</p>
-            <button className="mr-empty-btn" onClick={() => { setSearch(''); setFilter('all'); }}>
-              Clear filters
-            </button>
+            {activeCats.map((c) => (
+              <button
+                key={c}
+                className={`mr-pill ${filter === c ? 'mr-pill-active' : ''}`}
+                onClick={() => setFilter(c)}
+              >
+                <span className="mr-pill-emoji" aria-hidden>{CATEGORY_META[c].emoji}</span>
+                {CATEGORY_META[c].label}
+              </button>
+            ))}
           </div>
-        )}
+        </div>
 
-        {visible.map((r) => (
-          <ReviewCard
-            key={r.id}
-            review={r}
-            open={openId === r.id}
-            onToggle={() => setOpenId((curr) => (curr === r.id ? null : r.id))}
-          />
-        ))}
+        {/* Body — the only scroll container */}
+        <div className="mr-body" role="list">
+          {visible.length === 0 && (
+            <div className="mr-empty">
+              <div className="mr-empty-emoji">🤷</div>
+              <p>Nothing matches that.</p>
+              <button className="mr-empty-btn" onClick={() => { setSearch(''); setFilter('all'); }}>
+                Clear filters
+              </button>
+            </div>
+          )}
 
-        <footer className="mr-footer">
-          <p>shagga.org/reviews · scanned a sticker? legend.</p>
-        </footer>
-      </main>
+          {visible.map((r) => (
+            <ReviewCard
+              key={r.id}
+              review={r}
+              open={openId === r.id}
+              onToggle={() => setOpenId((curr) => (curr === r.id ? null : r.id))}
+            />
+          ))}
+
+          {visible.length > 0 && (
+            <p className="mr-foot-note">shagga.org/reviews · scanned a sticker? legend.</p>
+          )}
+        </div>
+
+        {/* Status bar */}
+        <div className="mr-statusbar">
+          <span className="mr-status-cell">{visible.length} review{visible.length === 1 ? '' : 's'}</span>
+          <span className="mr-status-cell mr-status-grow">{filter === 'all' ? 'All categories' : CATEGORY_META[filter].label}</span>
+          <span className="mr-status-cell">shagga.org</span>
+        </div>
+      </div>
     </div>
   );
 }
@@ -254,4 +269,3 @@ function ReviewCard({ review, open, onToggle }: { review: Review; open: boolean;
     </article>
   );
 }
-
