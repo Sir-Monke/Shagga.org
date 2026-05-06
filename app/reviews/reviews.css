@@ -1,6 +1,7 @@
 /* ============================================================
    REVIEWS ROUTE STYLES
    Mobile/Desktop swap + XP-themed mobile reviews window.
+   Uses NATIVE document scroll on mobile — sticky chrome at top.
    ============================================================ */
 
 /* Mobile/Desktop swap */
@@ -12,53 +13,38 @@
 }
 
 /* ============================================================
-   MOBILE REVIEWS WINDOW
-   Lock html/body to viewport; scroll happens inside .mr-body.
-   This pattern matches /portfolio so behaviour is consistent.
+   MOBILE REVIEWS — UNLOCK SCROLL
+   globals.css locks html/body for the desktop XP layout.
+   Override that here when .mr-page is in the DOM so the document
+   can scroll naturally on mobile.
    ============================================================ */
 
 html:has(.mr-page),
 body:has(.mr-page) {
-  height: 100vh;
-  height: 100dvh;
-  overflow: hidden;
+  overflow: visible !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  min-height: 100%;
   margin: 0;
   padding: 0;
 }
 
 .mr-page {
-  height: 100vh;
-  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
   width: 100%;
   background: linear-gradient(180deg, #1f5fb8 0%, #2c7ad6 35%, #5b9eef 100%);
-  background-attachment: fixed;
   padding: 8px;
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
   font-family: "Segoe UI", Tahoma, system-ui, sans-serif;
   color: #1a1a1a;
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
   box-sizing: border-box;
-}
-
-.mr-page::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 800px 200px at 20% 30%, rgba(255,255,255,0.18), transparent 60%),
-    radial-gradient(ellipse 600px 180px at 80% 60%, rgba(255,255,255,0.12), transparent 60%);
-  pointer-events: none;
-  z-index: 0;
+  display: flex;
+  justify-content: center;
 }
 
 .mr-window {
   width: 100%;
   max-width: 720px;
-  height: 100%;
   background: #ece9d8;
   border: 1px solid #003c74;
   border-radius: 8px 8px 0 0;
@@ -69,7 +55,16 @@ body:has(.mr-page) {
   display: flex;
   flex-direction: column;
   position: relative;
-  z-index: 1;
+}
+
+/* ============== Sticky chrome top ============== */
+
+.mr-chrome-top {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #ece9d8;
+  /* The whole top chrome stack scrolls together as one sticky block */
 }
 
 /* ============== Title bar ============== */
@@ -95,9 +90,6 @@ body:has(.mr-page) {
   border-bottom: 1px solid #003c74;
   min-height: 30px;
   user-select: none;
-  flex-shrink: 0;
-  position: relative;
-  z-index: 4;
 }
 .mr-titlebar-left {
   display: flex;
@@ -165,9 +157,6 @@ body:has(.mr-page) {
   gap: 4px;
   font-size: 12px;
   user-select: none;
-  flex-shrink: 0;
-  position: relative;
-  z-index: 3;
 }
 .mr-menu-item {
   padding: 2px 8px;
@@ -185,9 +174,6 @@ body:has(.mr-page) {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  flex-shrink: 0;
-  position: relative;
-  z-index: 3;
 }
 
 .mr-search-wrap {
@@ -282,22 +268,15 @@ body:has(.mr-page) {
 }
 .mr-pill-emoji { font-size: 13px; }
 
-/* ============== Body — THE SCROLL CONTAINER ============== */
+/* ============== Body — flows naturally ============== */
 
 .mr-body {
   background: #fff;
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
   padding: 12px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   border-top: 1px solid #aca899;
-  position: relative;
-  z-index: 1;
 }
 
 /* ============== Cards ============== */
@@ -403,6 +382,27 @@ body:has(.mr-page) {
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
+
+/* Mini pros/cons preview on collapsed card */
+.mr-pc-preview {
+  padding: 0 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.mr-pc-preview-good,
+.mr-pc-preview-bad {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+.mr-pc-preview-good { color: #2e7d32; font-weight: 600; }
+.mr-pc-preview-bad  { color: #c62828; font-weight: 600; }
+.mr-pc-preview-more { color: #999; font-weight: 700; font-size: 11px; }
 
 .mr-card-body {
   padding: 12px;
@@ -577,9 +577,6 @@ body:has(.mr-page) {
   gap: 4px;
   font-size: 11px;
   color: #555;
-  flex-shrink: 0;
-  position: relative;
-  z-index: 3;
 }
 .mr-status-cell {
   background: #fff;

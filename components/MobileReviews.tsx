@@ -53,75 +53,78 @@ export default function MobileReviews() {
   return (
     <div className="mr-page">
       <div className="mr-window">
-        {/* Title bar */}
-        <div className="mr-titlebar">
-          <div className="mr-titlebar-left">
-            <span className="mr-favicon" aria-hidden>★</span>
-            <span className="mr-title-text">Shagga Reviews — Liverpool.exe</span>
-          </div>
-          <div className="mr-titlebar-buttons" aria-hidden>
-            <button className="mr-tb-btn" tabIndex={-1}>_</button>
-            <button className="mr-tb-btn" tabIndex={-1}>▢</button>
-            <button className="mr-tb-btn mr-tb-close" tabIndex={-1}>×</button>
-          </div>
-        </div>
-
-        {/* Menu bar */}
-        <div className="mr-menubar">
-          <span className="mr-menu-item"><u>F</u>ile</span>
-          <span className="mr-menu-item"><u>E</u>dit</span>
-          <span className="mr-menu-item"><u>V</u>iew</span>
-          <span className="mr-menu-item"><u>H</u>elp</span>
-        </div>
-
-        {/* Toolbar — search, sort, pills */}
-        <div className="mr-toolbar">
-          <div className="mr-search-wrap">
-            <span className="mr-search-icon" aria-hidden>🔍</span>
-            <input
-              type="search"
-              placeholder="Search venues, areas, tags…"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="mr-search"
-              aria-label="Search reviews"
-            />
+        {/* Sticky chrome top — titlebar + menubar + toolbar */}
+        <div className="mr-chrome-top">
+          {/* Title bar */}
+          <div className="mr-titlebar">
+            <div className="mr-titlebar-left">
+              <span className="mr-favicon" aria-hidden>★</span>
+              <span className="mr-title-text">Shagga Reviews — Liverpool.exe</span>
+            </div>
+            <div className="mr-titlebar-buttons" aria-hidden>
+              <button className="mr-tb-btn" tabIndex={-1}>_</button>
+              <button className="mr-tb-btn" tabIndex={-1}>▢</button>
+              <button className="mr-tb-btn mr-tb-close" tabIndex={-1}>×</button>
+            </div>
           </div>
 
-          <select
-            className="mr-sort"
-            value={sort}
-            onChange={(e) => setSort(e.target.value as SortKey)}
-            aria-label="Sort reviews"
-          >
-            <option value="recent">Sort: Recent</option>
-            <option value="highest">Sort: Highest rated</option>
-            <option value="lowest">Sort: Lowest rated</option>
-            <option value="priceLow">Sort: Price ↑</option>
-            <option value="priceHigh">Sort: Price ↓</option>
-          </select>
+          {/* Menu bar */}
+          <div className="mr-menubar">
+            <span className="mr-menu-item"><u>F</u>ile</span>
+            <span className="mr-menu-item"><u>E</u>dit</span>
+            <span className="mr-menu-item"><u>V</u>iew</span>
+            <span className="mr-menu-item"><u>H</u>elp</span>
+          </div>
 
-          <div className="mr-pills">
-            <button
-              className={`mr-pill ${filter === 'all' ? 'mr-pill-active' : ''}`}
-              onClick={() => setFilter('all')}
+          {/* Toolbar — search, sort, pills */}
+          <div className="mr-toolbar">
+            <div className="mr-search-wrap">
+              <span className="mr-search-icon" aria-hidden>🔍</span>
+              <input
+                type="search"
+                placeholder="Search venues, areas, tags…"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="mr-search"
+                aria-label="Search reviews"
+              />
+            </div>
+
+            <select
+              className="mr-sort"
+              value={sort}
+              onChange={(e) => setSort(e.target.value as SortKey)}
+              aria-label="Sort reviews"
             >
-              All ({REVIEWS.length})
-            </button>
-            {activeCats.map((c) => (
+              <option value="recent">Sort: Recent</option>
+              <option value="highest">Sort: Highest rated</option>
+              <option value="lowest">Sort: Lowest rated</option>
+              <option value="priceLow">Sort: Price ↑</option>
+              <option value="priceHigh">Sort: Price ↓</option>
+            </select>
+
+            <div className="mr-pills">
               <button
-                key={c}
-                className={`mr-pill ${filter === c ? 'mr-pill-active' : ''}`}
-                onClick={() => setFilter(c)}
+                className={`mr-pill ${filter === 'all' ? 'mr-pill-active' : ''}`}
+                onClick={() => setFilter('all')}
               >
-                <span className="mr-pill-emoji" aria-hidden>{CATEGORY_META[c].emoji}</span>
-                {CATEGORY_META[c].label}
+                All ({REVIEWS.length})
               </button>
-            ))}
+              {activeCats.map((c) => (
+                <button
+                  key={c}
+                  className={`mr-pill ${filter === c ? 'mr-pill-active' : ''}`}
+                  onClick={() => setFilter(c)}
+                >
+                  <span className="mr-pill-emoji" aria-hidden>{CATEGORY_META[c].emoji}</span>
+                  {CATEGORY_META[c].label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Body — the only scroll container */}
+        {/* Body — flows naturally, no internal scroll */}
         <div className="mr-body" role="list">
           {visible.length === 0 && (
             <div className="mr-empty">
@@ -147,7 +150,7 @@ export default function MobileReviews() {
           )}
         </div>
 
-        {/* Status bar */}
+        {/* Status bar — at end of content, not sticky */}
         <div className="mr-statusbar">
           <span className="mr-status-cell">{visible.length} review{visible.length === 1 ? '' : 's'}</span>
           <span className="mr-status-cell mr-status-grow">{filter === 'all' ? 'All categories' : CATEGORY_META[filter].label}</span>
@@ -200,6 +203,24 @@ function ReviewCard({ review, open, onToggle }: { review: Review; open: boolean;
       </div>
 
       <p className="mr-card-title">{review.title}</p>
+
+      {/* Mini pros/cons preview — shown on collapsed card for quick scan */}
+      {((review.pros && review.pros.length > 0) || (review.cons && review.cons.length > 0)) && (
+        <div className="mr-pc-preview">
+          {review.pros && review.pros.length > 0 && (
+            <span className="mr-pc-preview-good">
+              <span aria-hidden>✅</span> {review.pros[0]}
+              {review.pros.length > 1 && <span className="mr-pc-preview-more"> +{review.pros.length - 1}</span>}
+            </span>
+          )}
+          {review.cons && review.cons.length > 0 && (
+            <span className="mr-pc-preview-bad">
+              <span aria-hidden>❌</span> {review.cons[0]}
+              {review.cons.length > 1 && <span className="mr-pc-preview-more"> +{review.cons.length - 1}</span>}
+            </span>
+          )}
+        </div>
+      )}
 
       {open && (
         <div className="mr-card-body">
