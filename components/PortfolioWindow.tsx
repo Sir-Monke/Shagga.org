@@ -121,7 +121,9 @@ export default function PortfolioWindow() {
   const [tab, setTab] = useState<Tab>('about');
   const [filter, setFilter] = useState<'all' | Project['category']>('all');
 
-  const totalProjects = PROJECTS.length;
+  // Total projects across my GitHub (public + private) and uncatalogued work,
+  // not just what's curated in PROJECTS below. Bump this when it grows.
+  const totalProjects = Math.max(40, PROJECTS.length);
   const productionCount = PROJECTS.filter((p) => p.status === 'Production').length;
   const researchCount = PROJECTS.filter((p) => p.status === 'Research').length;
   // Years coding tracks my longest-running skill, ticks up automatically.
@@ -320,8 +322,8 @@ function ProjectsPanel({ filter, setFilter }: { filter: 'all' | Project['categor
     <div className="pf-panel">
       <h2 className="pf-section-h">Projects</h2>
       <p className="pf-prose pf-dim">
-        Selected work, public and private. Recent projects are in private repos and won&apos;t link out to source.
-        Older educational projects on{' '}
+        A curated selection from 40+ projects across public and private repos. Recent work is in private repos
+        and won&apos;t link out to source. Older educational projects on{' '}
         <a className="pf-link" href="https://github.com/Sir-Monke" target="_blank" rel="noopener noreferrer">github.com/Sir-Monke</a>.
       </p>
 
