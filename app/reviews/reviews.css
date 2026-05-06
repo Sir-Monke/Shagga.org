@@ -277,6 +277,11 @@ body:has(.mr-page) {
   flex-direction: column;
   gap: 12px;
   border-top: 1px solid #aca899;
+  /* Grow to fill window when content is short, so there's no empty
+     beige space between the foot note and the status bar. When content
+     is long, this still lets it grow naturally and the document scrolls. */
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 /* ============== Cards ============== */
