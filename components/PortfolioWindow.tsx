@@ -65,7 +65,7 @@ interface Project {
 
 const PROJECTS: Project[] = [
   // --- Active commercial / product work ---
-  { title: 'Custom Streaming OS',        year: '2026',      category: 'Systems',         status: 'In Development', blurb: 'A purpose-built Linux distribution for video-streaming hardware. Custom-compiled kernel, hand-picked package set, and a stripped-down userland targeting sub-5-second boot on low-cost hardware. In-progress as the first product of my own company.', stack: ['Linux', 'C', 'Kernel', 'Custom Build'],     privateRepo: true },
+  { title: 'Custom Streaming OS',        year: '2026',      category: 'Systems',         status: 'In Development', blurb: 'A purpose-built Linux distribution for video-streaming hardware. Custom-compiled kernel, hand-picked package set, and a stripped-down userland targeting sub-5-second boot on low-cost hardware.', stack: ['Linux', 'C', 'Kernel', 'Custom Build'],     privateRepo: true },
   { title: 'DeepScope',                  year: '2025',      category: 'AI / Automation', status: 'In Development', blurb: 'Windows-only AI-driven cybersecurity platform. Automates reverse engineering and behavioural analysis of Windows binaries using an adaptive OODA-loop decision architecture, with deobfuscation and static-analysis pipelines. Being developed as a sellable product.',          stack: ['Python', 'AI', 'Win32', 'OODA Loop', 'Static Analysis'], privateRepo: true },
 
   // --- Production / live ---
@@ -263,7 +263,7 @@ function AboutPanel({ total, production, research, yearsCoding }: { total: numbe
         Self-taught developer based in the UK. I work across the full stack — from kernel drivers and assembly,
         through reverse engineering and AI-driven security tooling, all the way up to smart contracts and
         production web apps. I&apos;ve done independent vulnerability research on widely-used platforms, and
-        I&apos;m currently building a Linux-based streaming OS as the first product of my own company.
+        I&apos;m currently building a Linux-based streaming OS..
         Most of my recent work lives in private repos — happy to walk through it in person.
       </p>
 
