@@ -188,7 +188,10 @@ export function ShaggaDesktop({ autoOpen, suppressPopups }: ShaggaDesktopProps =
   useEffect(() => {
     if (!mounted || isMobile) return;
     fetch('/shagga.txt')
-      .then((r) => r.text())
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.text();
+      })
       .then((t) => setShaggapadText(t))
       .catch(() => setShaggapadText("couldnt load shagga.txt mate"));
   }, [mounted, isMobile]);

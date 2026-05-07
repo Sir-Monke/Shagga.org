@@ -17,19 +17,23 @@ export default function ShaggaAreaBody({ imageSrc }: { imageSrc: string }) {
   const [distance] = useState(() => Math.floor(Math.random() * 50) + 1);
 
   useEffect(() => {
-    let cancelled = false;
-    fetch('https://ipapi.co/json/')
-      .then((r) => r.json())
+    const controller = new AbortController();
+    fetch('https://ipapi.co/json/', { signal: controller.signal })
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
       .then((d) => {
-        if (cancelled) return;
-        if (d?.city) setLocation(`${d.city}, ${d.region ?? d.country_name ?? ''}`.replace(/,\s*$/, ''));
+        if (typeof d?.city !== 'string') return;
+        const region = typeof d.region === 'string' ? d.region
+          : typeof d.country_name === 'string' ? d.country_name
+          : '';
+        setLocation(`${d.city}, ${region}`.replace(/,\s*$/, ''));
       })
       .catch(() => {
         /* keep default */
       });
-    return () => {
-      cancelled = true;
-    };
+    return () => controller.abort();
   }, []);
 
   return (

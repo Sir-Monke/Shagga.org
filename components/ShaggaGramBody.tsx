@@ -367,6 +367,7 @@ function StoryView({ users, startIdx, onClose }: {
   }, [onClose, users.length]);
 
   const user = users[idx];
+  if (!user) return null;
   return (
     <div className="gram2-story-modal" onClick={onClose} onMouseDown={(e) => e.stopPropagation()}>
       <div className="gram2-story-frame" onClick={(e) => e.stopPropagation()}>
