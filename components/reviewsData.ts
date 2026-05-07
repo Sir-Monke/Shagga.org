@@ -92,8 +92,8 @@ export const REVIEWS: Review[] = [
     category: 'gym',
     rating: 5.5,
     visited: 'May 2026',
-    title: 'Decent gym, but honestly it’s a bit mid',
-    body: "Was told by a staff member to leave a review, hence my honest review: it’s mid, this gym. They make you pay too much for what you get access to. I wouldn't recommend the spa; it’s a waste of time and money. I can guarantee you will only use it once or twice then never again, and you're stuck with that £150+ subscription you forgot to cancel after a year or two.\n\nI only use it for the pool and gym, and that's all you need. Closes at 10:30pm most of the time, which is the peak time to go—an hour before closing you get everything to yourself. Same for the pool. Strongly suggest going only during the adult hours; the indoor pool is super hairy and dirty sometimes. Some proper weird cunts in the spa section—if you sit down in the sauna, the sauna chats are weird as. Tennis courts are good, both indoor and outdoor, though the outdoor ones are mainly used for footy.",
+    title: 'Decent gym, but honestly it\u2019s a bit mid',
+    body: "Was told by a staff member to leave a review, hence my honest review: it\u2019s mid, this gym. They make you pay too much for what you get access to. I wouldn't recommend the spa; it\u2019s a waste of time and money. I can guarantee you will only use it once or twice then never again, and you're stuck with that £150+ subscription you forgot to cancel after a year or two.\n\nI only use it for the pool and gym, and that's all you need. Closes at 10:30pm most of the time, which is the peak time to go—an hour before closing you get everything to yourself. Same for the pool. Strongly suggest going only during the adult hours; the indoor pool is super hairy and dirty sometimes. Some proper weird cunts in the spa section—if you sit down in the sauna, the sauna chats are weird as. Tennis courts are good, both indoor and outdoor, though the outdoor ones are mainly used for footy.",
     pros: [
       'Night time swims are mega',
       'Gym has good equipment',
@@ -121,7 +121,7 @@ export const REVIEWS: Review[] = [
     rating: 8.5,
     visited: 'May 2026',
     title: 'Elite pastries and the best sandwiches in the Dock',
-    body: "Been going to this place for years and it never misses. All the pastries are absolutely amazing—you can tell the owner really knows what she’s doing, and she’s proper nice as well.\n\nThe pesto, tomato, and mozzarella sandwiches are easily the best about, and the hot chocolates are really good too. Everything is fresh and high quality. If you're down the Albert Dock, this is the only place you need for a bit of scran.",
+    body: "Been going to this place for years and it never misses. All the pastries are absolutely amazing—you can tell the owner really knows what she\u2019s doing, and she\u2019s proper nice as well.\n\nThe pesto, tomato, and mozzarella sandwiches are easily the best about, and the hot chocolates are really good too. Everything is fresh and high quality. If you're down the Albert Dock, this is the only place you need for a bit of scran.",
     pros: [
       'Pastries are elite tier',
       'Owner is super nice',
@@ -141,7 +141,7 @@ export const REVIEWS: Review[] = [
     wouldReturn: true,
   },
 
-{
+  {
     id: 4,
     venue: 'The BIG Sandwich Club',
     location: '28 Commerce Way, Liverpool L8 7BA',
@@ -149,7 +149,7 @@ export const REVIEWS: Review[] = [
     rating: 1.5,
     visited: 'May 2026',
     title: 'Proper disappointed, way too salty',
-    body: "Had high hopes for this place but it really wasn't for me. I got the Philly cheesesteak and it was honestly just very salty—I couldn't even finish it as it made me feel a bit sick. The cheese was that plastic American type which wasn't great either. \n\nThe bread was actually decent, but the filling let it down completely. It felt like the products used weren't top quality. The menu looks like they have good stuff and the reviews are normally high, so maybe I just got a bad batch or ordered the wrong thing. More than happy to return and try something else if they reach out, but this visit was a struggle.",
+    body: "Had high hopes for this place but it really wasn't for me. I got the Philly cheesesteak and it was honestly just very salty—I couldn't even finish it as it made me feel a bit sick. The cheese was that plastic American type which wasn't great either.\n\nThe bread was actually decent, but the filling let it down completely. It felt like the products used weren't top quality. The menu looks like they have good stuff and the reviews are normally high, so maybe I just got a bad batch or ordered the wrong thing. More than happy to return and try something else if they reach out, but this visit was a struggle.",
     pros: [
       'Bread was actually decent',
       'Menu has a good variety',

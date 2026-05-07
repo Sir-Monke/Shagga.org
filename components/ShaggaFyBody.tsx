@@ -5,7 +5,7 @@ import { SfyIcon } from './icons';
 import { audioSrc } from './imageManifest';
 
 // ---------- Types ----------
-interface Track {
+export interface Track {
   id: number;
   title: string;
   artist: string;
@@ -15,7 +15,7 @@ interface Track {
   bg: string;
 }
 
-interface Playlist {
+export interface Playlist {
   id: string;
   name: string;
   description: string;
@@ -35,7 +35,7 @@ type View =
   | { kind: 'now' };
 
 // ---------- Track data (40+) ----------
-const TRACKS: Track[] = [
+export const TRACKS: Track[] = [
   { id: 1,  title: "Down Under (but cooked)",         artist: 'Men At Snag',         album: 'Cooked Classics',     durationSec: 227, emoji: '🌭', bg: 'linear-gradient(135deg, #ff7e5f, #c44569)' },
   { id: 2,  title: 'Goon of Fortune',                 artist: 'The Hills Hoists',    album: 'Backyard Bangers',    durationSec: 252, emoji: '🍷', bg: 'linear-gradient(135deg, #6a1b9a, #c4006c)' },
   { id: 3,  title: 'Sausage Sizzle Saturday',         artist: 'Snaggas Boys',       album: 'Hardware & Heart',    durationSec: 178, emoji: '🔨', bg: 'linear-gradient(135deg, #c40, #f00)' },

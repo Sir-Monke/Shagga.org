@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { videoSrc } from './imageManifest';
 
 // ---------- Data ----------
-interface Channel {
+export interface Channel {
   id: string;
   name: string;
   handle: string;
@@ -13,11 +13,11 @@ interface Channel {
   color: string;
 }
 
-interface Video {
+export interface Video {
   id: number;
   title: string;
   channelId: string;
-  views: number;          // actual number so we can sort/format
+  views: number;
   ageDays: number;
   durationSec: number;
   thumbBg: string;
@@ -26,7 +26,7 @@ interface Video {
   tags: string[];
 }
 
-const CHANNELS: Channel[] = [
+export const CHANNELS: Channel[] = [
   { id: 'outback', name: 'OUTBACK MAYHEM', handle: '@outbackmayhem', subs: '4.2M', emoji: '🦘', color: '#1c1c1c' },
   { id: 'snagtv',  name: 'SnaggasTV',     handle: '@snaggastv',   subs: '892k', emoji: '🔨', color: '#f00' },
   { id: 'topsh',   name: 'Top Shagga',     handle: '@topshagga',    subs: '2.1M', emoji: '🤠', color: '#00a86b' },
@@ -40,7 +40,7 @@ const CHANNELS: Channel[] = [
   { id: 'rossbk',  name: 'Ross Buckley',     handle: '@rossbuckley',   subs: '47.2M', emoji: '🕺', color: '#9c27b0' },
 ];
 
-const VIDEOS: Video[] = [
+export const VIDEOS: Video[] = [
   { id: 1,  title: '10 hour magpie attack compilation (you wont believe #7)',          channelId: 'outback', views: 4_700_000, ageDays: 3,    durationSec: 36000, thumbBg: 'linear-gradient(135deg, #1c1c1c 0%, #5a5a5a 100%)', emoji: '🐦‍⬛', description: 'every magpie attack ever recorded back to back. uncut. cinematic masterpiece.', tags: ['compilation', 'mayhem'] },
   { id: 2,  title: 'how to put a snag on a sandwich (CORRECT WAY)',                      channelId: 'snagtv',  views: 892_000,   ageDays: 14,   durationSec: 862,   thumbBg: 'linear-gradient(135deg, #f00 0%, #ff8c00 100%)',   emoji: '🌭', description: 'the definitive guide. onions UNDER. settled science. dispute me.', tags: ['food', 'tutorial'] },
   { id: 3,  title: 'I lived in a Snaggas for 24 hours (NOT clickbait!!)',                channelId: 'topsh',   views: 2_100_000, ageDays: 30,   durationSec: 1391,  thumbBg: 'linear-gradient(135deg, #00a86b 0%, #0066cc 100%)', emoji: '🔨', description: 'security found me at hour 23. worth it. one star.', tags: ['vlog', 'challenge'] },
