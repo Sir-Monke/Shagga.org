@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { ShaggaDesktop } from '../page';
+import { ShaggaDesktop } from '@/components/ShaggaDesktop';
 import { MobileOS } from '@/components/mobile/MobileOS';
 import '@/components/mobile/mobile.css';
 
