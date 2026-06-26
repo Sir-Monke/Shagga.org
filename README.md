@@ -80,8 +80,4 @@ Currently uses placeholders. To use your photos:
 
 `public/shagga.txt` — edit and reload.
 
-## Deploying
-
-Easiest: push to GitHub → import at vercel.com → point your `shagga.org` domain at the Vercel deployment. Zero config required.
-
 — G'day, mate. Send it.
